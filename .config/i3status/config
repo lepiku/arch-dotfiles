@@ -1,0 +1,77 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+		output_format = "i3bar"
+        colors = true
+        #colors = false
+        markup = pango
+        interval = 5
+		color_good = "#ffffff"
+		color_degraded = "#ffff00"
+		color_bad = "#ff6644"
+}
+
+
+order += "load"
+order += "cpu_temperature 0"
+order += "disk /"
+#order += "disk /home"
+#order += "ethernet wlan0"
+order += "wireless wlp2s0"
+order += "volume master"
+order += "battery 0"
+order += "tztime local"
+
+load {
+        format = "<span background='#400060'> CPU: %1min Load </span>"
+}
+
+cpu_temperature 0 {
+        format = "<span background='#600060'> Temp: %degrees°C </span>"
+        path = "/sys/class/thermal/thermal_zone0/temp"
+}
+
+disk "/" {
+        format = "<span background='#600000'> Disk: %free </span>"
+}
+
+ethernet wlan0 {
+        format_up = "<span background='#604000'> LAN: %ip </span>"
+        format_down = "<span background='#800000'> LAN: Disconnected </span>"
+}
+
+wireless wlp2s0 {
+        format_up = "<span background='#604000'> Wifi:%quality %essid </span>"
+        format_down = "<span background='#800000'> Wifi: Disconnected </span>"
+}
+
+volume master {
+        format = "<span background='#606000'> Vol: %volume </span>"
+        format_muted = "<span background='#808000'> Vol: -M- </span>"
+        device = "default"
+        mixer = "Master"
+        mixer_idx = 0
+}
+
+battery 0 {
+        format = "<span background='#206000'> %status: %percentage </span>"
+        format_down = "No Battery"
+        status_chr = "Charging"
+        status_bat = "Battery"
+        status_unk = "Unknown"
+        status_full = "Charged"
+        path = "/sys/class/power_supply/BAT%d/uevent"
+        low_threshold = 15
+		threshold_type = "percentage"
+}
+
+tztime local {
+		format = "<span background='#006060'> %time </span>"
+		format_time = "%a, %-d %b %H:%M"
+}
