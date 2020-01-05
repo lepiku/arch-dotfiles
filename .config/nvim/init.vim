@@ -6,25 +6,27 @@ call plug#begin(stdpath('data') . '/plugged')
 " Plugins from github
 " Make sure you use single quotes
 " On-demand loading
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
-Plug 'w0rp/ale'
-Plug 'ycm-core/YouCompleteMe'
-Plug 'vim-airline/vim-airline'
-Plug 'scrooloose/nerdcommenter'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
-Plug 'tomasiser/vim-code-dark'
 Plug 'godlygeek/tabular'
+Plug 'jiangmiao/auto-pairs'
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'tomasiser/vim-code-dark'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
 " Initialize plugin system
 call plug#end()
 filetype plugin indent on
 set encoding=utf-8
 set hidden
+
+" change leader key
+let mapleader=","
 
 " set defautl tabs to have 4 spaces
 set sw=4 ts=4 sts=4 noexpandtab autoindent
@@ -52,10 +54,6 @@ set incsearch
 " Set hybrid line number
 set number relativenumber
 
-" Enable autocomplete (enabled by neovim)
-"set wildmenu
-"set wildmode=longest:list,full
-
 " Set new split below or right
 set splitbelow splitright
 
@@ -81,6 +79,107 @@ set conceallevel=2
 set undofile
 set undodir=~/.undodir
 
+" ------------ coc.nvim settings ----------------- "
+" Some servers have issues with backup files, see #649
+set nobackup
+set nowritebackup
+
+set cmdheight=2
+set updatetime=200
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Or use `complete_info` if your vim support it, like:
+" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Create mappings for function text object, requires document symbols feature of languageserver.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+" Use <TAB> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+nmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <TAB> <Plug>(coc-range-select)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
 " ------------ Highlight/Color/Theme ------------- "
 colorscheme default
 set background=dark
@@ -99,7 +198,7 @@ highlight VertSplit cterm=NONE ctermfg=123
 " comment color
 highlight Comment ctermfg=248
 
-" YouCompleteMe highlights
+" autocomplete highlights
 highlight Pmenu ctermbg=236 ctermfg=254
 highlight PmenuSel ctermbg=232 ctermfg=252
 
@@ -108,30 +207,10 @@ highlight Search ctermbg=239 ctermfg=NONE
 highlight Visual ctermbg=18
 
 " ------------ Plugin Settings ------------------- "
-" ALE plugin settings
-let g:ale_linters = {
-	\ 'javascript': ['eslint'],
-	\ 'python': ['pylint'],
-	\}
-let g:ale_fixers = {
-	\ 'javascript': ['prettier', 'eslint'],
-	\ 'python': ['isort', 'autopep8'],
-	\}
-"let g:ale_python_pylint_options = '--load-plugins pylint_django -d missing-docstring'
-let g:ale_python_pylint_options = '-d missing-docstring'
-let g:ale_fix_on_save = 1
-
-" YouCompleteMe settings with django
-let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
-let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
-let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
-let g:ycm_confirm_extra_conf = 0 " disable asking extra conf everytime
-
 " vim-code-dark plugin
 let g:airline_theme = 'codedark'
 
 " gitgutter plugin
-set updatetime=200
 highlight GitGutterAdd		cterm=bold ctermfg=2
 highlight GitGutterDelete	cterm=bold ctermfg=1
 highlight GitGutterChange	cterm=bold ctermfg=3
@@ -143,8 +222,7 @@ highlight DiffDelete	cterm=NONE ctermbg=17 ctermfg=1
 highlight DiffChange	cterm=NONE ctermbg=17
 highlight DiffText		cterm=NONE ctermbg=52
 
-" ale plugin
-let g:ale_set_signs = 0
+" error color
 highlight error ctermbg=88
 highlight SpellBad ctermbg=88
 highlight todo ctermbg=100
@@ -172,9 +250,6 @@ let NERDTreeIgnore = ['\.pyc$', '\.class']
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.js,*.jsx'
 
 " ------------ Mapping / Remaped keys ------------ "
-" change leader key
-let mapleader=","
-
 " change indent in visual mode
 vnoremap > >gv
 vnoremap < <gv
@@ -204,13 +279,6 @@ noremap <C-z> :call fzf#run(fzf#wrap({'source': '$FZF_VIM_COMMAND'}))<CR>
 " NERDTree plugin
 noremap <Leader>n :NERDTreeToggle<CR>
 
-" ALE warp to next error
-nnoremap <Leader>j :ALENextWrap<CR>
-nnoremap <Leader>k :ALEPreviousWrap<CR>
-" ALE Fixes
-nnoremap <Leader>trim :ALEFix trim_whitespace<CR>
-map <Leader>fix :ALEFix<CR>
-
 " reload vimrc
 nnoremap <Leader>rr :source ~/.config/nvim/init.vim<CR>
 
@@ -220,9 +288,6 @@ map <Esc><Esc> :nohlsearch<CR>
 " vim fugitive
 map <Leader>gs :G<CR>
 map <Leader>gd :Gdiff<CR>
-
-" YouCompleteMe
-map <Leader>gt :YcmCompleter GoTo<CR>
 
 " ------------ Config for filetypes -------------- "
 " pandoc , markdown
@@ -235,7 +300,7 @@ nmap <Leader>pe :RunSilent evince /tmp/vim-pandoc-out.pdf<CR>
 augroup extension
 	au!
 	" force indentation
-	autocmd BufRead,BufNewFile *.html,*.css,*.js,*.jsx setlocal sw=2 ts=2 sts=2 expandtab
+	autocmd BufRead,BufNewFile *.html,*.css,*.js,*.jsx,*.json setlocal sw=2 ts=2 sts=2 expandtab
 	" force filetypes
 	autocmd BufRead,BufNewFile *.jsx,*js setlocal filetype=javascript
 	autocmd BufRead,BufNewFile *.mdx setlocal filetype=markdown

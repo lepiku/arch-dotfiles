@@ -12,6 +12,8 @@
 !.Xmodmap
 !.ssh/
 !.ssh/config
+!bin
+!bin/**
 
 !.config/
 !.config/nvim/
@@ -27,9 +29,13 @@
 
 !.condarc
 
-!bin
-!bin/**
-
+# background picture
 !.fehbg
 !Pictures/
 !Pictures/wallpaper.png
+
+# coc.nvim
+!.config/
+!.config/coc/
+!.config/coc/extensions/
+!.config/coc/extensions/package.json
