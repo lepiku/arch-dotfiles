@@ -102,14 +102,26 @@ fi
 source $ZSH/oh-my-zsh.sh
 autoload -U compinit && compinit
 
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
 
-# aliases
-alias vim="nvim"
-alias helios="cd ~/Projects/compfest/helios"
-alias rc="vim ~/.zshrc"
-alias sudo="sudo -E"
-alias vimrc="vim ~/.config/nvim/init.vim"
-alias i3config="vim ~/.config/i3/config"
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+if [ -f ~/.zsh_aliases ]; then
+	. ~/.zsh_aliases
+fi
+if [ -f ~/.keys ]; then
+	. ~/.keys
+fi
+# enable/disable conda with 'conda-toggle'
+if [ -f ~/.condainit ]; then
+	. ~/.condainit
+fi
 
 # default editor
 export VISUAL=nvim
@@ -122,24 +134,9 @@ export FZF_ALT_C_COMMAND='fd --type d -I --hidden --follow --max-depth 5'
 export FZF_VIM_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_DEFAULT_OPTS='--height 40%'
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/opt/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/opt/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/opt/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-conda activate std
-
-# <<< conda initialize <<<
-zstyle ':completion::complete:*' use-cache 1
-zstyle ":conda_zsh_completion:*" use-groups true
-
 # not disturb ctrl-s and ctrl-q
 stty -ixon
+
+# compfest development env
+export NODE_ENV="development"
+export ZEUS_ENV="development"

@@ -196,6 +196,10 @@ bindsym $mod+m			exec $termi "ranger"
 
 bindsym $mod+t			exec $termi "htop"
 
+bindsym Print			exec --no-startup-id "scrot -e 'mv $f ~/Pictures/Screenshots'"
+bindsym Shift+Print		exec --no-startup-id "scrot -u -e 'mv $f ~/Pictures/Screenshots'"
+bindsym $mod+Print		exec --no-startup-id "sleep 1; scrot -s -e 'mv $f ~/Pictures/Screenshots'"
+
 # ---------- Autostart Programs ---------- #
 # default workspace
 exec --no-startup-id i3-msg workspace $ws1
@@ -215,3 +219,4 @@ exec --no-startup-id xinput set-prop "ELAN0504:00 04F3:3091 Touchpad" \
 	"libinput Disable While Typing Enabled" 0
 exec --no-startup-id dropbox
 exec --no-startup-id blueman-applet
+exec --no-startup-id redshift-gtk
