@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ "$(ls -A ~/kawung)" ]; then
+	fusermount -u ~/kawung/
+else
+	echo "kawung: is not mounted"
+fi

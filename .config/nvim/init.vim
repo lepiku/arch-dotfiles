@@ -6,7 +6,6 @@ call plug#begin(stdpath('data') . '/plugged')
 " Plugins from github
 " Make sure you use single quotes
 " On-demand loading
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 Plug 'alvan/vim-closetag'
 Plug 'godlygeek/tabular'
@@ -19,6 +18,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 " Initialize plugin system
 call plug#end()
 filetype plugin indent on
@@ -78,6 +78,8 @@ set conceallevel=2
 " permanent undo
 set undofile
 set undodir=~/.undodir
+
+set clipboard=unnamed
 
 " ------------ coc.nvim settings ----------------- "
 " Some servers have issues with backup files, see #649
@@ -206,6 +208,9 @@ highlight MatchParen ctermbg=24
 highlight Search ctermbg=239 ctermfg=NONE
 highlight Visual ctermbg=18
 
+" coc
+highlight CocWarningSign ctermfg=172
+
 " ------------ Plugin Settings ------------------- "
 " vim-code-dark plugin
 let g:airline_theme = 'codedark'
@@ -289,6 +294,12 @@ map <Esc><Esc> :nohlsearch<CR>
 map <Leader>gs :G<CR>
 map <Leader>gd :Gdiff<CR>
 
+" undo branching
+map <C-n> g-
+map <C-m> g+
+
+" copy with CTRL-C
+map <C-c> "+y
 " ------------ Config for filetypes -------------- "
 " pandoc , markdown
 command! -nargs=* RunSilent

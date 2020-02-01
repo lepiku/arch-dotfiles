@@ -97,19 +97,19 @@ plugins=(
 
 ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
-  mkdir $ZSH_CACHE_DIR
+	mkdir $ZSH_CACHE_DIR
 fi
 source $ZSH/oh-my-zsh.sh
 autoload -U compinit && compinit
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
+	PATH="$HOME/bin:$PATH"
 fi
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
+	PATH="$HOME/.local/bin:$PATH"
 fi
 
 if [ -f ~/.zsh_aliases ]; then
@@ -136,7 +136,3 @@ export FZF_DEFAULT_OPTS='--height 40%'
 
 # not disturb ctrl-s and ctrl-q
 stty -ixon
-
-# compfest development env
-export NODE_ENV="development"
-export ZEUS_ENV="development"
