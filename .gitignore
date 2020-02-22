@@ -1,25 +1,38 @@
 # ignore all but these files
 *
+
+# basic
 !.gitignore
 !.gitignore.global
 !README.md
 
+# shell
+!.bashrc
+!.bash_aliases
 !.oh-my-zsh/
 !.oh-my-zsh/**
+.oh-my-zsh/plugins/
+!.profile
 !.zshrc
-!.Xresources
-!.xinitrc
-!.Xmodmap
-!.ssh/
-!.ssh/config
+!.zsh_aliases
+
+# programs
 !bin
 !bin/**
+bin/*.jar
 
+# neovim
 !.config/
 !.config/nvim/
 !.config/nvim/**
 .config/nvim/.netrwhist
 
+# other
+!.Xresources
+!.xinitrc
+!.Xmodmap
+!.ssh/
+!.ssh/config
 !.config/i3/
 !.config/i3/**
 !.config/i3status/
@@ -27,6 +40,7 @@
 !.config/ranger/
 !.config/ranger/**
 
+# conda
 !.condarc
 
 # background picture
