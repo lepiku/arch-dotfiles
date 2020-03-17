@@ -1,0 +1,3 @@
+#!/bin/sh
+
+java -jar /home/dimas/bin/JFLAP7.1.jar
