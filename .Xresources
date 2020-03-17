@@ -11,10 +11,10 @@ URxvt.color9:			#FF3030
 URxvt.color12:			#4444FF
 
 ! fonts
-URxvt.font:				xft:Source Code Pro:pixelsize=15:antialias=true:Regular,xft:DejaVu Sans Mono for Powerline:pixelsize=15
-URxvt.italicFont:		xft:Source Code Pro:pixelsize=15:antialias=true:Regular:Italic:pixelsize=15,xft:DejaVu Sans Mono for Powerline:pixelsize=15
-URxvt.boldFont:			xft:Source Code Pro:pixelsize=15:antialias=true:Bold:pixelsize=15,xft:DejaVu Sans Mono for Powerline:pixelsize=15
-URxvt.boldItalicFont:	xft:Source Code Pro:pixelsize=15:antialias=true:Bold:Italic:pixelsize=15,xft:DejaVu Sans Mono for Powerline:pixelsize=15
+URxvt.font:				xft:Source Code Pro for Powerline:pixelsize=15:antialias=true:Regular,xft:DejaVu Sans Mono for Powerline:pixelsize=15
+URxvt.italicFont:		xft:Source Code Pro for Powerline:pixelsize=15:antialias=true:Regular:Italic:pixelsize=15,xft:DejaVu Sans Mono for Powerline:pixelsize=15
+URxvt.boldFont:			xft:Source Code Pro for Powerline:pixelsize=15:antialias=true:Bold:pixelsize=15,xft:DejaVu Sans Mono for Powerline:pixelsize=15
+URxvt.boldItalicFont:	xft:Source Code Pro for Powerline:pixelsize=15:antialias=true:Bold:Italic:pixelsize=15,xft:DejaVu Sans Mono for Powerline:pixelsize=15
 
 ! hotkey
 URxvt.keysym.Control-Up:	\033[1;5A

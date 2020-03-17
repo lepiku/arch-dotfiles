@@ -7,38 +7,44 @@
 # If the above line is not correctly displayed, fix your editor first!
 
 general {
-		output_format = "i3bar"
+        output_format = "i3bar"
         colors = true
         #colors = false
         markup = pango
         interval = 5
-		color_good = "#ffffff"
-		color_degraded = "#ffff00"
-		color_bad = "#ff6644"
+        color_good = "#ffffff"
+        color_degraded = "#ffff00"
+        color_bad = "#ff6644"
 }
 
 
 order += "load"
 order += "cpu_temperature 0"
-order += "disk /"
-#order += "disk /home"
-#order += "ethernet wlan0"
+order += "disk /home"
+order += "memory"
 order += "wireless wlp2s0"
 order += "volume master"
 order += "battery 0"
 order += "tztime local"
 
 load {
-        format = "<span background='#400060'> CPU: %1min Load </span>"
+        format = "<span background='#400060'> ▦ %1min Load </span>"
 }
 
 cpu_temperature 0 {
-        format = "<span background='#600060'> Temp: %degrees°C </span>"
+        format = "<span background='#400060'> ♨ %degrees°C </span>"
         path = "/sys/class/thermal/thermal_zone0/temp"
 }
 
-disk "/" {
-        format = "<span background='#600000'> Disk: %free </span>"
+disk "/home" {
+        format = "<span background='#600060'> %free </span>"
+}
+
+memory {
+        format = "<span background='#600000'> ⌁ %available </span>"
+        memory_used_method = "memavailable"
+        threshold_degraded = "10%"
+        threshold_critical = "5%"
 }
 
 ethernet wlan0 {
@@ -47,13 +53,13 @@ ethernet wlan0 {
 }
 
 wireless wlp2s0 {
-        format_up = "<span background='#604000'> Wifi:%quality %essid </span>"
-        format_down = "<span background='#800000'> Wifi: Disconnected </span>"
+        format_up = "<span background='#604000'>%quality %essid </span>"
+        format_down = "<span background='#800000'> Disconnected </span>"
 }
 
 volume master {
-        format = "<span background='#606000'> Vol: %volume </span>"
-        format_muted = "<span background='#808000'> Vol: -M- </span>"
+        format = "<span background='#606000'> 🎵 %volume </span>"
+        format_muted = "<span background='#808000'> 🎵 -M- </span>"
         device = "default"
         mixer = "Master"
         mixer_idx = 0
@@ -62,16 +68,16 @@ volume master {
 battery 0 {
         format = "<span background='#206000'> %status: %percentage </span>"
         format_down = "No Battery"
-        status_chr = "Charging"
-        status_bat = "Battery"
-        status_unk = "Unknown"
-        status_full = "Charged"
+        status_chr = "Chr"
+        status_bat = "Bat"
+        status_unk = "Unk"
+        status_full = "Crd"
         path = "/sys/class/power_supply/BAT%d/uevent"
         low_threshold = 15
-		threshold_type = "percentage"
+        threshold_type = "percentage"
 }
 
 tztime local {
-		format = "<span background='#006060'> %time </span>"
-		format_time = "%a, %-d %b %H:%M"
+        format = "<span background='#006060'> %time </span>"
+        format_time = "%a, %-d %b %H:%M"
 }

@@ -11,6 +11,7 @@
 
 set $mod Mod4
 set $term urxvtc
+set $terme urxvtc -e
 set $termi urxvtc -e zsh -ic
 set $shutdown systemctl poweroff
 set $suspend systemctl suspend
@@ -29,7 +30,7 @@ for_window [class="^.*"] border pixel 3
 gaps inner 8
 
 # font
-font pango:SourceCodePro 10
+font pango:SourceCodePro for Powerline 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -188,19 +189,23 @@ bar {
 }
 # ---------- Launch Applications ---------- #
 bindsym $mod+b			exec firefox
-bindsym $mod+Shift+b	exec chromium
+bindsym $mod+Shift+b	exec firefox --private-window
 
-bindsym $mod+c			exec $termi "vim .vimrc"
-bindsym $mod+Shift+c	exec $termi "vim .config/i3/config"
+bindsym $mod+c			exec $termi "nvimrc"
+bindsym $mod+Shift+c	exec $termi "i3config"
 
+bindsym $mod+g			exec chromium
+
+bindsym $mod+m			exec $terme "ranger"
 bindsym $mod+Shift+m	exec pcmanfm
-bindsym $mod+m			exec $termi "ranger"
 
-bindsym $mod+t			exec $termi "htop"
+bindsym $mod+t			exec $terme "htop"
 
-bindsym Print			exec --no-startup-id "scrot -e 'mv $f ~/Pictures/Screenshots'"
-bindsym Shift+Print		exec --no-startup-id "scrot -u -e 'mv $f ~/Pictures/Screenshots'"
-bindsym $mod+Print		exec --no-startup-id "sleep 1; scrot -s -e 'mv $f ~/Pictures/Screenshots'"
+bindsym $mod+v			exec pavucontrol
+
+bindsym Print			exec scrot -e 'mv $f ~/Pictures/Screenshots'
+bindsym Shift+Print		exec scrot -u -e 'mv $f ~/Pictures/Screenshots'
+bindsym $mod+Print		exec sleep 1 && scrot -s -e 'mv $f ~/Pictures/Screenshots'
 
 # ---------- Autostart Programs ---------- #
 # default workspace
@@ -222,4 +227,4 @@ exec --no-startup-id xinput set-prop "ELAN0504:00 04F3:3091 Touchpad" \
 exec --no-startup-id dropbox						# dropbox
 exec --no-startup-id blueman-applet					# bluetooth
 exec --no-startup-id redshift-gtk					# redshift
-exec --no-startup-id xautolock -time 15 -locker "systemctl suspend" # autosuspend
+exec --no-startup-id xautolock -time 15 -locker "systemctl suspend"	# autosuspend
