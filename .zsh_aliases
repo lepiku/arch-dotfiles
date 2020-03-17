@@ -1,0 +1,29 @@
+# basic
+alias sudo="sudo -E"
+
+# configs
+alias rc="nvim ~/.zshrc"
+alias nvimrc="nvim ~/.config/nvim/init.vim"
+alias i3config="nvim ~/.config/i3/config"
+alias zshaliases="nvim ~/.zsh_aliases"
+
+# projects
+alias helios="cd ~/Projects/compfest/helios"
+alias black-manta="cd ~/Projects/compfest/black-manta"
+alias zeus="conda deactivate && conda activate zeus && cd ~/Projects/compfest/zeus/zeus"
+alias praktekiin="conda deactivate && conda activate praktekiin && cd ~/Projects/Django/praktekiin"
+alias alkhwarizmi="conda deactivate && conda activate itf && cd ~/Projects/it-force/alkhwarizmi"
+alias adpro="cd ~/Projects/adpro/advprog-tutorial-2020"
+alias ppw-lab="conda deactivate && conda activate ppw-lab && cd ~/Projects/PPW/ppw-lab"
+
+# search inside files
+alias search="grep -Rne"
+alias isearch="grep -Rnie"
+
+# git aliases
+alias gitpullall='find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \;'
+alias git-commit-no-message="git commit --allow-empty-message -m ''"
+alias git-reset='git checkout HEAD --'
+
+# other
+alias restart-wifi="sudo systemctl restart wpa_supplicant@wlp2s0.service"
