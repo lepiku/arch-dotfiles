@@ -75,6 +75,7 @@ plugins=(
 	#vi-mode
 	shrink-path
 	fzf
+	#gradle-completion
 )
 
 
@@ -102,22 +103,13 @@ fi
 source $ZSH/oh-my-zsh.sh
 autoload -U compinit && compinit
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-	PATH="$HOME/bin:$PATH"
-fi
-
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ] ; then
-	PATH="$HOME/.local/bin:$PATH"
-fi
-
 if [ -f ~/.zsh_aliases ]; then
 	. ~/.zsh_aliases
 fi
 if [ -f ~/.keys ]; then
 	. ~/.keys
 fi
+
 # enable/disable conda with 'conda-toggle'
 if [ -f ~/.condainit ]; then
 	. ~/.condainit
