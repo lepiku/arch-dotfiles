@@ -5,16 +5,18 @@ alias sudo="sudo -E"
 alias rc="nvim ~/.zshrc"
 alias nvimrc="nvim ~/.config/nvim/init.vim"
 alias i3config="nvim ~/.config/i3/config"
-alias zshaliases="nvim ~/.zsh_aliases"
+alias zshalias="nvim ~/.zsh_aliases"
+alias nvimft="nvim ~/.config/nvim/ftplugin"
 
 # projects
 alias helios="cd ~/Projects/compfest/helios"
 alias black-manta="cd ~/Projects/compfest/black-manta"
 alias zeus="conda deactivate && conda activate zeus && cd ~/Projects/compfest/zeus/zeus"
-alias praktekiin="conda deactivate && conda activate praktekiin && cd ~/Projects/Django/praktekiin"
+alias praktekiin="conda deactivate && conda activate praktekiin && cd ~/Projects/django/praktekiin"
 alias alkhwarizmi="conda deactivate && conda activate itf && cd ~/Projects/it-force/alkhwarizmi"
 alias adpro="cd ~/Projects/adpro/advprog-tutorial-2020"
-alias ppw-lab="conda deactivate && conda activate ppw-lab && cd ~/Projects/PPW/ppw-lab"
+alias ppw-lab="conda deactivate && conda activate ppw-lab && cd ~/Projects/ppw/ppw-lab"
+alias iguide="cd ~/Projects/flutter/iguide"
 
 # search inside files
 alias search="grep -Rne"
