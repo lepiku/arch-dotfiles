@@ -4,7 +4,7 @@
 if has('nvim')
 	call plug#begin(stdpath('data') . '/plugged')
 else
-	call plug#Begin('~/.vim/plugged')
+	call plug#begin('~/.local/share/nvim/plugged')
 endif
 
 " Plugins from github
@@ -39,7 +39,7 @@ set hidden
 let mapleader=","
 
 " set defautl tabs to have 4 spaces
-set sw=4 ts=4 sts=4 noexpandtab autoindent
+set sw=4 ts=4 sts=4 expandtab autoindent
 
 " show the matching part of the pair for [] {} and ()
 set showmatch
@@ -296,39 +296,47 @@ noremap <C-Up>		:resize -1<CR>
 noremap <C-Right>	:vertical:resize +1<CR>
 
 " reload vimrc
-nnoremap <Leader>rr :source ~/.config/nvim/init.vim<CR>
+if has('nvim')
+	nnoremap <Leader>rr :source ~/.config/nvim/init.vim<CR>
+else
+	nnoremap <Leader>rr :source ~/.vimrc<CR>
+endif
 
 " hide search results
 map <Esc><Esc> :nohlsearch<CR>
 
 " undo branching
-map <C-n> g-
-map <C-m> g+
+noremap <C-n> g-
+noremap <C-m> g+
 
 if has('clipboard')
 	" copy with CTRL-C
 	vnoremap <C-c> "+y
 endif
 
-if has('nvim')
-	" FZF
-	noremap <C-z> :call fzf#run(fzf#wrap({'source': '$FZF_VIM_COMMAND'}))<CR>
+" FZF
+noremap <C-z> :call fzf#run(fzf#wrap({'source': '$FZF_VIM_COMMAND'}))<CR>
 
-	" NERDTree plugin
-	noremap <Leader>n :NERDTreeToggle<CR>
+" NERDTree plugin
+noremap <Leader>n :NERDTreeToggle<CR>
 
-	" vim fugitive
-	map <Leader>gs :G<CR>
-	map <Leader>gd :Gdiff<CR>
-endif
+" vim fugitive
+noremap <Leader>gs :G<CR>
+noremap <Leader>gd :Gdiff<CR>
 
-" ------------ Config for filetypes -------------- "
+" open terminal like vscode
+noremap <silent> <C-Space> :10 split \| term<CR> A
+
+" trim whitespace
+nmap <Leader>trim :%s/\ \+$//<CR>
+
+"------------ Config for filetypes -------------- "
 " pandoc , markdown
 command! -nargs=* RunSilent
 			\| execute ':silent !'.'<args>'
 			\| execute ':redraw!'
-nmap <Leader>pp :RunSilent pandoc -o /tmp/vim-pandoc-out.pdf "%"<CR>
-nmap <Leader>pe :RunSilent evince /tmp/vim-pandoc-out.pdf<CR>
+"nmap <Leader>pp :RunSilent pandoc -o /tmp/vim-pandoc-out.pdf "%"<CR>
+"nmap <Leader>pe :RunSilent evince /tmp/vim-pandoc-out.pdf<CR>
 
 augroup extension
 	au!

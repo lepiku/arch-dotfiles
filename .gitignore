@@ -21,7 +21,8 @@
 !bin/**
 bin/*.jar
 
-# neovim
+# vim
+!.vimrc
 !.config/
 !.config/nvim/
 !.config/nvim/**
