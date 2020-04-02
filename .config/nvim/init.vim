@@ -12,6 +12,7 @@ endif
 " On-demand loading
 Plug 'airblade/vim-gitgutter'
 Plug 'alvan/vim-closetag'
+Plug 'dart-lang/dart-vim-plugin'
 Plug 'godlygeek/tabular'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'jiangmiao/auto-pairs'
@@ -193,6 +194,9 @@ if has('nvim')
 
 	" Add status line support, for integration with other plugin, checkout `:h coc-status`
 	set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+	" CocCommand shortcut
+	nnoremap <silent> <C-P> :CocCommand<CR>
 endif
 
 " ------------ Highlight/Color/Theme ------------- "
