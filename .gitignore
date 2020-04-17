@@ -48,9 +48,3 @@ bin/*.jar
 !.fehbg
 !Pictures/
 !Pictures/wallpaper.png
-
-# coc.nvim
-!.config/
-!.config/coc/
-!.config/coc/extensions/
-!.config/coc/extensions/package.json
