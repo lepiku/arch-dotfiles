@@ -14,7 +14,7 @@ alias black-manta="cd ~/Projects/compfest/black-manta"
 alias zeus="conda deactivate && conda activate zeus && cd ~/Projects/compfest/zeus/zeus"
 alias praktekiin="conda deactivate && conda activate praktekiin && cd ~/Projects/django/praktekiin"
 alias alkhwarizmi="conda deactivate && conda activate itf && cd ~/Projects/it-force/alkhwarizmi"
-alias adpro="cd ~/Projects/adpro/advprog-tutorial-2020"
+alias adpro="export SPRING_PROFILES_ACTIVE='okto' && cd ~/Projects/adpro/chroom-eatery"
 alias ppw-lab="conda deactivate && conda activate ppw-lab && cd ~/Projects/ppw/ppw-lab"
 alias iguide="cd ~/Projects/flutter/iguide"
 
