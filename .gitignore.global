@@ -1,3 +1,4 @@
 *.sw[op]
 .ycm_extra_conf.py
 coc-settings.json
+.vim/
