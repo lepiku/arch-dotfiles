@@ -91,7 +91,7 @@ set undodir=~/.undodir
 set clipboard=unnamed
 
 " wrap text with 'gq'
-set textwidth=80
+"set textwidth=80
 
 " ------------ coc.nvim settings ----------------- "
 " Some servers have issues with backup files, see #649
@@ -290,10 +290,10 @@ noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
 " resize splits with arrow keys
-noremap <C-Left>	:vertical:resize -1<CR>
-noremap <C-Down>	:resize +1<CR>
-noremap <C-Up>		:resize -1<CR>
-noremap <C-Right>	:vertical:resize +1<CR>
+noremap <silent> <C-Up>		:resize -2<CR>
+noremap <silent> <C-Down>	:resize +2<CR>
+noremap <silent> <C-Left>	:vertical:resize -3<CR>
+noremap <silent> <C-Right>	:vertical:resize +3<CR>
 
 " reload vimrc
 if has('nvim')
