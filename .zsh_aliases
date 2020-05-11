@@ -17,6 +17,7 @@ alias alkhwarizmi="conda deactivate && conda activate itf && cd ~/Projects/it-fo
 alias adpro="export SPRING_PROFILES_ACTIVE='okto' && cd ~/Projects/adpro/chroom-eatery"
 alias ppw-lab="conda deactivate && conda activate ppw-lab && cd ~/Projects/ppw/ppw-lab"
 alias iguide="cd ~/Projects/flutter/iguide"
+alias basdat="conda deactivate && conda activate basdat && cd ~/Projects/django/medika-go"
 
 # search inside files
 alias search="grep -Rne"
@@ -29,3 +30,4 @@ alias git-reset='git checkout HEAD --'
 
 # other
 alias restart-wifi="sudo systemctl restart wpa_supplicant@wlp2s0.service"
+alias restart-network="sudo systemctl restart systemd-networkd.service"
