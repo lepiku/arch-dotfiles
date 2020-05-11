@@ -24,13 +24,13 @@ set $resizeFloat 20
 set $resizeTile 2
 
 # set size for focused border
-for_window [class="^.*"] border pixel 3
+for_window [class="^.*"] border pixel 2
 
 # set gaps
 gaps inner 8
 
 # font
-font pango:SourceCodePro for Powerline 10
+font pango:Source Code Pro Medium 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -178,12 +178,32 @@ mode $mode_power {
 }
 bindsym $mod+Shift+p mode $mode_power
 
+#0042ff
+#ff0000
+
+# window colors
+# class					border	backgr.	text	indicator	child_border
+client.focused			#1a46c4	#1640b8	#ffffff	#c4d4ff		#1640b8
+client.focused_inactive	#505050	#505050	#ffffff	#8a8a8a		#505050
+client.unfocused		#333333	#222222	#8a8a8a	#292d2e		#222222
+client.urgent			#ff0000	#f00000	#ffffff	#900000		#900000
+client.placeholder		#000000	#0c0c0c	#ffffff	#000000		#0c0c0c
+
+client.background		#ffffff
+
 # Start i3bar to display a workspace bar (plus the system information i3status)
 bar {
 	colors {
 		background #18181a
 		separator #18181a
+		
+		focused_workspace  #1640b8 #1640b8 #ffffff
+		active_workspace   #333333 #5f676a #ffffff
+		inactive_workspace #333333 #222222 #888888
+		urgent_workspace   #ff0000 #f00000 #ffffff
+		binding_mode       #2f343a #900000 #ffffff
 	}
+
 	position top
 	status_command i3status
 }
@@ -195,6 +215,7 @@ bindsym $mod+c			exec $termi "nvimrc"
 bindsym $mod+Shift+c	exec $termi "i3config"
 
 bindsym $mod+g			exec chromium
+bindsym $mod+Shift+g	exec chromium --incognito
 
 bindsym $mod+m			exec $terme "ranger"
 bindsym $mod+Shift+m	exec pcmanfm
