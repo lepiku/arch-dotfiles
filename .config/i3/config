@@ -168,11 +168,11 @@ bindsym $mod+Shift+r restart
 # power modes
 set $mode_power "[E]xit | [L]ock | sus[P]end | [R]eboot | [S]hutdown"
 mode $mode_power {
-	bindsym e exec --no-startup-id exec i3-msg exit
-	bindsym l exec --no-startup-id exec $lock, mode "default"
-	bindsym p exec --no-startup-id exec $suspend, mode "default"
-	bindsym r exec --no-startup-id exec $reboot
-	bindsym s exec --no-startup-id exec $shutdown
+	bindsym e exec --no-startup-id sh "$HOME/bin/i3exit.sh"; exec i3-msg exit
+	bindsym l exec --no-startup-id $lock, mode "default"
+	bindsym p exec --no-startup-id $suspend, mode "default"
+	bindsym r exec --no-startup-id $reboot
+	bindsym s exec --no-startup-id $shutdown
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
 }
@@ -238,14 +238,15 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- $lock --nofork
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 #exec --no-startup-id nm-applet
-exec --no-startup-id urxvtd -q						# daemonize urxvt
-exec --no-startup-id ~/.fehbg						# add wallpaper
-exec --no-startup-id xset r rate 300 32				# hold key repeat rate
+exec --no-startup-id urxvtd -q														# daemonize urxvt
+exec --no-startup-id feh --no-fehbg --bg-fill "$HOME/Pictures/wallpaper.png"	# add wallpaper
+exec --no-startup-id xset r rate 300 32												# hold key repeat rate
 exec --no-startup-id xinput set-prop "ELAN0504:00 04F3:3091 Touchpad" \
 	"libinput Tapping Enabled" 1
 exec --no-startup-id xinput set-prop "ELAN0504:00 04F3:3091 Touchpad" \
 	"libinput Disable While Typing Enabled" 0
-exec --no-startup-id dropbox						# dropbox
-exec --no-startup-id blueman-applet					# bluetooth
-exec --no-startup-id redshift-gtk					# redshift
-exec --no-startup-id xautolock -time 15 -locker "systemctl suspend"	# autosuspend
+exec --no-startup-id dropbox														# dropbox
+exec --no-startup-id blueman-applet													# bluetooth
+exec --no-startup-id nm-applet  													# wifi
+exec --no-startup-id redshift-gtk													# redshift
+exec --no-startup-id xautolock -time 15 -locker "systemctl suspend"					# autosuspend
