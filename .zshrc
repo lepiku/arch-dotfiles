@@ -71,7 +71,6 @@ ZSH_CUSTOM=$HOME/.oh-my-zsh/
 plugins=(
 	git
 	nvm
-	conda-zsh-completion
 	#vi-mode
 	shrink-path
 	fzf
@@ -114,10 +113,6 @@ fi
 if [ -f ~/.condainit ]; then
 	. ~/.condainit
 fi
-
-# default editor
-export VISUAL=nvim
-export EDITOR="$VISUAL"
 
 # fzf plugin settings
 export FZF_DEFAULT_COMMAND='fd --type f -I --hidden --follow --max-depth 5'

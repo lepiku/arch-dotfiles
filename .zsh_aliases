@@ -1,5 +1,5 @@
 # basic
-alias sudo="sudo -E"
+#alias sudo="sudo -E"
 
 # configs
 alias rc="nvim ~/.zshrc"
