@@ -3,7 +3,7 @@
 
 # basic
 !.gitignore
-!.gitignore.global
+!.global-gitignore
 !README.md
 
 # shell
