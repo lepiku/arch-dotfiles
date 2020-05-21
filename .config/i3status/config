@@ -20,6 +20,7 @@ general {
 
 order += "load"
 order += "cpu_temperature 0"
+order += "disk /"
 order += "disk /home"
 order += "memory"
 order += "wireless wlp2s0"
@@ -34,6 +35,10 @@ load {
 cpu_temperature 0 {
         format = "<span background='#400060'> ♨ %degrees°C </span>"
         path = "/sys/class/thermal/thermal_zone0/temp"
+}
+
+disk "/" {
+        format = "<span background='#600060'> %free </span>"
 }
 
 disk "/home" {

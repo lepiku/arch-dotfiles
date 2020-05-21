@@ -183,7 +183,7 @@ bindsym $mod+Shift+p mode $mode_power
 
 # window colors
 # class					border	backgr.	text	indicator	child_border
-client.focused			#1a46c4	#1640b8	#ffffff	#c4d4ff		#1640b8
+client.focused			#1a46c4	#1640b8	#ffffff	#a5b0ce		#1640b8
 client.focused_inactive	#505050	#505050	#ffffff	#8a8a8a		#505050
 client.unfocused		#333333	#222222	#8a8a8a	#292d2e		#222222
 client.urgent			#ff0000	#f00000	#ffffff	#900000		#900000
