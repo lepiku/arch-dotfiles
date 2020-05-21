@@ -12,17 +12,19 @@ URxvt.color12:			#4444FF
 
 ! fonts
 URxvt.font:				xft:Source Code Pro for Powerline:pixelsize=15:antialias=true:Medium,xft:DejaVu Sans Mono for Powerline:pixelsize=15
-URxvt.italicFont:		xft:Source Code Pro for Powerline:pixelsize=15:antialias=true:Medium:Italic:pixelsize=15,xft:DejaVu Sans Mono for Powerline:pixelsize=15
-URxvt.boldFont:			xft:Source Code Pro for Powerline:pixelsize=15:antialias=true:Black:pixelsize=15,xft:DejaVu Sans Mono for Powerline:pixelsize=15
-URxvt.boldItalicFont:	xft:Source Code Pro for Powerline:pixelsize=15:antialias=true:Black:Italic:pixelsize=15,xft:DejaVu Sans Mono for Powerline:pixelsize=15
+URxvt.italicFont:		xft:Source Code Pro for Powerline:pixelsize=15:antialias=true:Medium:Italic:,xft:DejaVu Sans Mono for Powerline:pixelsize=15
+URxvt.boldFont:			xft:Source Code Pro for Powerline:pixelsize=15:antialias=true:Black,xft:DejaVu Sans Mono for Powerline:pixelsize=15
+URxvt.boldItalicFont:	xft:Source Code Pro for Powerline:pixelsize=15:antialias=true:Black:Italic,xft:DejaVu Sans Mono for Powerline:pixelsize=15
 
 ! hotkey
 URxvt.keysym.Control-Up:	\033[1;5A
 URxvt.keysym.Control-Down:	\033[1;5B
 URxvt.keysym.Control-Left:	\033[1;5D
 URxvt.keysym.Control-Right:	\033[1;5C
-URxvt.keysym.C-S-plus:		font-size:increase
-URxvt.keysym.C-S-underscore:font-size:decrease
+URxvt.keysym.C-S-plus:		resize-font:bigger
+URxvt.keysym.C-S-underscore:resize-font:smaller
+URxvt.keysym.C-equal:		resize-font:reset
+URxvt.resize-font.step: 1
 
 ! cursor
 URxvt.cursorColor:		#FFFFFF
