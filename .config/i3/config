@@ -241,10 +241,10 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- $lock --nofork
 exec --no-startup-id urxvtd -q														# daemonize urxvt
 exec --no-startup-id feh --no-fehbg --bg-fill "$HOME/Pictures/wallpaper.png"	# add wallpaper
 exec --no-startup-id xset r rate 300 32												# hold key repeat rate
-exec --no-startup-id xinput set-prop "ELAN0504:00 04F3:3091 Touchpad" \
-	"libinput Tapping Enabled" 1
-exec --no-startup-id xinput set-prop "ELAN0504:00 04F3:3091 Touchpad" \
-	"libinput Disable While Typing Enabled" 0
+#exec --no-startup-id xinput set-prop "ELAN0504:00 04F3:3091 Touchpad" \
+	#"libinput Tapping Enabled" 1
+#exec --no-startup-id xinput set-prop "ELAN0504:00 04F3:3091 Touchpad" \
+	#"libinput Disable While Typing Enabled" 0
 exec --no-startup-id dropbox														# dropbox
 exec --no-startup-id blueman-applet													# bluetooth
 exec --no-startup-id nm-applet  													# wifi

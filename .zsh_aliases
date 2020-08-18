@@ -9,15 +9,15 @@ alias zshalias="nvim ~/.zsh_aliases"
 alias nvimft="nvim ~/.config/nvim/ftplugin"
 
 # projects
-alias helios="cd ~/Projects/compfest/helios"
+alias helios="cd ~/Projects/compfest/helios-return"
 alias black-manta="cd ~/Projects/compfest/black-manta"
 alias zeus="conda deactivate && conda activate zeus && cd ~/Projects/compfest/zeus/zeus"
 alias praktekiin="conda deactivate && conda activate praktekiin && cd ~/Projects/django/praktekiin"
 alias alkhwarizmi="conda deactivate && conda activate itf && cd ~/Projects/it-force/alkhwarizmi"
-alias adpro="export SPRING_PROFILES_ACTIVE='okto' && cd ~/Projects/adpro/chroom-eatery"
+alias adpro="cd ~/Projects/adpro/chroom-eatery"
 alias ppw-lab="conda deactivate && conda activate ppw-lab && cd ~/Projects/ppw/ppw-lab"
 alias iguide="cd ~/Projects/flutter/iguide"
-alias basdat="conda deactivate && conda activate basdat && cd ~/Projects/django/medika-go"
+alias basdat="conda deactivate && conda activate basdat && export LOCAL_DATABASE_URL='postgres://localhost:5432/dimas?currentSchema=medikago' && cd ~/Projects/django/medika-go"
 
 # search inside files
 alias search="grep -Rne"
@@ -31,3 +31,4 @@ alias git-reset='git checkout HEAD --'
 # other
 alias restart-wifi="sudo systemctl restart wpa_supplicant@wlp2s0.service"
 alias restart-network="sudo systemctl restart systemd-networkd.service"
+alias diff="colordiff"

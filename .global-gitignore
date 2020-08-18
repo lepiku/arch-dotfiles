@@ -1,4 +1,11 @@
+# vim
 *.sw[op]
+*.vims
+
+# vim extensions
+.vim/
 .ycm_extra_conf.py
 coc-settings.json
-.vim/
+
+# other
+nohup.out

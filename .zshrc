@@ -75,6 +75,7 @@ plugins=(
 	shrink-path
 	fzf
 	#gradle-completion
+	zsh-syntax-highlighting
 )
 
 
