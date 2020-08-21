@@ -249,4 +249,5 @@ exec --no-startup-id dropbox														# dropbox
 exec --no-startup-id blueman-applet													# bluetooth
 exec --no-startup-id nm-applet  													# wifi
 exec --no-startup-id redshift-gtk													# redshift
-exec --no-startup-id xautolock -time 15 -locker "systemctl suspend"					# autosuspend
+#exec --no-startup-id xautolock -time 15 -locker "systemctl suspend"					# autosuspend
+exec --no-startup-id sh /home/dimas/bin/run-xidlehook.sh							# new autosuspend
