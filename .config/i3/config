@@ -10,6 +10,7 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
+set $alt Mod1
 set $term urxvtc
 set $terme urxvtc -e
 set $termi urxvtc -e zsh -ic
@@ -87,32 +88,32 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # resize with mod + alt
-bindsym $mod+Mod1+h resize shrink width	$resizeFloat px or $resizeTile ppt
-bindsym $mod+Mod1+j resize grow height $resizeFloat px or $resizeTile ppt
-bindsym $mod+Mod1+k resize shrink height $resizeFloat px or $resizeTile ppt
-bindsym $mod+Mod1+l resize grow width $resizeFloat px or $resizeTile ppt
-bindsym $mod+Mod1+Left resize shrink width	$resizeFloat px or $resizeTile ppt
-bindsym $mod+Mod1+Down resize grow height $resizeFloat px or $resizeTile ppt
-bindsym $mod+Mod1+Up resize shrink height $resizeFloat px or $resizeTile ppt
-bindsym $mod+Mod1+Right resize grow width $resizeFloat px or $resizeTile ppt
+bindsym $mod+$alt+h     resize shrink width  $resizeFloat px or $resizeTile ppt
+bindsym $mod+$alt+j     resize grow   height $resizeFloat px or $resizeTile ppt
+bindsym $mod+$alt+k     resize shrink height $resizeFloat px or $resizeTile ppt
+bindsym $mod+$alt+l     resize grow   width  $resizeFloat px or $resizeTile ppt
+bindsym $mod+$alt+Left  resize shrink width  $resizeFloat px or $resizeTile ppt
+bindsym $mod+$alt+Down  resize grow   height $resizeFloat px or $resizeTile ppt
+bindsym $mod+$alt+Up    resize shrink height $resizeFloat px or $resizeTile ppt
+bindsym $mod+$alt+Right resize grow   width  $resizeFloat px or $resizeTile ppt
 
 # resize gaps with mod + alt + shift
-bindsym $mod+Mod1+Shift+h gaps outer current minus 4
-bindsym $mod+Mod1+Shift+j gaps inner current plus 4
-bindsym $mod+Mod1+Shift+k gaps inner current minus 4
-bindsym $mod+Mod1+Shift+l gaps outer current plus 4
-bindsym $mod+Mod1+Shift+0 gaps inner current set 0; gaps outer current set 0
+bindsym $mod+$alt+Shift+h gaps outer current minus 4
+bindsym $mod+$alt+Shift+j gaps inner current plus 4
+bindsym $mod+$alt+Shift+k gaps inner current minus 4
+bindsym $mod+$alt+Shift+l gaps outer current plus 4
+bindsym $mod+$alt+Shift+0 gaps inner current set 0; gaps outer current set 0
 
 # Define names for default workspaces for which we configure key bindings later on.
 set $ws1 "1: work"
 set $ws2 "2: server"
 set $ws3 "3: browser"
 set $ws4 "4: shell"
-set $ws5 "5"
+set $ws5 "5: media"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
-set $ws9 "9: media"
+set $ws9 "9"
 set $ws10 "10: config"
 
 # switch to workspace
@@ -168,13 +169,13 @@ bindsym $mod+Shift+r restart
 # power modes
 set $mode_power "[E]xit | [L]ock | sus[P]end | [R]eboot | [S]hutdown"
 mode $mode_power {
-	bindsym e exec --no-startup-id sh "$HOME/bin/i3exit.sh"; exec i3-msg exit
-	bindsym l exec --no-startup-id $lock, mode "default"
-	bindsym p exec --no-startup-id $suspend, mode "default"
-	bindsym r exec --no-startup-id $reboot
-	bindsym s exec --no-startup-id $shutdown
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
+    bindsym e exec --no-startup-id sh "$HOME/bin/i3exit.sh"; exec i3-msg exit
+    bindsym l exec --no-startup-id $lock, mode "default"
+    bindsym p exec --no-startup-id $suspend, mode "default"
+    bindsym r exec --no-startup-id $reboot
+    bindsym s exec --no-startup-id $shutdown
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 bindsym $mod+Shift+p mode $mode_power
 
@@ -182,51 +183,53 @@ bindsym $mod+Shift+p mode $mode_power
 #ff0000
 
 # window colors
-# class					border	backgr.	text	indicator	child_border
-client.focused			#1a46c4	#1640b8	#ffffff	#a5b0ce		#1640b8
-client.focused_inactive	#505050	#505050	#ffffff	#8a8a8a		#505050
-client.unfocused		#333333	#222222	#8a8a8a	#292d2e		#222222
-client.urgent			#ff0000	#f00000	#ffffff	#900000		#900000
-client.placeholder		#000000	#0c0c0c	#ffffff	#000000		#0c0c0c
+# class                 border  backgr. text    indicator   child_border
+client.focused          #1a46c4 #1640b8 #ffffff #a5b0ce     #1640b8
+client.focused_inactive #505050 #505050 #ffffff #8a8a8a     #505050
+client.unfocused        #333333 #222222 #8a8a8a #292d2e     #222222
+client.urgent           #ff0000 #f00000 #ffffff #900000     #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000     #0c0c0c
 
-client.background		#ffffff
+client.background       #ffffff
 
 # Start i3bar to display a workspace bar (plus the system information i3status)
 bar {
-	colors {
-		background #18181a
-		separator #18181a
-		
-		focused_workspace  #1640b8 #1640b8 #ffffff
-		active_workspace   #333333 #5f676a #ffffff
-		inactive_workspace #333333 #222222 #888888
-		urgent_workspace   #ff0000 #f00000 #ffffff
-		binding_mode       #2f343a #900000 #ffffff
-	}
+    colors {
+        background #18181a
+        separator #18181a
 
-	position top
-	status_command i3status
+        focused_workspace  #1640b8 #1640b8 #ffffff
+        active_workspace   #333333 #5f676a #ffffff
+        inactive_workspace #333333 #222222 #888888
+        urgent_workspace   #ff0000 #f00000 #ffffff
+        binding_mode       #2f343a #900000 #ffffff
+    }
+
+    position top
+    status_command i3status
 }
 # ---------- Launch Applications ---------- #
-bindsym $mod+b			exec firefox
-bindsym $mod+Shift+b	exec firefox --private-window
+bindsym $mod+b          exec firefox
+bindsym $mod+Shift+b    exec firefox --private-window
 
-bindsym $mod+c			exec $termi "nvimrc"
-bindsym $mod+Shift+c	exec $termi "i3config"
+bindsym $mod+c          exec $termi nvimrc
+bindsym $mod+Shift+c    exec $termi i3config
 
-bindsym $mod+g			exec chromium
-bindsym $mod+Shift+g	exec chromium --incognito
+bindsym $mod+g          exec chromium
+bindsym $mod+Shift+g    exec chromium --incognito
 
-bindsym $mod+m			exec $terme "ranger"
-bindsym $mod+Shift+m	exec pcmanfm
+bindsym $mod+i          exec $terme sudo iftop -Bm 12M
 
-bindsym $mod+t			exec $terme "htop"
+bindsym $mod+m          exec $terme ranger
+bindsym $mod+Shift+m    exec pcmanfm
 
-bindsym $mod+v			exec pavucontrol
+bindsym $mod+t          exec $terme htop
 
-bindsym Print			exec scrot -e 'mv $f ~/Pictures/Screenshots'
-bindsym Shift+Print		exec scrot -u -e 'mv $f ~/Pictures/Screenshots'
-bindsym $mod+Print		exec sleep 1 && scrot -s -e 'mv $f ~/Pictures/Screenshots'
+bindsym $mod+v          exec pavucontrol
+
+bindsym Print           exec scrot -e 'mv $f ~/Pictures/Screenshots'
+bindsym Shift+Print     exec scrot -u -e 'mv $f ~/Pictures/Screenshots'
+bindsym $mod+Print      exec sleep 1 && scrot -s -e 'mv $f ~/Pictures/Screenshots'
 
 # ---------- Autostart Programs ---------- #
 # default workspace
@@ -238,16 +241,16 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- $lock --nofork
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 #exec --no-startup-id nm-applet
-exec --no-startup-id urxvtd -q														# daemonize urxvt
-exec --no-startup-id feh --no-fehbg --bg-fill "$HOME/Pictures/wallpaper.png"	# add wallpaper
-exec --no-startup-id xset r rate 300 32												# hold key repeat rate
+exec --no-startup-id urxvtd -q                                                  # daemonize urxvt
+exec --no-startup-id feh --no-fehbg --bg-fill "$HOME/Pictures/wallpaper.png"    # add wallpaper
+exec --no-startup-id xset r rate 300 32                                         # hold key repeat rate
 #exec --no-startup-id xinput set-prop "ELAN0504:00 04F3:3091 Touchpad" \
-	#"libinput Tapping Enabled" 1
+    #"libinput Tapping Enabled" 1
 #exec --no-startup-id xinput set-prop "ELAN0504:00 04F3:3091 Touchpad" \
-	#"libinput Disable While Typing Enabled" 0
-exec --no-startup-id dropbox														# dropbox
-exec --no-startup-id blueman-applet													# bluetooth
-exec --no-startup-id nm-applet  													# wifi
-exec --no-startup-id redshift-gtk													# redshift
-#exec --no-startup-id xautolock -time 15 -locker "systemctl suspend"					# autosuspend
-exec --no-startup-id sh /home/dimas/bin/run-xidlehook.sh							# new autosuspend
+    #"libinput Disable While Typing Enabled" 0
+exec --no-startup-id dropbox                                                    # dropbox
+exec --no-startup-id blueman-applet                                             # bluetooth
+exec --no-startup-id nm-applet                                                  # wifi
+exec --no-startup-id redshift-gtk                                               # redshift
+#exec --no-startup-id xautolock -time 15 -locker "systemctl suspend"            # autosuspend
+exec --no-startup-id sh /home/dimas/bin/run-xidlehook.sh                        # new autosuspend
