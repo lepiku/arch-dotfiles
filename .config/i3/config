@@ -17,7 +17,6 @@ set $termi urxvtc -e zsh -ic
 set $shutdown systemctl poweroff
 set $suspend systemctl suspend
 set $reboot systemctl reboot
-set $lock i3lock -c 18181a
 set $logoff i3-msg exit
 
 # set variabled for resizing
@@ -170,8 +169,8 @@ bindsym $mod+Shift+r restart
 set $mode_power "[E]xit | [L]ock | sus[P]end | [R]eboot | [S]hutdown"
 mode $mode_power {
     bindsym e exec --no-startup-id sh "$HOME/bin/i3exit.sh"; exec i3-msg exit
-    bindsym l exec --no-startup-id $lock, mode "default"
-    bindsym p exec --no-startup-id $suspend, mode "default"
+    bindsym l exec --no-startup-id lock, mode "default"
+    bindsym p exec --no-startup-id $suspend & lock, mode "default"
     bindsym r exec --no-startup-id $reboot
     bindsym s exec --no-startup-id $shutdown
     bindsym Return mode "default"
@@ -236,7 +235,7 @@ bindsym $mod+Print      exec sleep 1 && scrot -s -e 'mv $f ~/Pictures/Screenshot
 exec --no-startup-id i3-msg workspace $ws1
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- $lock --nofork
+#exec --no-startup-id xss-lock --transfer-sleep-lock -- $lock --nofork
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -253,4 +252,5 @@ exec --no-startup-id blueman-applet                                             
 exec --no-startup-id nm-applet                                                  # wifi
 exec --no-startup-id redshift-gtk                                               # redshift
 #exec --no-startup-id xautolock -time 15 -locker "systemctl suspend"            # autosuspend
-exec --no-startup-id sh /home/dimas/bin/run-xidlehook.sh                        # new autosuspend
+exec --no-startup-id sh "$HOME/bin/run-xidlehook.sh"                        # new autosuspend
+exec --no-startup-id systemctl --user start dispad.service

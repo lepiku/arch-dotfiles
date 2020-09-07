@@ -42,6 +42,7 @@ bin/*.jar
 !.config/ranger/
 !.config/ranger/**
 !.config/redshift.conf
+!.dispad
 
 # conda
 !.condarc
