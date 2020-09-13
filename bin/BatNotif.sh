@@ -1,7 +1,7 @@
 #!/bin/sh
 # Low battery warning script
 
-low=25
+low=20
 high=70
 
 export DISPLAY=:0

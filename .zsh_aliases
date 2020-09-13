@@ -9,7 +9,7 @@ alias zshalias="nvim ~/.zsh_aliases"
 alias nvimft="nvim ~/.config/nvim/ftplugin"
 
 # projects
-alias helios=". ~/Projects/compfest/preview.env.sh && cd ~/Projects/compfest/helios-return"
+alias helios=". ~/Projects/compfest/delivery.env.sh && cd ~/Projects/compfest/helios-return"
 alias black-manta="cd ~/Projects/compfest/black-manta"
 alias zeus="cd ~/Projects/compfest/zeus"
 alias praktekiin="conda deactivate && conda activate praktekiin && cd ~/Projects/django/praktekiin"

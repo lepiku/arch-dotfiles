@@ -25,7 +25,7 @@
 # delay
 # 
 # How long after the trackpad(s) should be disabled after a keystroke. Integer value. Defaults to 1000.
-delay=250
+delay=400
 
 # pidfile
 #
