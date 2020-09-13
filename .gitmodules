@@ -1,3 +1,0 @@
-[submodule ".oh-my-zsh/plugins/conda-zsh-completion"]
-	path = .oh-my-zsh/plugins/conda-zsh-completion
-	url = https://github.com/esc/conda-zsh-completion.git
