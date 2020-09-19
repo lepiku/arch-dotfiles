@@ -20,12 +20,12 @@
 #
 # How long (in milliseconds) that dispad will wait after polling the keyboard
 # before polling again. Integer value. Defaults to 100.
-#poll=100
+poll=50
 
 # delay
 # 
 # How long after the trackpad(s) should be disabled after a keystroke. Integer value. Defaults to 1000.
-delay=400
+delay=600
 
 # pidfile
 #
