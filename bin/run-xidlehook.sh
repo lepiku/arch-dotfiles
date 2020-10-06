@@ -10,5 +10,5 @@ xidlehook \
     'xset dpms force off' \
     'xset dpms force on' \
   --timer 10 \
-    'systemctl suspend & lock' \
+    'systemctl suspend' \
     ''

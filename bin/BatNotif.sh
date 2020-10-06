@@ -1,8 +1,8 @@
 #!/bin/sh
 # Low battery warning script
 
-low=20
-high=70
+low=15
+high=65
 
 export DISPLAY=:0
 charging=`acpi -b | grep "Charging"`
