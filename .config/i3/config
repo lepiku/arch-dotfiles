@@ -228,9 +228,8 @@ bindsym $mod+t          exec $terme htop
 
 bindsym $mod+v          exec pavucontrol
 
-bindsym Print           exec scrot -e 'mv $f ~/Pictures/Screenshots'
-bindsym Shift+Print     exec scrot -u -e 'mv $f ~/Pictures/Screenshots'
-bindsym $mod+Print      exec sleep 1 && scrot -s -e 'mv $f ~/Pictures/Screenshots'
+bindsym Print           exec sh $HOME/bin/screenshot.sh screen
+bindsym Shift+Print     exec sh $HOME/bin/screenshot.sh select
 
 # ---------- Autostart Programs ---------- #
 # default workspace
