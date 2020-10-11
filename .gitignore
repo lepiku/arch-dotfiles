@@ -39,6 +39,7 @@ bin/*.jar
 !.config/i3/**
 !.config/i3status/
 !.config/i3status/**
+!.config/picom.conf
 !.config/ranger/
 !.config/ranger/**
 !.config/redshift.conf

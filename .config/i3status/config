@@ -63,8 +63,8 @@ wireless wlp2s0 {
 }
 
 volume master {
-        format = "<span background='#606000'> 🎵 %volume </span>"
-        format_muted = "<span background='#808000'> 🎵 -M- </span>"
+        format = "<span background='#606000'> ♫ %volume </span>"
+        format_muted = "<span background='#808000'> ♫ -M- </span>"
         device = "default"
         mixer = "Master"
         mixer_idx = 0
