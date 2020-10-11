@@ -25,7 +25,8 @@ set $resizeTile 2
 
 # set size for focused border
 for_window [class="^.*"] border pixel 2
-for_window [title="albert — Albert"] border pixel 0
+#for_window [title="albert — Albert"] border pixel 0
+for_window [class="jetbrains-studio" window_type="dialog" title="^win[0-9]+$"] border pixel 0
 
 # set gaps
 gaps inner 8
