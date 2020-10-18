@@ -35,6 +35,9 @@ bin/*.jar
 !.Xmodmap
 !.ssh/
 !.ssh/config
+!.config/feh/
+!.config/feh/**
+!.config/feh/buttons
 !.config/i3/
 !.config/i3/**
 !.config/i3status/
