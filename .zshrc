@@ -126,4 +126,4 @@ export FZF_DEFAULT_OPTS='--height 40%'
 stty -ixon
 
 # mouse scroll on less
-export LESS='--mouse --wheel-lines 2'
+export LESS='-R --mouse --wheel-lines 2'
