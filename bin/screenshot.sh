@@ -1,6 +1,6 @@
 #!/bin/sh
 
-image_name="$HOME/Pictures/Screenshots/$(date +%s).png"
+image_name="$HOME/Pictures/Screenshots/$(date +%F_%H-%M-%S-%N | cut -c -23).png"
 
 _maim() {
     maim $* $image_name
