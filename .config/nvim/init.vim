@@ -16,6 +16,7 @@ Plug 'dart-lang/dart-vim-plugin'
 Plug 'godlygeek/tabular'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'jiangmiao/auto-pairs'
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tomasiser/vim-code-dark'
@@ -92,6 +93,12 @@ set clipboard=unnamed
 
 " wrap text with 'gq'
 "set textwidth=80
+
+" Enable true color support.
+set termguicolors
+"let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+"let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+let g:Hexokinase_highlighters = ['backgroundfull']
 
 " ------------ coc.nvim settings ----------------- "
 " Some servers have issues with backup files, see #649
@@ -203,52 +210,53 @@ endif
 colorscheme default
 set background=dark
 highlight Normal guibg=black guifg=white
-highlight SignColumn ctermbg=NONE
+highlight SignColumn ctermbg=NONE guibg=NONE
 
 " 80 char border
-highlight colorcolumn ctermbg=235
+highlight colorcolumn ctermbg=235 guibg=#262626
 
 " hybrid line number
-highlight CursorLineNR cterm=NONE ctermfg=214
+highlight CursorLine gui=reverse
+highlight CursorLineNR cterm=NONE ctermfg=214 guifg=#ffaf00
 
 " vertical split
-highlight VertSplit cterm=NONE ctermfg=123
+highlight VertSplit cterm=NONE ctermfg=123 gui=NONE guifg=#87ffff
 
 " comment color
-highlight Comment ctermfg=248
+highlight Comment ctermfg=248 guifg=#a8a8a8
 
 " autocomplete highlights
-highlight Pmenu ctermbg=236 ctermfg=254
-highlight PmenuSel ctermbg=232 ctermfg=252
+highlight Pmenu ctermbg=236 ctermfg=254 guibg=#303030 guifg=#e4e4e4
+highlight PmenuSel ctermbg=232 ctermfg=252 guibg=#080808 guifg=#d0d0d0
 
-highlight MatchParen ctermbg=24
-highlight Search ctermbg=239 ctermfg=NONE
-highlight Visual ctermbg=18
+highlight MatchParen ctermbg=24 guibg=#005f87
+highlight Search ctermbg=239 ctermfg=NONE guibg=#4e4e4e guifg=NONE
+highlight Visual ctermbg=18 guibg=#000087
 
 " coc
-highlight CocWarningSign ctermfg=172
+highlight CocWarningSign ctermfg=172 guifg=#d78700
 
 " ------------ Plugin Settings ------------------- "
 " vim-code-dark plugin
 let g:airline_theme = 'codedark'
 
+
 " gitgutter plugin
-highlight GitGutterAdd		cterm=bold ctermfg=2
-highlight GitGutterDelete	cterm=bold ctermfg=1
-highlight GitGutterChange	cterm=bold ctermfg=3
-highlight GitGutterText		cterm=bold ctermfg=5
+highlight GitGutterAdd		cterm=bold ctermfg=2 gui=bold guifg=#00ff00 guibg=NONE
+highlight GitGutterDelete	cterm=bold ctermfg=1 gui=bold guifg=#ff0000 guibg=NONE
+highlight GitGutterChange	cterm=bold ctermfg=3 gui=bold guifg=#ffff00 guibg=NONE
+highlight GitGutterText		cterm=bold ctermfg=5 gui=bold guifg=#ff00ff guibg=NONE
 
 " vim-fugitive plugin
-highlight DiffAdd		cterm=NONE ctermbg=17
-highlight DiffDelete	cterm=NONE ctermbg=17 ctermfg=1
-highlight DiffChange	cterm=NONE ctermbg=17
-highlight DiffText		cterm=NONE ctermbg=52
+highlight DiffAdd		cterm=NONE ctermbg=17 gui=NONE guibg=#00005f
+highlight DiffDelete	cterm=NONE ctermbg=17 ctermfg=1 gui=NONE guibg=#00005f guifg=#5f0000
+highlight DiffChange	cterm=NONE ctermbg=17 gui=NONE guibg=#00005f
+highlight DiffText		cterm=NONE ctermbg=52 gui=NONE guibg=#00005f
 
 " error color
-highlight error ctermbg=88
-highlight SpellBad ctermbg=88
-highlight todo ctermbg=100
-highlight SpellCap ctermbg=100
+highlight error ctermbg=88 guibg=#870000
+highlight SpellBad ctermbg=88 guibg=#870000
+highlight todo ctermbg=100 guibg=#878700
 
 " airline plugin
 if !exists('g:airline_symbols')

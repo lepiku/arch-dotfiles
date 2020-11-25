@@ -11,9 +11,9 @@
 
 set $mod Mod4
 set $alt Mod1
-set $term urxvtc
-set $terme urxvtc -e
-set $termi urxvtc -e zsh -ic
+set $term st
+set $terme st -e
+set $termi st -e zsh -ic
 set $shutdown systemctl poweroff
 set $suspend systemctl suspend
 set $reboot systemctl reboot
@@ -181,9 +181,6 @@ mode $mode_power {
     bindsym Escape mode "default"
 }
 bindsym $mod+Shift+p mode $mode_power
-
-#0042ff
-#ff0000
 
 # window colors
 # class                 border  backgr. text    indicator   child_border
