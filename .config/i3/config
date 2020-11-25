@@ -233,6 +233,14 @@ bindsym $mod+v          exec pavucontrol
 bindsym Print           exec sh $HOME/bin/screenshot.sh screen
 bindsym Shift+Print     exec sh $HOME/bin/screenshot.sh select
 
+# ---------- Browser Shortcut Mode ---------- #
+set $mode_browser "Browser Shortcut"
+mode $mode_browser {
+    bindsym s exec firefox --new-window "https://soundcloud.com/", mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+$alt+b mode $mode_browser
+
 # ---------- Autostart Programs ---------- #
 # default workspace
 exec --no-startup-id i3-msg workspace $ws1

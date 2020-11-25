@@ -16,3 +16,5 @@ fi
 # default editor
 export VISUAL=nvim
 export EDITOR="$VISUAL"
+
+export GOPATH="$HOME/.go"
