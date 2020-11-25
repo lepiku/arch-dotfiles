@@ -35,6 +35,8 @@ bin/*.jar
 !.Xmodmap
 !.ssh/
 !.ssh/config
+!.config/dunst/
+!.config/dunst/**
 !.config/feh/
 !.config/feh/**
 !.config/feh/buttons
