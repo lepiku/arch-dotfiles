@@ -26,7 +26,9 @@ set $resizeTile 2
 # set size for focused border
 for_window [class="^.*"] border pixel 2
 #for_window [title="albert — Albert"] border pixel 0
-for_window [class="jetbrains-studio" window_type="dialog" title="^win[0-9]+$"] border pixel 0
+for_window [class="jetbrains-studio" window_type="dialog" title="^win\d+$"] border pixel 0
+for_window [class="jetbrains-studio" title="^win\d+$"] focus
+for_window [class="firefox" window_role="Popup"] border pixel 0
 
 # set gaps
 gaps inner 8
@@ -219,7 +221,7 @@ bindsym $mod+Shift+c    exec $termi i3config
 bindsym $mod+g          exec chromium
 bindsym $mod+Shift+g    exec chromium --incognito
 
-bindsym $mod+i          exec $terme sudo iftop -Bm 12M
+bindsym $mod+i          exec $terme sudo iftop -Bm 20M
 
 bindsym $mod+m          exec $terme ranger
 bindsym $mod+Shift+m    exec pcmanfm
