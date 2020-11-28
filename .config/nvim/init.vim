@@ -4,7 +4,7 @@
 if has('nvim')
 	call plug#begin(stdpath('data') . '/plugged')
 else
-	call plug#begin('~/.local/share/nvim/plugged')
+	call plug#begin('~/.vim/plugged')
 endif
 
 " Plugins from github
@@ -12,9 +12,7 @@ endif
 " On-demand loading
 Plug 'airblade/vim-gitgutter'
 Plug 'alvan/vim-closetag'
-Plug 'dart-lang/dart-vim-plugin'
 Plug 'godlygeek/tabular'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'jiangmiao/auto-pairs'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'scrooloose/nerdcommenter'
@@ -27,6 +25,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 if has('nvim')
+	Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 	Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 endif
 
@@ -96,8 +95,8 @@ set clipboard=unnamed
 
 " Enable true color support.
 set termguicolors
-"let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-"let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 let g:Hexokinase_highlighters = ['backgroundfull']
 
 " ------------ coc.nvim settings ----------------- "

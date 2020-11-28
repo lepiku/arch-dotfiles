@@ -234,9 +234,10 @@ bindsym Shift+Print     exec sh $HOME/bin/screenshot.sh select
 set $mode_browser "Browser Shortcut"
 mode $mode_browser {
     bindsym s exec firefox --new-window "https://soundcloud.com/", mode "default"
+    bindsym y exec firefox --new-window "https://youtube.com/", mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+$alt+b mode $mode_browser
+bindsym $mod+w mode $mode_browser
 
 # ---------- Autostart Programs ---------- #
 # default workspace
