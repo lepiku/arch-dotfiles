@@ -2,7 +2,7 @@
 
 This is my Arch Linux config files.
 I use
-[i3wm](https://i3wm.org/) as my window manager,
+[i3-gaps](https://github.com/Airblader/i3) as my window manager,
 [st](https://st.suckless.org/) as my terminal emulator,
 [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) as my shell, and
 [Neovim](https://github.com/neovim/neovim) as my main text editor.
