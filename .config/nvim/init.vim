@@ -2,10 +2,12 @@
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
 if has('nvim')
-	call plug#begin(stdpath('data') . '/plugged')
+    let g:datapath = stdpath('data')
 else
-	call plug#begin('~/.vim/plugged')
+    let g:datapath = $HOME . '/.vim'
 endif
+
+call plug#begin(g:datapath . '/plugged')
 
 " Plugins from github
 " Make sure you use single quotes
@@ -361,3 +363,53 @@ augroup postWrite
 	" xrdb autoload .Xresources
 	autocmd BufWritePost .Xresources silent !xrdb ~/.Xresources
 augroup end
+
+"------------ Autoload session ------------------ "
+" modified from https://vim.fandom.com/wiki/Go_away_and_come_back
+function GetSessionFile()
+    let sessionfile = substitute('session_' . getcwd() . '.vim', $HOME . '/', '', '')
+    let sessionfile = substitute(sessionfile, '/', '%', 'g')
+    return g:datapath . "/sessions" . '/' . sessionfile
+endfunction
+
+" Creates a session
+function MakeSession()
+    if (filewritable(g:datapath . "/sessions") != 2)
+        exe 'silent !mkdir -p ' . g:datapath . "/sessions"
+        redraw!
+    endif
+    exe "mksession! " . substitute(GetSessionFile(), '%', '\\%', 'g')
+    echo 'Session created.'
+endfunction
+
+" Updates a session, BUT ONLY IF IT ALREADY EXISTS
+function UpdateSession()
+    if (filereadable(GetSessionFile()))
+        exe "mksession! " . substitute(GetSessionFile(), '%', '\\%', 'g')
+        echo "Session updated"
+    endif
+endfunction
+
+" Loads a session if it exists
+function LoadSession()
+    if argc() == 0
+        if (filereadable(GetSessionFile()))
+            exe "source " . substitute(GetSessionFile(), '%', '\\%', 'g')
+            echo "Session loaded."
+        endif
+   endif
+endfunction
+
+function RemoveSession()
+    if (filereadable(GetSessionFile()))
+        exe "!rm " . substitute(GetSessionFile(), '%', '\\%', 'g')
+        echo "Session removed."
+    else
+        echo "Err: Session cant be deleted."
+    endif
+endfunction
+
+au VimEnter * nested :call LoadSession()
+au VimLeave * :call UpdateSession()
+map <leader>ms :call MakeSession()<CR>
+map <leader>rs :call RemoveSession()<CR>
