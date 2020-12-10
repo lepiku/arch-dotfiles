@@ -1,0 +1,40 @@
+#!/bin/sh
+
+username="dimas"
+static_ip="192.168.1.24"
+enp_mac="1e:87:63:81:09:46"
+wlan_mac="14:4f:8a:98:32:21"
+
+getaddr() {
+    echo "$arp" | grep $1 | awk '{print substr($2, 2, length($2) - 2)}'
+}
+
+connect() {
+    if [ -n $static_ip ]; then
+        ssh "$username@$static_ip"
+        return
+    fi
+
+    failed="false"
+
+    arp=`arp -a`
+    enp_addr=`getaddr $enp_mac`
+    wlan_addr=`getaddr $wlan_mac`
+
+    if [ -n "$enp_addr" ]; then
+        echo "enp: $enp_addr"
+        ssh "$username@$enp_addr"
+    elif [ -n "$wlan_addr" ]; then
+        echo "wlan: $wlan_addr"
+        ssh "$username@$wlan_addr"
+    else
+        failed="true"
+    fi
+}
+
+connect
+if [ $failed = "true" ]; then
+    nmap -sP 192.168.1.0/24
+    connect
+fi
+
