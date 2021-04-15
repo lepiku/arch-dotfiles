@@ -14,6 +14,7 @@ call plug#begin(g:datapath . '/plugged')
 " On-demand loading
 Plug 'airblade/vim-gitgutter'
 Plug 'alvan/vim-closetag'
+Plug 'dart-lang/dart-vim-plugin'
 Plug 'godlygeek/tabular'
 Plug 'jiangmiao/auto-pairs'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
@@ -24,6 +25,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-test/vim-test'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 if has('nvim')
@@ -207,6 +209,13 @@ if has('nvim')
 	nnoremap <silent> <C-P> :CocCommand<CR>
 endif
 
+" these "Ctrl mappings" work well when Caps Lock is mapped to Ctrl
+nmap <leader>tn :TestNearest<CR>
+nmap <leader>tf :TestFile<CR>
+nmap <leader>ts :TestSuite<CR>
+nmap <leader>tl :TestLast<CR>
+nmap <leader>tg :TestVisit<CR>
+
 " ------------ Highlight/Color/Theme ------------- "
 colorscheme default
 set background=dark
@@ -334,7 +343,7 @@ noremap <Leader>gs :G<CR>
 noremap <Leader>gd :Gdiff<CR>
 
 " open terminal like vscode
-noremap <silent> <C-Space> :10 split \| term<CR> A
+"noremap <silent> <C-Space> :10 split \| term<CR> A
 
 " trim whitespace
 nmap <Leader>trim :%s/\ \+$//<CR>
