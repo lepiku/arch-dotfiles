@@ -29,6 +29,8 @@ for_window [class="^.*"] border pixel 2
 for_window [class="jetbrains-studio" window_type="dialog" title="^win\d+$"] border pixel 0
 for_window [class="jetbrains-studio" title="^win\d+$"] focus
 for_window [class="firefox" window_role="Popup"] border pixel 0
+for_window [class="PacketTracer7"] floating enable
+#for_window [title="^Android Emulator"] border pixel 0
 
 # set gaps
 gaps inner 8
@@ -165,7 +167,7 @@ bindsym $mod+a focus parent
 bindsym $mod+Shift+a focus child
 
 # reload the configuration file
-bindsym $mod+r reload
+bindsym $mod+r reload; exec $HOME/bin/monitors
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
@@ -228,7 +230,7 @@ bindsym $mod+t          exec $terme htop
 bindsym $mod+v          exec pavucontrol
 
 bindsym Print           exec sh $HOME/bin/screenshot.sh screen
-bindsym Shift+Print     exec sh $HOME/bin/screenshot.sh select
+bindsym $mod+e     exec sh $HOME/bin/screenshot.sh select
 
 # ---------- Browser Shortcut Mode ---------- #
 set $mode_browser "Browser Shortcut"
@@ -261,7 +263,8 @@ exec --no-startup-id blueman-applet                                             
 exec --no-startup-id nm-applet                                                  # wifi
 exec --no-startup-id redshift-gtk                                               # redshift
 #exec --no-startup-id xautolock -time 15 -locker "systemctl suspend"            # autosuspend
-exec --no-startup-id sh "$HOME/bin/run-xidlehook.sh"                        # new autosuspend
+exec --no-startup-id sh "$HOME/bin/run-xidlehook.sh"                            # new autosuspend
 exec --no-startup-id systemctl --user start dispad.service
 exec --no-startup-id albert
 exec --no-startup-id picom -b
+exec --no-startup-id bash "$HOME/bin/auto-enable-mic.sh"                        # change profile to Duplex everytime
