@@ -2,20 +2,17 @@
 # Low battery warning script
 
 off=5
-low=15
-high=65
+slp=30
+low=12
+high=60
 
-export DISPLAY=:0
 charging=`acpi -b | grep "Charging"`
 level=`cat /sys/class/power_supply/BAT0/charge_now`
 full_level=`cat /sys/class/power_supply/BAT0/charge_full_design`
 current_level=`expr "$level" \* 100 / "$full_level"`
 
-echo "Battery: $current_level%"
-if [ ! -n "$charging" ] && [ "$current_level" -lt "$off" ]; then
-    poweroff
-elif [ ! -n "$charging" ] && [ "$current_level" -lt "$low" ]; then
-    i3-nagbar -f "pango:SourceCodePro SemiBold 10" -m "LOW BATTERY: Battery < $low%"
+if [ ! -n "$charging" ] && [ "$current_level" -lt "$low" ]; then
+    notify-send -u critical "LOW BATTERY ($current_level%)"
 elif [ -n "$charging" ] && [ "$current_level" -ge "$high" ];then
-    i3-nagbar -f "pango:SourceCodePro SemiBold 10" -m "FULL BATTERY: Battery > $high%" -t "warning"
+    notify-send -u normal "FULL BATTERY ($current_level%)"
 fi
