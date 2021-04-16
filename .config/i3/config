@@ -56,7 +56,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id sh -c 'sudo tee /sys/class/ba
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec $term
+bindsym $mod+Return exec --no-startup-id $term
 bindsym $mod+Shift+Return exec i3-sensible-terminal
 
 # kill focused window
@@ -167,7 +167,7 @@ bindsym $mod+a focus parent
 bindsym $mod+Shift+a focus child
 
 # reload the configuration file
-bindsym $mod+r reload; exec $HOME/bin/monitors
+bindsym $mod+r reload; exec --no-startup-id $HOME/bin/monitors
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
@@ -229,8 +229,8 @@ bindsym $mod+t          exec $terme htop
 
 bindsym $mod+v          exec pavucontrol
 
-bindsym Print           exec sh $HOME/bin/screenshot.sh screen
-bindsym $mod+e     exec sh $HOME/bin/screenshot.sh select
+bindsym Print           exec --no-startup-id sh $HOME/bin/screenshot.sh screen
+bindsym $mod+e          exec --no-startup-id sh $HOME/bin/screenshot.sh select
 
 # ---------- Browser Shortcut Mode ---------- #
 set $mode_browser "Browser Shortcut"
