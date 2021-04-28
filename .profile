@@ -13,6 +13,10 @@ if [ -d "$HOME/Android/flutter/bin" ] ; then
 	PATH="$PATH:$HOME/Android/flutter/bin"
 fi
 
+if [ -f ~/.keys ]; then
+	. ~/.keys
+fi
+
 # default editor
 export VISUAL=nvim
 export EDITOR="$VISUAL"
