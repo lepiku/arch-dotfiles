@@ -30,11 +30,6 @@ bin/*.jar
 .config/nvim/coc-settings.json
 
 # other
-!.Xresources
-!.xinitrc
-!.Xmodmap
-!.ssh/
-!.ssh/config
 !.config/dunst/
 !.config/dunst/**
 !.config/feh/
@@ -48,7 +43,14 @@ bin/*.jar
 !.config/ranger/
 !.config/ranger/**
 !.config/redshift.conf
+!.config/rofi/
+!.config/rofi/**
 !.dispad
+!.ssh/
+!.ssh/config
+!.xinitrc
+!.Xmodmap
+!.Xresources
 
 # conda
 !.condarc
