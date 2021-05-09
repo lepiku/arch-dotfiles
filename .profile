@@ -13,6 +13,12 @@ if [ -d "$HOME/Android/flutter/bin" ] ; then
 	PATH="$PATH:$HOME/Android/flutter/bin"
 fi
 
+# android path
+if [ -d "$HOME/Android/Sdk" ] ; then
+	PATH="$PATH:$HOME/Android/Sdk/platform-tools"
+	PATH="$PATH:$HOME/Android/Sdk/emulator"
+fi
+
 if [ -f ~/.keys ]; then
 	. ~/.keys
 fi
