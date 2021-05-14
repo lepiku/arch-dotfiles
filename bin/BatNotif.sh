@@ -4,7 +4,7 @@
 off=5
 slp=30
 low=12
-high=60
+high=50
 
 charging=`acpi -b | grep "Charging"`
 level=`cat /sys/class/power_supply/BAT0/charge_now`

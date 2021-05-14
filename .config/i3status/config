@@ -78,7 +78,7 @@ battery 0 {
         status_unk = "Unk"
         status_full = "Crd"
         path = "/sys/class/power_supply/BAT%d/uevent"
-        low_threshold = 15
+        low_threshold = 12
         threshold_type = "percentage"
 }
 
