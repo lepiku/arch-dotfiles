@@ -333,7 +333,7 @@ if has('clipboard')
 endif
 
 " FZF
-noremap <C-z> :call fzf#run(fzf#wrap({'source': '$FZF_VIM_COMMAND'}))<CR>
+noremap <C-z> :call fzf#run(fzf#wrap({'source': $FZF_VIM_COMMAND}))<CR>
 
 " NERDTree plugin
 noremap <Leader>n :NERDTreeToggle<CR>
