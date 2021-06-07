@@ -27,7 +27,6 @@ bin/*.jar
 !.config/nvim/
 !.config/nvim/**
 .config/nvim/.netrwhist
-.config/nvim/coc-settings.json
 
 # other
 !.config/dunst/

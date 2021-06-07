@@ -1,0 +1,20 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "dart",
+    "graphql",
+    "html",
+    "javascript",
+    "json",
+    "markdown",
+    "python",
+    "scss"
+  ],
+  "python.pythonPath": "~/bin/pyright-conda",
+  "python.formatting.autopep8Path": "~/.local/bin/autopep8",
+  "python.analysis.useLibraryCodeForTypes": true,
+  "diagnostic.showUnused": false,
+  "python.analysis.diagnosticSeverityOverrides": {
+    "reportGeneralTypeIssues": "none"
+  }
+}
