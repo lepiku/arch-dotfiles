@@ -229,6 +229,7 @@ bindsym $mod+m          exec $terme ranger
 bindsym $mod+Shift+m    exec pcmanfm
 
 bindsym $mod+t          exec $terme htop
+bindsym $mod+Shift+t    exec sudo bluetooth toggle
 
 bindsym $mod+v          exec pavucontrol
 
@@ -238,8 +239,9 @@ bindsym $mod+e          $exe sh $HOME/bin/screenshot.sh select
 # ---------- Browser Shortcut Mode ---------- #
 set $mode_browser "Browser Shortcut"
 mode $mode_browser {
-    bindsym s exec firefox --new-window "https://soundcloud.com/", mode "default"
-    bindsym y exec firefox --new-window "https://youtube.com/", mode "default"
+    bindsym s exec firefox --new-window "https://soundcloud.com", mode "default"
+    bindsym y exec firefox --new-window "https://youtube.com", mode "default"
+    bindsym m exec firefox --private-window "https://myanimelist.net", mode "default"
     bindsym Escape mode "default"
 }
 bindsym $mod+w mode $mode_browser
@@ -269,4 +271,4 @@ $exe redshift-gtk                                               # redshift
 $exe sh "$HOME/bin/run-xidlehook.sh"                            # new autosuspend
 $exe systemctl --user start dispad.service
 $exe picom -b
-$exe bash "$HOME/bin/auto-enable-mic.sh"                        # change profile to Duplex everytime
+#$exe bash "$HOME/bin/auto-enable-mic.sh"                        # change profile to Duplex everytime

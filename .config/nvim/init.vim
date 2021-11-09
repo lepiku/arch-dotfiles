@@ -419,6 +419,6 @@ function RemoveSession()
 endfunction
 
 au VimEnter * nested :call LoadSession()
-au VimLeave * :call UpdateSession()
+"au VimLeave * :call UpdateSession()
 map <leader>ms :call MakeSession()<CR>
 map <leader>rs :call RemoveSession()<CR>

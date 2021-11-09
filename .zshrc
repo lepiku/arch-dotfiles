@@ -127,3 +127,10 @@ stty -ixon
 
 # mouse scroll on less
 export LESS="$LESS --mouse --wheel-lines 2"
+
+# set nvim as default editor
+export EDITOR=/usr/bin/nvim
+export VISUAL=$EDITOR
+
+# enable nvm
+source /usr/share/nvm/init-nvm.sh
