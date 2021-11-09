@@ -10,6 +10,7 @@
     "python",
     "scss"
   ],
+  "eslint.autoFixOnSave": true,
   "python.pythonPath": "~/bin/pyright-conda",
   "python.formatting.autopep8Path": "~/.local/bin/autopep8",
   "python.analysis.useLibraryCodeForTypes": true,
