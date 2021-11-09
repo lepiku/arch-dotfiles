@@ -217,7 +217,7 @@ bar {
 bindsym $mod+b          exec firefox
 bindsym $mod+Shift+b    exec firefox --private-window
 
-bindsym $mod+c          exec $termi nvimrc
+bindsym $mod+c          exec calibre
 bindsym $mod+Shift+c    exec $termi i3config
 
 bindsym $mod+g          exec chromium
