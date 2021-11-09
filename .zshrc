@@ -134,3 +134,9 @@ export VISUAL=$EDITOR
 
 # enable nvm
 source /usr/share/nvm/init-nvm.sh
+
+if [[ $1 == eval ]]
+then
+    "$@"
+set --
+fi
