@@ -239,9 +239,14 @@ bindsym $mod+e          $exe sh $HOME/bin/screenshot.sh select
 # ---------- Browser Shortcut Mode ---------- #
 set $mode_browser "Browser Shortcut"
 mode $mode_browser {
-    bindsym s exec firefox --new-window "https://soundcloud.com", mode "default"
-    bindsym y exec firefox --new-window "https://youtube.com", mode "default"
-    bindsym m exec firefox --private-window "https://myanimelist.net", mode "default"
+    bindsym j exec firefox --private-window "https://www.justlightnovels.com/", mode "default"
+    bindsym m exec firefox --private-window "https://myanimelist.net/", mode "default"
+    bindsym n exec firefox --private-window "https://jnovels.com/", mode "default"
+    bindsym p exec firefox --new-tab "https://paper.dropbox.com/", mode "default"
+    bindsym s exec firefox --new-tab "https://soundcloud.com/", mode "default"
+    bindsym y exec firefox --new-tab "https://youtube.com/", mode "default"
+
+
     bindsym Escape mode "default"
 }
 bindsym $mod+w mode $mode_browser
