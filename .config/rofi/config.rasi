@@ -1,6 +1,7 @@
 configuration {
     modi: "window,drun,ssh,filebrowser,run";
     kb-cancel: "Escape";
-    theme: "Arc-Dark";
     font: "Source Code Pro for Powerline 12";
 }
+
+@theme "Arc-Dark"

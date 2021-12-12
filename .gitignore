@@ -58,3 +58,6 @@ bin/*.jar
 !.fehbg
 !Pictures/
 !Pictures/wallpaper.png
+
+# web shortcuts
+bin/web-shortcuts-mapping.txt

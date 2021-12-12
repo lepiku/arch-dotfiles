@@ -220,6 +220,8 @@ bindsym $mod+Shift+b    exec firefox --private-window
 bindsym $mod+c          exec calibre
 bindsym $mod+Shift+c    exec $termi i3config
 
+bindsym $mod+e          exec sudo bluetooth toggle
+
 bindsym $mod+g          exec chromium
 bindsym $mod+Shift+g    exec chromium --incognito
 
@@ -229,27 +231,15 @@ bindsym $mod+m          exec $terme ranger
 bindsym $mod+Shift+m    exec pcmanfm
 
 bindsym $mod+t          exec $terme htop
-bindsym $mod+Shift+t    exec sudo bluetooth toggle
 
 bindsym $mod+v          exec pavucontrol
 
+bindsym $mod+z          $exe sh $HOME/bin/screenshot.sh select
+
 bindsym Print           $exe sh $HOME/bin/screenshot.sh screen
-bindsym $mod+e          $exe sh $HOME/bin/screenshot.sh select
 
-# ---------- Browser Shortcut Mode ---------- #
-set $mode_browser "Browser Shortcut"
-mode $mode_browser {
-    bindsym j exec firefox --private-window "https://www.justlightnovels.com/", mode "default"
-    bindsym m exec firefox --private-window "https://myanimelist.net/", mode "default"
-    bindsym n exec firefox --private-window "https://jnovels.com/", mode "default"
-    bindsym p exec firefox --new-tab "https://paper.dropbox.com/", mode "default"
-    bindsym s exec firefox --new-tab "https://soundcloud.com/", mode "default"
-    bindsym y exec firefox --new-tab "https://youtube.com/", mode "default"
-
-
-    bindsym Escape mode "default"
-}
-bindsym $mod+w mode $mode_browser
+# ---------- Browser Shortcuts ---------- #
+bindsym $mod+w $exe bash bin/web-shortcuts.sh `bash bin/web-shortcuts.sh | rofi -dmenu -i -p "Web Shortcuts"`
 
 # ---------- Autostart Programs ---------- #
 # default workspace
