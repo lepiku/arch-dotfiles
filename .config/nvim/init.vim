@@ -228,6 +228,7 @@ highlight colorcolumn ctermbg=235 guibg=#262626
 " hybrid line number
 highlight CursorLine gui=reverse
 highlight CursorLineNR cterm=NONE ctermfg=214 guifg=#ffaf00
+highlight CursorColumn guibg=#4e4e4e
 
 " vertical split
 highlight VertSplit cterm=NONE ctermfg=123 gui=NONE guifg=#87ffff
@@ -240,7 +241,7 @@ highlight Pmenu ctermbg=236 ctermfg=254 guibg=#303030 guifg=#e4e4e4
 highlight PmenuSel ctermbg=232 ctermfg=252 guibg=#080808 guifg=#d0d0d0
 
 highlight MatchParen ctermbg=24 guibg=#005f87
-highlight Search ctermbg=239 ctermfg=NONE guibg=#4e4e4e guifg=NONE
+highlight Search ctermbg=239 ctermfg=NONE guibg=#3a3a3a guifg=NONE
 highlight Visual ctermbg=18 guibg=#000087
 
 " coc
