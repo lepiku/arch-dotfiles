@@ -1,2 +1,6 @@
 envs_dirs:
   - /home/dimas/.conda/envs/
+channels:
+  - conda-forge
+  - defaults
+channel_priority: strict
