@@ -1,2 +1,9 @@
 #!/bin/sh
-feh --no-fehbg --bg-center '/home/dimas/Pictures/wallpaper.png'
+
+if xrandr --query | grep -q "HDMI1 connected"; then
+    feh --no-fehbg --bg-fill \
+        "/home/dimas/Pictures/wallpaper.png" \
+        "/home/dimas/Pictures/oshino_shinobu_red.png"
+else
+    feh --no-fehbg --bg-fill "/home/dimas/Pictures/wallpaper.png"
+fi

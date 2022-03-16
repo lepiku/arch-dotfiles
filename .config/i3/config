@@ -199,6 +199,10 @@ client.background       #ffffff
 
 # Start i3bar to display a workspace bar (plus the system information i3status)
 bar {
+    status_command i3status
+    position top
+    mode hide
+
     colors {
         background #18181a
         separator #18181a
@@ -209,9 +213,6 @@ bar {
         urgent_workspace   #ff0000 #f00000 #ffffff
         binding_mode       #2f343a #900000 #ffffff
     }
-
-    position top
-    status_command i3status
 }
 # ---------- Launch Applications ---------- #
 bindsym $mod+b          exec firefox

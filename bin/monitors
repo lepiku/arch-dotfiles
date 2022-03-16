@@ -6,3 +6,4 @@ then
 else
     xrandr --output HDMI1 --off
 fi
+~/.fehbg
