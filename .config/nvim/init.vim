@@ -17,6 +17,7 @@ Plug 'alvan/vim-closetag'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'godlygeek/tabular'
 Plug 'jiangmiao/auto-pairs'
+Plug 'leafOfTree/vim-vue-plugin'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -289,7 +290,7 @@ let g:airline#extensions#tabline#enabled = 1
 let NERDTreeIgnore = ['\.pyc$', '\.class']
 
 " closetag
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.js,*.jsx'
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.js,*.jsx,*.vue'
 
 " ------------ Mapping / Remaped keys ------------ "
 " change indent in visual mode
