@@ -1,9 +1,12 @@
 #!/bin/sh
 
-if xrandr --query | grep -q "HDMI1 connected"; then
-    feh --no-fehbg --bg-fill \
-        "/home/dimas/Pictures/wallpaper.png" \
-        "/home/dimas/Pictures/oshino_shinobu_red.png"
+monitor2Connected=`xrandr --query | grep -q "HDMI1 connected"`
+monitor1BelowMonitor2=`xrandr --query | grep -q "eDP1 connected primary 1920x1080+0+1080"`
+bg1="$HOME/Pictures/wallpaper.png"
+bg2="$HOME/Pictures/oshino_shinobu_red.png"
+
+if $monitor2Connected && $monitor1BelowMonitor2; then
+    feh --no-fehbg --bg-fill $bg1 $bg2
 else
-    feh --no-fehbg --bg-fill "/home/dimas/Pictures/wallpaper.png"
+    feh --no-fehbg --bg-fill $bg1
 fi
