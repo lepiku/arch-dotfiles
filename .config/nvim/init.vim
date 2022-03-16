@@ -219,7 +219,7 @@ nmap <leader>tg :TestVisit<CR>
 " ------------ Highlight/Color/Theme ------------- "
 colorscheme default
 set background=dark
-highlight Normal guibg=black guifg=white
+highlight Normal guibg=NONE guifg=white
 highlight SignColumn ctermbg=NONE guibg=NONE
 
 " 80 char border
@@ -279,8 +279,9 @@ let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = '☰'
-let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.linenr = ' '
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.colnr = ':'
 let g:airline#extensions#hunks#enabled = 0
 let g:airline#extensions#tabline#enabled = 1
 
@@ -344,7 +345,8 @@ noremap <Leader>gs :G<CR>
 noremap <Leader>gd :Gdiff<CR>
 
 " open terminal like vscode
-"noremap <silent> <C-Space> :10 split \| term<CR> A
+noremap <Leader>term :10 split term://zsh<CR>A
+noremap <Leader>vterm :10 vsplit term://zsh<CR>A
 
 " trim whitespace
 nmap <Leader>trim :%s/\ \+$//<CR>
