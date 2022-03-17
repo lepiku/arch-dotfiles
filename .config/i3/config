@@ -31,6 +31,8 @@ for_window [class="jetbrains-studio" window_type="dialog" title="^win\d+$"] bord
 for_window [class="jetbrains-studio" title="^win\d+$"] focus
 for_window [class="firefox" window_role="Popup"] border pixel 0
 for_window [class="PacketTracer7"] floating enable
+for_window [class="zoom" title="^zoom$"] floating enable border pixel 0
+for_window [class="zoom" title="^Settings$"] floating enable
 #for_window [title="^Android Emulator"] border pixel 0
 
 # set gaps
