@@ -29,3 +29,7 @@ I use
 - [tpope/vim-surround](https://github.com/tpope/vim-surround) change surrounding brackets
 - [vim-airline/vim-airline](https://github.com/vim-airline/vim-airline) feature rich status line
 - [Xuyuanp/nerdtree-git-plugin](https://github.com/Xuyuanp/nerdtree-git-plugin) git integration for nerdtree plugin
+
+## Notes
+
+- Wallpapers use `Pictures/wallpaper1` and `Pictures/wallpaper2` in symbolic link.
