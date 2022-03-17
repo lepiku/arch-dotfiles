@@ -28,6 +28,9 @@ bin/*.jar
 !.config/nvim/**
 .config/nvim/.netrwhist
 
+# tmux
+!.tmux.conf
+
 # other
 !.config/dunst/
 !.config/dunst/**
