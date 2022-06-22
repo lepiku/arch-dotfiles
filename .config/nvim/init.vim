@@ -377,6 +377,12 @@ augroup postWrite
 	autocmd BufWritePost .Xresources silent !xrdb ~/.Xresources
 augroup end
 
+augroup toggleCocExtensions
+    autocmd!
+    autocmd BufEnter *.vue call CocAction('deactivateExtension', 'coc-tsserver')
+    autocmd BufEnter *.js,*.jsx call CocAction('activeExtension', 'coc-tsserver')
+augroup end
+
 "------------ Autoload session ------------------ "
 " modified from https://vim.fandom.com/wiki/Go_away_and_come_back
 function GetSessionFile()

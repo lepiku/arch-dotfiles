@@ -3,7 +3,7 @@
 
 off=5
 slp=30
-low=10
+low=15
 high=42
 
 charging=`acpi -b | grep "Charging"`
