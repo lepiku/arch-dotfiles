@@ -8,7 +8,8 @@
     "json",
     "markdown",
     "python",
-    "scss"
+    "scss",
+    "typescript"
   ],
   "eslint.autoFixOnSave": true,
   "python.pythonPath": "~/bin/pyright-conda",
