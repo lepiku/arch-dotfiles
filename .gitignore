@@ -32,6 +32,7 @@ bin/*.jar
 !.tmux.conf
 
 # other
+!settings.md
 !.config/dunst/
 !.config/dunst/**
 !.config/feh/

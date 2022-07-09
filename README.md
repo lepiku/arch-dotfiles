@@ -33,3 +33,4 @@ I use
 ## Notes
 
 - Wallpapers use `Pictures/wallpaper1` and `Pictures/wallpaper2` in symbolic link.
+- More settings in `settings.md`
