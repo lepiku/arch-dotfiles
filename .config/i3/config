@@ -61,7 +61,7 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return $exe $term
-bindsym $mod+Shift+Return exec i3-sensible-terminal
+bindsym $mod+Shift+Return exec $terme tmux
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -231,6 +231,8 @@ bar {
     }
 }
 # ---------- Launch Applications ---------- #
+bindsym $mod+apostrophe     exec i3-sensible-terminal
+
 bindsym $mod+b          exec firefox
 bindsym $mod+Shift+b    exec firefox --private-window
 
