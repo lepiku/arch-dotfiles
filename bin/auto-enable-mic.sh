@@ -1,4 +1,5 @@
 #!/bin/bash
+# Watch change audio profile to Duplex
 
 while IFS= read -r LOGLINE || [[ -n "$LOGLINE" ]]
 do

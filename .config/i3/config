@@ -194,7 +194,7 @@ bindsym $mod+Shift+r restart
 # power modes
 set $mode_power "[E]xit | [L]ock | sus[P]end | [R]eboot | [S]hutdown"
 mode $mode_power {
-    bindsym e $exe sh "$HOME/bin/i3exit.sh"; exec i3-msg exit
+    bindsym e $exe sh $HOME/bin/i3exit.sh; exec i3-msg exit
     bindsym l $exe lock, mode "default"
     bindsym p $exe $suspend, mode "default"
     bindsym r $exe $reboot
@@ -262,27 +262,31 @@ bindsym $mod+w $exe bash bin/web-shortcuts.sh `bash bin/web-shortcuts.sh | rofi 
 
 # ---------- Autostart Programs ---------- #
 # default workspace
-$exe i3-msg workspace $ws1
+exec --no-startup-id i3-msg workspace $ws1
+
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-$exe xss-lock --transfer-sleep-lock -- lock
+exec --no-startup-id xss-lock --transfer-sleep-lock -- lock
 
-# NetworkManager is the most popular way to manage wireless networks on Linux,
-# and nm-applet is a desktop environment-independent system tray GUI for it.
-#$exe nm-applet
-$exe urxvtd -q                                                  # daemonize urxvt
-$exe feh --no-fehbg --bg-fill "$HOME/Pictures/wallpaper.png"    # add wallpaper
-$exe xset r rate 300 32                                         # hold key repeat rate
-#$exe xinput set-prop "ELAN0504:00 04F3:3091 Touchpad" \
+# unused
+#exec --no-startup-id urxvtd -q
+#exec --no-startup-id xinput set-prop "ELAN0504:00 04F3:3091 Touchpad" \
     #"libinput Tapping Enabled" 1
-#$exe xinput set-prop "ELAN0504:00 04F3:3091 Touchpad" \
+#exec --no-startup-id xinput set-prop "ELAN0504:00 04F3:3091 Touchpad" \
     #"libinput Disable While Typing Enabled" 0
-$exe dropbox                                                    # dropbox
-$exe blueman-applet                                             # bluetooth
-$exe nm-applet                                                  # wifi
-$exe redshift-gtk                                               # redshift
-#$exe xautolock -time 15 -locker "systemctl suspend"            # autosuspend
-$exe sh "$HOME/bin/run-xidlehook.sh"                            # new autosuspend
-$exe systemctl --user start dispad.service
-$exe picom -b
-#$exe bash "$HOME/bin/auto-enable-mic.sh"                        # change profile to Duplex everytime
+#exec --no-startup-id xautolock -time 15 -locker "systemctl suspend"
+#exec --no-startup-id bash "$HOME/bin/auto-enable-mic.sh"
+
+# add wallpaper
+exec --no-startup-id .fehbg
+# hold key repeat rate
+exec --no-startup-id xset r rate 300 32
+exec --no-startup-id dropbox
+exec --no-startup-id blueman-applet
+exec --no-startup-id nm-apple
+exec --no-startup-id redshift-gtk
+# autosuspend
+exec --no-startup-id run-xidlehook
+exec --no-startup-id systemctl --user start dispad.service
+exec --no-startup-id picom -b
+
