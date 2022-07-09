@@ -16,10 +16,12 @@
 !.zshrc
 !.zsh_aliases
 
-# programs
-!bin
+# scripts
+!bin/
 !bin/**
-bin/*.jar
+bin/assets/
+!scripts/
+!scripts/**
 
 # vim
 !.vimrc

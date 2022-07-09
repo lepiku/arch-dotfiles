@@ -1,18 +1,22 @@
 #!/bin/sh
 
+args="${@:2}"
 image_name="$HOME/Pictures/Screenshots/$(date +%F_%H-%M-%S-%N | cut -c -23).png"
 
 _maim() {
     maim $* $image_name
-    xclip -selection clipboard -t image/png $image_name
+    case $args in *--save*)
+        xclip -selection clipboard -t image/png $image_name;;
+    esac
 }
 
 case $1 in
     screen)
         _maim
         ;;
-
     select)
         _maim -su
         ;;
+    *)
+        echo "Unknown command: $1"
 esac
