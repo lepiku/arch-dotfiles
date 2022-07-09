@@ -1,8 +1,7 @@
 #!/bin/sh
 # Low battery warning script
 
-off=5
-slp=30
+#off=5
 low=15
 high=42
 

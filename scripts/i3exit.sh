@@ -1,7 +1,4 @@
 #!/bin/sh
 
-pkill redshift
-pkill xidlehook
+pkill wrap-sigterm
 screenshot clean
-
-#pkill urxvtd

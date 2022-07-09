@@ -194,7 +194,7 @@ bindsym $mod+Shift+r restart
 # power modes
 set $mode_power "[E]xit | [L]ock | sus[P]end | [R]eboot | [S]hutdown"
 mode $mode_power {
-    bindsym e $exe sh $HOME/scripts/i3exit.sh; exec i3-msg exit
+    bindsym e $exe sh $HOME/scripts/i3exit.sh; exec $logoff
     bindsym l $exe lock, mode "default"
     bindsym p $exe $suspend, mode "default"
     bindsym r $exe $reboot
@@ -279,15 +279,15 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- lock
 #exec --no-startup-id xautolock -time 15 -locker "systemctl suspend"
 #exec --no-startup-id bash "$HOME/bin/auto-enable-mic.sh"
 
-# add wallpaper
+# wallpaper
 exec --no-startup-id .fehbg
 # hold key repeat rate
 exec --no-startup-id xset r rate 300 32
 exec --no-startup-id dropbox
 exec --no-startup-id blueman-applet
 exec --no-startup-id nm-applet
-exec --no-startup-id redshift-gtk
+exec --no-startup-id wrap-sigterm redshift-gtk
 # autosuspend
-exec --no-startup-id run-xidlehook
+exec --no-startup-id wrap-sigterm run-xidlehook
 exec --no-startup-id systemctl --user start dispad.service
 exec --no-startup-id picom -b

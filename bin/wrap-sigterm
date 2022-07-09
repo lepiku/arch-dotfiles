@@ -1,0 +1,14 @@
+#!/bin/sh
+# Wrapper to kill child processes. Killed on scripts/i3exit.sh.
+
+child_and_kill() {
+    pids=`pgrep --parent $1`
+    [ -n "$pids" ] && for i in "$pids"; do child_and_kill $i ${@:2}; done
+    kill ${@:2} $1
+}
+
+sh -c "$*" &
+pid=$!
+
+trap "child_and_kill $pid" SIGTERM
+wait
