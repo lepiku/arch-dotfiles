@@ -7,7 +7,7 @@ alias nvimrc="nvim ~/.config/nvim/init.vim"
 alias i3config="nvim ~/.config/i3/config"
 alias zshalias="nvim ~/.zsh_aliases"
 alias nvimft="nvim ~/.config/nvim/ftplugin"
-alias conda-run="source $HOME/bin/conda-run.sh"
+alias conda-run="source ~/scripts/conda-run.sh"
 
 # projects
 alias helios=". ~/Projects/compfest/delivery.env.sh && cd ~/Projects/compfest/helios-return"

@@ -1,17 +1,9 @@
 #!/bin/sh
 
-create_condainit () {
-    echo "source $HOME/bin/conda-run.sh" > ~/.condainit
-}
-
-delete_condainit () {
-    rm ~/.condainit
-}
-
 if [ -f ~/.condainit ]; then
-    delete_condainit
-    echo "condainit deleted"
+    rm ~/.condainit
+    echo ".condainit deleted"
 else
-    create_condainit
-    echo "condainit created"
+    echo "source $HOME/scripts/conda-run.sh" > ~/.condainit
+    echo ".condainit created"
 fi

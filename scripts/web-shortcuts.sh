@@ -1,6 +1,7 @@
 #!/bin/bash
 
-filename="$HOME/bin/web-shortcuts-mapping.txt"
+dir_path="$(dirname $(realpath $0))"
+filename="$dir_path/web-shortcuts-mapping.txt"
 mapfile -t myArray < "$filename"
 
 for i in "${myArray[@]}"; do
