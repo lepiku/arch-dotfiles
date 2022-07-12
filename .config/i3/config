@@ -60,8 +60,8 @@ bindsym XF86MonBrightnessDown $exe sh -c 'sudo tee /sys/class/backlight/intel_ba
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return $exe $term
-bindsym $mod+Shift+Return exec $terme tmux
+bindsym $mod+Return $exe $terme tmux
+bindsym $mod+Shift+Return $exe $term
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -237,19 +237,20 @@ bindsym $mod+b          exec firefox
 bindsym $mod+Shift+b    exec firefox --private-window
 
 bindsym $mod+c          exec calibre
-bindsym $mod+Shift+c    exec $termi i3config
+bindsym $mod+Shift+c    $exe $termi i3config
 
 bindsym $mod+e          exec sudo bluetooth toggle
+bindsym $mod+Shift+e    exec steam-runtime
 
 bindsym $mod+g          exec chromium
 bindsym $mod+Shift+g    exec chromium --incognito
 
-bindsym $mod+i          exec $terme sudo iftop -Bm 20M
+bindsym $mod+i          $exe $terme sudo iftop -Bm 20M
 
-bindsym $mod+m          exec $terme ranger
+bindsym $mod+m          $exe $terme ranger
 bindsym $mod+Shift+m    exec pcmanfm
 
-bindsym $mod+t          exec $terme htop
+bindsym $mod+t          $exe $terme htop
 
 bindsym $mod+v          exec pavucontrol
 
@@ -260,7 +261,8 @@ bindsym Print           $exe screenshot screen
 bindsym Shift+Print     $exe screenshot screen --save
 
 # ---------- Browser Shortcuts ---------- #
-bindsym $mod+w $exe bash scripts/web-shortcuts.sh `bash scripts/web-shortcuts.sh | rofi -dmenu -i -p "Web Shortcuts"`
+bindsym $mod+w exec bash scripts/web-shortcuts.sh \
+    `bash scripts/web-shortcuts.sh | rofi -dmenu -i -p "Web Shortcuts"`
 
 # ---------- Autostart Programs ---------- #
 # default workspace
