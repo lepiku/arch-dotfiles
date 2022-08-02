@@ -2,7 +2,7 @@
 
 if xrandr --query | grep -q "HDMI1 connected"
 then
-    xrandr --output HDMI1 --auto --above eDP1
+    xrandr --output HDMI1 --mode 1920x1080 --rate 120 --above eDP1
 else
     xrandr --output HDMI1 --off
 fi

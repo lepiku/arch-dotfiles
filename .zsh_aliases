@@ -33,3 +33,4 @@ alias git-reset='git checkout HEAD --'
 alias restart-wifi="sudo systemctl restart wpa_supplicant@wlp2s0.service"
 alias restart-network="sudo systemctl restart systemd-networkd.service"
 alias diff="colordiff"
+alias incognito="unset HISTFILE"
