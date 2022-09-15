@@ -12,6 +12,6 @@ current_level=`expr "$level" \* 100 / "$full_level"`
 
 if [ ! -n "$charging" ] && [ "$current_level" -lt "$low" ]; then
     notify-send -u critical "LOW BATTERY ($current_level%)"
-elif [ -n "$charging" ] && [ "$current_level" -ge "$high" ];then
-    notify-send -u normal "FULL BATTERY ($current_level%)"
+#elif [ -n "$charging" ] && [ "$current_level" -ge "$high" ];then
+#    notify-send -u normal "FULL BATTERY ($current_level%)"
 fi
