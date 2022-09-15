@@ -135,8 +135,11 @@ export VISUAL=$EDITOR
 # enable nvm
 source /usr/share/nvm/init-nvm.sh
 
-if [[ $1 == eval ]]
-then
+if [[ ${SSH_TTY} ]]; then
+    PROMPT="%{$fg[white]%}%n@%{$fg[yellow]%}%m%{$reset_color%} ${PROMPT}"
+fi
+
+if [[ $1 == eval ]]; then
     "$@"
 set --
 fi
