@@ -1,12 +1,15 @@
 #!/bin/sh
 
-monitor2Connected=`xrandr --query | grep -q "HDMI1 connected"`
-monitor1BelowMonitor2=`xrandr --query | grep -q "eDP1 connected primary 1920x1080+0+1080"`
+function monitor2Connected {
+    xrandr --query | grep -q "HDMI1 connected 1920x1080"
+}
+#monitor1BelowMonitor2=`xrandr --query | grep -q "eDP1 connected primary 1920x1080+0+1080"`
 bg1="$HOME/Pictures/wallpaper1"
 bg2="$HOME/Pictures/wallpaper2"
 
-if $monitor2Connected && $monitor1BelowMonitor2; then
-    feh --no-fehbg --bg-fill $bg1 $bg2
+if monitor2Connected; then
+    # 2nd monitor resolution 1920x1080 normal orientation
+    feh --no-fehbg --image-bg "#171719" --bg-max $bg1 $bg2
 else
-    feh --no-fehbg --bg-fill $bg1
+    feh --no-fehbg --image-bg "#171719" --bg-max $bg1
 fi
