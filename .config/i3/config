@@ -250,6 +250,8 @@ bindsym $mod+i          $exe $terme sudo iftop -Bm 20M
 bindsym $mod+m          $exe $terme ranger
 bindsym $mod+Shift+m    exec pcmanfm
 
+bindsym $mod+p          exec arandr
+
 bindsym $mod+t          $exe $terme htop
 
 bindsym $mod+v          exec pavucontrol
