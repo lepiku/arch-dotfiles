@@ -106,9 +106,6 @@ autoload -U compinit && compinit
 if [ -f ~/.zsh_aliases ]; then
 	. ~/.zsh_aliases
 fi
-#if [ -f ~/.keys ]; then
-	#. ~/.keys
-#fi
 
 # enable/disable conda with 'conda-toggle'
 if [ -f ~/.condainit ]; then
