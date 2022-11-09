@@ -197,8 +197,8 @@ mode $mode_power {
     bindsym e $exe sh $HOME/scripts/i3exit.sh; exec $logoff
     bindsym l $exe lock, mode "default"
     bindsym p $exe $suspend, mode "default"
-    bindsym r $exe $reboot
-    bindsym s $exe $shutdown
+    bindsym r $exe sh $HOME/scripts/i3exit.sh; $exe $reboot
+    bindsym s $exe sh $HOME/scripts/i3exit.sh; $exe $shutdown
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
