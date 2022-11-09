@@ -18,5 +18,11 @@
   "diagnostic.showUnused": false,
   "python.analysis.diagnosticSeverityOverrides": {
     "reportGeneralTypeIssues": "none"
+  },
+
+  "explorer.width": 30,
+  "explorer.keyMappings.global": {
+    "<cr>": ["wait", "expandable?", "expand", "open"],
+    "v": "open:vsplit"
   }
 }

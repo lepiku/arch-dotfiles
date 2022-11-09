@@ -20,14 +20,12 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'leafOfTree/vim-vue-plugin'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tomasiser/vim-code-dark'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-test/vim-test'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 
 if has('nvim')
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
@@ -38,6 +36,7 @@ if has('nvim')
                 \'coc-css',
                 \'coc-emmet',
                 \'coc-eslint',
+                \'coc-explorer',
                 \'coc-flutter',
                 \'coc-go',
                 \'coc-html',
@@ -262,7 +261,7 @@ if has('nvim')
     " Show all diagnostics.
     nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
     " Manage extensions.
-    nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+    "nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
     " Show commands.
     nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
     " Find symbol of current document.
@@ -275,6 +274,9 @@ if has('nvim')
     nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
     " Resume latest coc list.
     nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+    " -- Extensions -- "
+    nnoremap <space>e <Cmd>CocCommand explorer<CR>
 endif
 
 " these "Ctrl mappings" work well when Caps Lock is mapped to Ctrl
@@ -321,16 +323,16 @@ let g:airline_theme = 'codedark'
 
 
 " gitgutter plugin
-highlight GitGutterAdd		cterm=bold ctermfg=2 gui=bold guifg=#00ff00 guibg=NONE
-highlight GitGutterDelete	cterm=bold ctermfg=1 gui=bold guifg=#ff0000 guibg=NONE
-highlight GitGutterChange	cterm=bold ctermfg=3 gui=bold guifg=#ffff00 guibg=NONE
-highlight GitGutterText		cterm=bold ctermfg=5 gui=bold guifg=#ff00ff guibg=NONE
+highlight GitGutterAdd      cterm=bold ctermfg=2 gui=bold guifg=#00ff00 guibg=NONE
+highlight GitGutterDelete   cterm=bold ctermfg=1 gui=bold guifg=#ff0000 guibg=NONE
+highlight GitGutterChange   cterm=bold ctermfg=3 gui=bold guifg=#ffff00 guibg=NONE
+highlight GitGutterText     cterm=bold ctermfg=5 gui=bold guifg=#ff00ff guibg=NONE
 
 " vim-fugitive plugin
-highlight DiffAdd		cterm=NONE ctermbg=17 gui=NONE guibg=#00005f
-highlight DiffDelete	cterm=NONE ctermbg=17 ctermfg=1 gui=NONE guibg=#00005f guifg=#5f0000
-highlight DiffChange	cterm=NONE ctermbg=17 gui=NONE guibg=#00005f
-highlight DiffText		cterm=NONE ctermbg=52 gui=NONE guibg=#00005f
+highlight DiffAdd       cterm=NONE ctermbg=17 gui=NONE guibg=#00005f
+highlight DiffDelete    cterm=NONE ctermbg=17 ctermfg=1 gui=NONE guibg=#00005f guifg=#5f0000
+highlight DiffChange    cterm=NONE ctermbg=17 gui=NONE guibg=#00005f
+highlight DiffText      cterm=NONE ctermbg=52 gui=NONE guibg=#00005f
 
 " error color
 highlight error ctermbg=88 guibg=#870000
@@ -339,7 +341,7 @@ highlight todo ctermbg=100 guibg=#878700
 
 " airline plugin
 if !exists('g:airline_symbols')
-	let g:airline_symbols = {}
+    let g:airline_symbols = {}
 endif
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
@@ -354,7 +356,7 @@ let g:airline#extensions#hunks#enabled = 0
 let g:airline#extensions#tabline#enabled = 1
 
 " NERDTree ignore
-let NERDTreeIgnore = ['\.pyc$', '\.class']
+"let NERDTreeIgnore = ['\.pyc$', '\.class']
 
 " closetag
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.js,*.jsx,*.vue'
@@ -378,16 +380,16 @@ noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
 " resize splits with arrow keys
-noremap <silent> <C-Up>		:resize -2<CR>
-noremap <silent> <C-Down>	:resize +2<CR>
-noremap <silent> <C-Left>	:vertical:resize -3<CR>
-noremap <silent> <C-Right>	:vertical:resize +3<CR>
+noremap <silent> <C-Up>     :resize -2<CR>
+noremap <silent> <C-Down>   :resize +2<CR>
+noremap <silent> <C-Left>   :vertical:resize -3<CR>
+noremap <silent> <C-Right>  :vertical:resize +3<CR>
 
 " reload vimrc
 if has('nvim')
-	nnoremap <Leader>rr :source ~/.config/nvim/init.vim<CR>
+    nnoremap <Leader>rr :source ~/.config/nvim/init.vim<CR>
 else
-	nnoremap <Leader>rr :source ~/.vimrc<CR>
+    nnoremap <Leader>rr :source ~/.vimrc<CR>
 endif
 
 " hide search results
@@ -398,15 +400,15 @@ noremap <C-n> g-
 noremap <C-m> g+
 
 if has('clipboard')
-	" copy with CTRL-C
-	vnoremap <C-c> "+y
+    " copy with CTRL-C
+    vnoremap <C-c> "+y
 endif
 
 " FZF
 noremap <C-z> :call fzf#run(fzf#wrap({'source': $FZF_VIM_COMMAND}))<CR>
 
 " NERDTree plugin
-noremap <Leader>n :NERDTreeToggle<CR>
+"noremap <Leader>n :NERDTreeToggle<CR>
 
 " vim fugitive
 noremap <Leader>gs :G<CR>
@@ -422,26 +424,26 @@ nmap <Leader>trim :%s/\ \+$//<CR>
 "------------ Config for filetypes -------------- "
 " pandoc , markdown
 command! -nargs=* RunSilent
-			\| execute ':silent !'.'<args>'
-			\| execute ':redraw!'
+            \| execute ':silent !'.'<args>'
+            \| execute ':redraw!'
 "nmap <Leader>pp :RunSilent pandoc -o /tmp/vim-pandoc-out.pdf "%"<CR>
 "nmap <Leader>pe :RunSilent evince /tmp/vim-pandoc-out.pdf<CR>
 
 augroup extension
-	au!
-	" force indentation
-	autocmd BufRead,BufNewFile *.html,*.css,*.js,*.jsx,*.json setlocal sw=2 ts=2 sts=2 expandtab
-	" force filetypes
-	autocmd BufRead,BufNewFile *.jsx,*js setlocal filetype=javascript
-	autocmd BufRead,BufNewFile *.mdx setlocal filetype=markdown
+    au!
+    " force indentation
+    autocmd BufRead,BufNewFile *.html,*.css,*.js,*.jsx,*.json setlocal sw=2 ts=2 sts=2 expandtab
+    " force filetypes
+    autocmd BufRead,BufNewFile *.jsx,*js setlocal filetype=javascript
+    autocmd BufRead,BufNewFile *.mdx setlocal filetype=markdown
 augroup end
 
 augroup postWrite
-	au!
-	" auto reload vimrc
-	autocmd BufWritePost .vimrc source ~/.vimrc
-	" xrdb autoload .Xresources
-	autocmd BufWritePost .Xresources silent !xrdb ~/.Xresources
+    au!
+    " auto reload vimrc
+    autocmd BufWritePost .vimrc source ~/.vimrc
+    " xrdb autoload .Xresources
+    autocmd BufWritePost .Xresources silent !xrdb ~/.Xresources
 augroup end
 
 augroup toggleCocExtensions
