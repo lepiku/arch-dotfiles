@@ -1,14 +1,18 @@
 #!/bin/sh
 
-args="${@:2}"
+source ~/.config/script.conf
+: '
+$screenshot_image_dir
+$screenshot_image_dir_temp
+'
+
+args=" ${@:2} "
 image_name="$(date +%F_%H-%M-%S-%N | cut -c -23).png"
-image_dir="$HOME/Pictures/Screenshots"
-image_dir_temp="$HOME/Pictures/Screenshots/tmp"
 
 _maim() {
     case $args in
-        *--save* | *-s*) image_path="$image_dir/$image_name";;
-        *) image_path="$image_dir_temp/$image_name";;
+        *" --save "* | *" -s "*) image_path="$screenshot_image_dir/$image_name";;
+        *) image_path="$screenshot_image_dir_temp/$image_name";;
     esac
 
     maim $* $image_path &&
@@ -23,8 +27,8 @@ case $1 in
         _maim -su
         ;;
     clean)
-        echo "Removing temp images in $image_dir_temp"
-        rm $image_dir_temp/*
+        echo "Removing temp images in $screenshot_image_dir_temp"
+        rm $screenshot_image_dir_temp/*
         ;;
     *)
         echo "Unknown command: $1"
