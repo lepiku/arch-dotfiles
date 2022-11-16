@@ -32,7 +32,7 @@ indicate_hidden = yes
 
 # Alignment of message text.
 # Possible values are "left", "center" and "right".
-alignment = center
+alignment = left
 
 # The frequency with wich text that is longer than the notification
 # window allows bounces back and forth.
@@ -57,7 +57,7 @@ stack_duplicates = yes
 hide_duplicate_count = yes
 
 # size
-width = 300
+width = 360
 #height =
 corner_radius = 8
 
@@ -148,7 +148,7 @@ max_icon_size = 48
 # Paths to default icons.
 icon_path = /usr/share/icons/Papirus-Dark/24x24/actions:/usr/share/icons/Papirus-Dark/24x24/animations:/usr/share/icons/Papirus-Dark/24x24/apps:/usr/share/icons/Papirus-Dark/24x24/categories:/usr/share/icons/Papirus-Dark/24x24/devices:/usr/share/icons/Papirus-Dark/24x24/emblems:/usr/share/icons/Papirus-Dark/24x24/emotes:/usr/share/icons/Papirus-Dark/24x24/mimetypes:/usr/share/icons/Papirus-Dark/24x24/panel:/usr/share/icons/Papirus-Dark/24x24/places:/usr/share/icons/Papirus-Dark/24x24/status
 
-frame_width = 3
+frame_width = 2
 frame_color = "#8EC07C"
 
 [shortcuts]
