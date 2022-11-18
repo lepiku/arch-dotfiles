@@ -9,7 +9,8 @@
     "markdown",
     "python",
     "scss",
-    "typescript"
+    "typescript",
+    "vue"
   ],
   "eslint.autoFixOnSave": true,
   "python.pythonPath": "~/bin/pyright-conda",
