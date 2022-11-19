@@ -29,5 +29,8 @@ export EDITOR="$VISUAL"
 
 export GOPATH="$HOME/.go"
 
-# google chrome (chromium) executable
+# flutter
 export CHROME_EXECUTABLE="/usr/bin/chromium"
+# ionic capacitor
+export CAPACITOR_ANDROID_STUDIO_PATH="/usr/bin/android-studio"
+export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
