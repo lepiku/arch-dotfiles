@@ -13,7 +13,6 @@ call plug#begin(g:datapath . '/plugged')
 " Make sure you use single quotes
 " On-demand loading
 Plug 'airblade/vim-gitgutter'
-Plug 'alvan/vim-closetag'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'godlygeek/tabular'
 Plug 'jiangmiao/auto-pairs'
