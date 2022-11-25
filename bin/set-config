@@ -1,0 +1,4 @@
+#!/bin/sh
+
+sed -i "s/\($1=\).*$/\1$2/" "$HOME/.config/script.conf"
+echo "Set $1 to $2"
