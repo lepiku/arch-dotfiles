@@ -1,15 +1,19 @@
 #!/bin/sh
 
-function monitor2Connected {
+source $HOME/.config/script.conf
+: '
+$fehbg_bg1
+$fehbg_bg2
+'
+
+# 2nd monitor resolution 1920x1080 normal orientation
+function monitor1080 {
     xrandr --query | grep -q "HDMI1 connected 1920x1080"
 }
 #monitor1BelowMonitor2=`xrandr --query | grep -q "eDP1 connected primary 1920x1080+0+1080"`
-bg1="$HOME/Pictures/wallpaper1"
-bg2="$HOME/Pictures/wallpaper2"
 
-if monitor2Connected; then
-    # 2nd monitor resolution 1920x1080 normal orientation
-    feh --no-fehbg --image-bg "#171719" --bg-max $bg1 $bg2
+if monitor1080; then
+    feh --no-fehbg --image-bg "#171719" --bg-max "$fehbg_bg1" "$fehbg_bg2"
 else
-    feh --no-fehbg --image-bg "#171719" --bg-max $bg1
+    feh --no-fehbg --image-bg "#171719" --bg-max "$fehbg_bg1"
 fi
