@@ -46,11 +46,10 @@ font pango:Source Code Pro Medium 10
 floating_modifier $mod
 
 # Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume $exe pactl set-sink-volume @DEFAULT_SINK@ +2% && $refresh_i3status
-bindsym XF86AudioLowerVolume $exe pactl set-sink-volume @DEFAULT_SINK@ -2% && $refresh_i3status
-bindsym XF86AudioMute $exe pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute $exe pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86AudioRaiseVolume $exe audio-adjust raise
+bindsym XF86AudioLowerVolume $exe audio-adjust lower
+bindsym XF86AudioMute $exe audio-adjust mute
+bindsym XF86AudioMicMute $exe audio-adjust mic-mute
 
 # adjust backlight
 bindsym XF86MonBrightnessUp $exe sh -c 'tee /sys/class/backlight/intel_backlight/brightness <<<$(( $(cat /sys/class/backlight/intel_backlight/brightness) + 10 ))'

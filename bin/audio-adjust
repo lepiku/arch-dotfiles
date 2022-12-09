@@ -1,0 +1,67 @@
+#!/bin/sh
+
+source ~/.config/script.conf
+: '
+$audio_inc
+$audio_dec
+$audio_low
+$audio_medium
+$audio_high
+$audio_notif_id
+'
+
+app_name="audio-adjust"
+
+_refresh_i3status() {
+    pkill -SIGUSR1 i3status
+}
+
+_notify() {
+    is_muted=`pactl get-sink-mute @DEFAULT_SINK@ | grep "yes"`
+    volume=`pactl get-sink-volume @DEFAULT_SINK@ |
+        head -n 1 |
+        awk '{ print substr($5, 1, length($5)-1) }'`
+
+    text="Volume"
+    if [ -n "$is_muted" ]; then
+        text="Muted"
+        icon="audio-volume-muted"
+    elif [ $volume -ge $audio_high ]; then
+        icon="audio-volume-high"
+    elif [ $volume -ge $audio_medium ]; then
+        icon="audio-volume-medium"
+    elif [ $volume -ge $audio_low ]; then
+        icon="audio-volume-low"
+    else
+        icon="audio-volume-high"
+    fi
+
+    notif_id=`
+    notify-send -u low -a $app_name -i $icon -t 1000 -r "$audio_notif_id" \
+        "$text $volume%"`
+}
+
+case $1 in
+    raise)
+        pactl set-sink-mute @DEFAULT_SINK@ no
+        pactl set-sink-volume @DEFAULT_SINK@ $audio_inc
+        _refresh_i3status
+        _notify
+        ;;
+    lower)
+        pactl set-sink-mute @DEFAULT_SINK@ no
+        pactl set-sink-volume @DEFAULT_SINK@ $audio_dec
+        _refresh_i3status
+        _notify
+        ;;
+    mute)
+        pactl set-sink-mute @DEFAULT_SINK@ toggle
+        _refresh_i3status
+        _notify
+        ;;
+    mic-mute)
+        pactl set-source-mute @DEFAULT_SOURCE@ toggle
+        ;;
+    *)
+        echo "Unknown command: $1"
+esac
