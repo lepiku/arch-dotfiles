@@ -102,3 +102,13 @@
   Or set it in "Output Devices" > "Advanced" > "Latency offset" to 100.00.
 
   Use "A2DP" Profile for high quality listening, switch to "HFP" for recording with microphone.
+
+- mpris-proxy
+
+  ```sh
+  yay mpris-proxy-service
+  systemctl --user start mpris-proxy
+  systemctl --user enable mpris-proxy
+  ```
+
+  Enable bluetooth controls to work on media players (Firefox included).
