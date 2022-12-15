@@ -34,6 +34,7 @@ if [ ! -n "$plugged_in" ] && [ "$current_level" -le "$battery_low" ]; then
             notify-send -u critical -a $app_name -i xfce4-battery-critical -t 0 -p \
                 "LOW BATTERY ($current_level%)" "Connect charger\!"`
         set-script-state "battery_notification_id" $notif_id
+        echo "$(date): $current_level% Low Battery" >> /tmp/$app_name.log
     fi
 
 elif [ "$battery_notify_high" = true ] \
@@ -46,6 +47,7 @@ elif [ "$battery_notify_high" = true ] \
             notify-send -u normal -a $app_name -i battery-full-charged -t 0 -p \
                 "Full Battery ($current_level%)" "Disconnect charger\!"`
         set-script-state "battery_notification_id" $notif_id
+        echo "$(date): $current_level% Full Battery" >> /tmp/$app_name.log
     fi
 
 else
@@ -60,9 +62,11 @@ fi
 if [ "$battery_prev_plugged_in" = false ] && [ -n "$plugged_in" ]; then
     notify-send -u normal -a $app_name -i battery_plugged -p \
         "Power Plugged In"
+    echo "$(date): $current_level% Plugged In" >> /tmp/$app_name.log
 elif [ "$battery_prev_plugged_in" = true ] && [ ! -n "$plugged_in" ]; then
     notify-send -u low -a $app_name -i battery_plugged -p \
         "Power Unplugged"
+    echo "$(date): $current_level% Unplugged" >> /tmp/$app_name.log
 fi
 
 if [ -n "$plugged_in" ]; then
