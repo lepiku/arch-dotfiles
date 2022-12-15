@@ -13,7 +13,7 @@ $battery_prev_plugged_in
 $battery_notification_id
 '
 
-app_name="battery-check.sh"
+app_name="battery-check"
 
 plugged_in=`acpi -a | grep "^Adapter.*: on-line$"`
 level=`cat /sys/class/power_supply/BAT0/charge_now`
