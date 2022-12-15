@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source ~/.config/script.conf
+source ~/.config/dotfiles.conf
 : '
 $screenshot_image_dir
 $screenshot_image_dir_temp
