@@ -60,11 +60,11 @@ fi
 
 # notify if adapter is plugged in or unplugged
 if [ "$battery_prev_plugged_in" = false ] && [ -n "$plugged_in" ]; then
-    notify-send -u normal -a $app_name -i battery_plugged -p \
+    notify-send -u normal -a $app_name -i battery_plugged -p -t 2000 \
         "Power Plugged In"
     echo "$(date): $current_level% Plugged In" >> /tmp/$app_name.log
 elif [ "$battery_prev_plugged_in" = true ] && [ ! -n "$plugged_in" ]; then
-    notify-send -u low -a $app_name -i battery_plugged -p \
+    notify-send -u low -a $app_name -i battery_plugged -p -t 2000 \
         "Power Unplugged"
     echo "$(date): $current_level% Unplugged" >> /tmp/$app_name.log
 fi
