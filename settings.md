@@ -112,3 +112,29 @@
   ```
 
   Enable bluetooth controls to work on media players (Firefox included).
+
+- Firefox on Linux
+
+  | Edit in `about:config`
+
+  - Hardware Acceleration
+
+    https://askubuntu.com/questions/491750/force-enable-hardware-acceleration-in-firefox
+
+    ```
+    layers.acceleration.force-enabled = true
+    ```
+
+    https://www.omgubuntu.co.uk/2020/08/firefox-80-release-linux-gpu-acceleration
+
+    ```
+    media.ffmpeg.vaapi.enabled
+    ```
+
+  - 120 FPS Limit
+
+    https://www.reddit.com/r/firefox/comments/g1yhqb/removing_the_60_fps_limit_in_firefox_for_linux/
+
+    ```
+    layout.frame_rate = 120
+    ```
