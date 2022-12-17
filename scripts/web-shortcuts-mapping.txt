@@ -1,8 +1,0 @@
-DropboxPaper;firefox --new-tab "https://paper.dropbox.com/"
-JNovels;firefox --private-window "https://jnovels.com/"
-JustLightNovels;firefox --private-window "https://www.justlightnovels.com/"
-MangaDex;firefox --private-window "https://mangadex.org/"
-MyAnimeList;firefox --private-window "https://myanimelist.net/"
-NovelUpdates;firefox --private-window "https://www.novelupdates.com/"
-Soundcloud;firefox --new-tab "https://soundcloud.com/"
-YouTube;firefox --new-tab "https://youtube.com/"
