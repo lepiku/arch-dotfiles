@@ -3,7 +3,7 @@
 source ~/.config/dotfiles.conf
 : '
 $screenshot_image_dir
-$screenshot_image_dir_temp
+$screenshot_image_temp_dir
 '
 
 args=" ${@:2} "
@@ -11,8 +11,14 @@ image_name="$(date +%F_%H-%M-%S-%N | cut -c -23).png"
 
 _maim() {
     case $args in
-        *" --save "* | *" -s "*) image_path="$screenshot_image_dir/$image_name";;
-        *) image_path="$screenshot_image_dir_temp/$image_name";;
+        *" --save "* | *" -s "*)
+            image_path="$screenshot_image_dir/$image_name"
+            ;;
+        *)
+            if [ ! -d "$screenshot_image_temp_dir" ]; then
+                mkdir "$screenshot_image_temp_dir"
+            fi
+            image_path="$screenshot_image_temp_dir/$image_name"
     esac
 
     maim $* $image_path &&
@@ -25,10 +31,6 @@ case $1 in
         ;;
     select)
         _maim -su
-        ;;
-    clean)
-        echo "Removing temp images in $screenshot_image_dir_temp"
-        rm $screenshot_image_dir_temp/*
         ;;
     *)
         echo "Unknown command: $1"
