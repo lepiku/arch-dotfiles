@@ -1,9 +1,13 @@
 #!/bin/sh
 
-if xrandr --query | grep -q "HDMI1 connected"
+if xrandr --query | grep "HDMI1 connected" -A 1 | grep -q "1920x1080.* 120\."
 then
-    xrandr --output HDMI1 --mode 1920x1080 --rate 120 --above eDP1
+    xrandr --output HDMI1 --above eDP1 --mode 1920x1080 --rate 120
+elif xrandr --query | grep -q "HDMI1 connected"
+then
+    xrandr --output HDMI1 --left-of eDP1
 else
     xrandr --output HDMI1 --off
 fi
+
 ~/.fehbg
