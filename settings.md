@@ -138,3 +138,18 @@
     ```
     layout.frame_rate = 120
     ```
+
+- Show bluetooth devices battery level
+
+  Source: https://askubuntu.com/a/1420501
+
+  ```sh
+  # /etc/bluetooth/main.conf
+  Experimental = true
+  ```
+
+  To check battery, run:
+
+  ```sh
+  bluetoothctl info
+  ```
