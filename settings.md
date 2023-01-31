@@ -153,3 +153,14 @@
   ```sh
   bluetoothctl info
   ```
+
+- Pacman parallel downloads
+
+  Source: https://ostechnix.com/enable-parallel-downloading-in-pacman-in-arch-linux/
+
+  Enable parallel download for pacman (optional config).
+
+  ```sh
+  # /etc/pacman.conf
+  ParallelDownloads = 4
+  ```
