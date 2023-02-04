@@ -283,7 +283,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- lock
 #exec --no-startup-id bash "$HOME/bin/auto-enable-mic.sh"
 
 # wallpaper
-exec --no-startup-id .fehbg
+exec --no-startup-id monitors
 # hold key repeat rate
 exec --no-startup-id xset r rate 300 32
 exec --no-startup-id dropbox
