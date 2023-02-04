@@ -164,3 +164,12 @@
   # /etc/pacman.conf
   ParallelDownloads = 4
   ```
+
+- Set lightdm Greeter theme
+
+  ```
+  # /etc/lightdm/lightdm-gtk-greeter.conf
+  [greeter]
+  background=<path/to/wallpaper>
+  theme-name=<gtk-theme>
+  ```
