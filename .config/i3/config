@@ -201,7 +201,7 @@ mode $mode_power {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+Shift+p mode $mode_power
+bindsym $mod+Shift+backslash mode $mode_power
 
 # window colors
 # class                 border  backgr. text    indicator   child_border
