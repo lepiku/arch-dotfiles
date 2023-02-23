@@ -65,3 +65,7 @@ bin/assets/
 
 # web shortcuts
 bin/web-shortcuts-mapping.txt
+
+# termux
+!.termux/
+!.termux/**
