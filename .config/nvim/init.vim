@@ -448,6 +448,12 @@ augroup end
 
 augroup toggleCocExtensions
     autocmd!
-    autocmd BufEnter *.vue call CocAction('deactivateExtension', 'coc-tsserver')
-    autocmd BufEnter *.js,*.jsx call CocAction('activeExtension', 'coc-tsserver')
+    function CommandTsserver(command)
+        let stats = CocAction('extensionStats')
+        if filter(stats, 'v:val["id"] == "coc-tsserver"')[0]['state'] != 'disabled'
+            call CocAction(a:command, 'coc-tsserver')
+        endif
+    endfunction
+    autocmd BufEnter *.vue call CommandTsserver('deactivateExtension')
+    autocmd BufEnter *.js,*.jsx,*.ts,*.tsx call CommandTsserver('activeExtension')
 augroup end

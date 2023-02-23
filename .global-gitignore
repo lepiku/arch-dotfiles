@@ -5,7 +5,6 @@
 # vim extensions
 .vim/
 .ycm_extra_conf.py
-coc-settings.json
 
 # other
 nohup.out

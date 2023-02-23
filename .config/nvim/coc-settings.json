@@ -1,26 +1,15 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": [
-    "css",
-    "dart",
-    "graphql",
-    "html",
-    "javascript",
-    "json",
-    "markdown",
-    "python",
-    "scss",
-    "typescript",
-    "vue"
-  ],
+  "[css][dart][graphql][html][javascript][json][markdown][python][scss][typescript][vue]": {
+    "coc.preferences.formatOnSave": true
+  },
   "eslint.autoFixOnSave": true,
   "python.pythonPath": "~/bin/pyright-conda",
   "python.formatting.autopep8Path": "~/.local/bin/autopep8",
   "python.analysis.useLibraryCodeForTypes": true,
-  "diagnostic.showUnused": false,
   "python.analysis.diagnosticSeverityOverrides": {
     "reportGeneralTypeIssues": "none"
   },
-
+  "diagnostic.showUnused": false,
   "explorer.width": 30,
   "explorer.keyMappings.global": {
     "<cr>": ["wait", "expandable?", "expand", "open"],
