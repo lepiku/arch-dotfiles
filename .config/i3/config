@@ -230,7 +230,7 @@ bar {
     }
 }
 # ---------- Launch Applications ---------- #
-bindsym $mod+apostrophe     exec i3-sensible-terminal
+bindsym $mod+apostrophe exec i3-sensible-terminal
 
 bindsym $mod+b          exec firefox
 bindsym $mod+Shift+b    exec firefox --private-window
@@ -250,6 +250,7 @@ bindsym $mod+m          $exe $terme ranger
 bindsym $mod+Shift+m    exec pcmanfm
 
 bindsym $mod+p          exec arandr
+bindsym $mod+Shift+p    $exe suspend-toggle
 
 bindsym $mod+t          $exe $terme htop
 

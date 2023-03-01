@@ -1,0 +1,13 @@
+#!/bin/sh
+# Toggle to enable/disable auto suspend
+
+app_name="suspend-toggle"
+enabled=`pidof xidlehook`
+
+if [ ! -n "$enabled" ]; then
+    notify-send -a $app_name "Enabling auto suspend" -t 2000
+    nohup wrap-sigterm run-xidlehook &> /dev/null & disown
+else
+    notify-send -a $app_name "Disabling auto suspend" -t 2000 -u critical
+    pkill xidlehook
+fi
