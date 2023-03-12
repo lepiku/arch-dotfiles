@@ -6,6 +6,7 @@ source ~/.config/dotfiles.conf
 $battery_low
 $battery_high
 $battery_notify_high
+$battery_notify_time
 '
 source ~/.config/state.sh
 : '
@@ -31,8 +32,9 @@ if [ ! -n "$plugged_in" ] && [ "$current_level" -le "$battery_low" ]; then
     if [ $battery_is_notified = false ]; then
         echo -e "\tNotifying."
         notif_id=`
-            notify-send -u critical -a $app_name -i xfce4-battery-critical -t 0 -p \
-                "LOW BATTERY ($current_level%)" "Connect charger\!"`
+            notify-send -u critical -a $app_name -i xfce4-battery-critical \
+                -t $battery_notify_time -p "LOW BATTERY ($current_level%)" \
+                "Connect charger\!"`
         set-state "battery_notification_id" $notif_id
         echo "$(date): $current_level% Low Battery" >> /tmp/$app_name.log
     fi
@@ -44,8 +46,9 @@ elif [ "$battery_notify_high" = true ] \
     if [ $battery_is_notified = false ]; then
         echo -e "\tNotifying."
         notif_id=`
-            notify-send -u normal -a $app_name -i battery-full-charged -t 0 -p \
-                "Full Battery ($current_level%)" "Disconnect charger\!"`
+            notify-send -u normal -a $app_name -i battery-full-charged \
+                -t $battery_notify_time -p "Full Battery ($current_level%)" \
+                "Disconnect charger\!"`
         set-state "battery_notification_id" $notif_id
         echo "$(date): $current_level% Full Battery" >> /tmp/$app_name.log
     fi
