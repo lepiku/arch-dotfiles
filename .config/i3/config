@@ -254,6 +254,7 @@ bindsym $mod+Shift+p    $exe suspend-toggle
 
 bindsym $mod+t          $exe $terme htop
 
+bindsym $mod+Shift+v    exec code
 bindsym $mod+v          exec pavucontrol
 
 bindsym $mod+z          $exe screenshot select
