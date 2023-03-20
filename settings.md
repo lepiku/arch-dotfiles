@@ -139,6 +139,14 @@
     layout.frame_rate = 120
     ```
 
+  - Layout selector `:has`
+
+    To use Ublock Origin ads filter.
+
+    ```
+    layout.css.has-selector.enabled = true
+    ```
+
 - Show bluetooth devices battery level
 
   Source: https://askubuntu.com/a/1420501
