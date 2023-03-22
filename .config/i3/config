@@ -186,7 +186,7 @@ bindsym $mod+a focus parent
 bindsym $mod+Shift+a focus child
 
 # reload the configuration file
-bindsym $mod+r reload; $exe $HOME/bin/monitors
+bindsym $mod+r reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
@@ -249,13 +249,16 @@ bindsym $mod+i          $exe $terme sudo iftop -Bm 20M
 bindsym $mod+m          $exe $terme ranger
 bindsym $mod+Shift+m    exec pcmanfm
 
+bindsym $mod+o          $exe monitors
+bindsym $mod+Shift+o    $exe monitors --no-hdmi
+
 bindsym $mod+p          exec arandr
 bindsym $mod+Shift+p    $exe suspend-toggle
 
 bindsym $mod+t          $exe $terme htop
 
-bindsym $mod+Shift+v    exec code
 bindsym $mod+v          exec pavucontrol
+bindsym $mod+Shift+v    exec code
 
 bindsym $mod+z          $exe screenshot select
 bindsym $mod+Shift+z    $exe screenshot select --save
@@ -285,7 +288,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- lock
 #exec --no-startup-id bash "$HOME/bin/auto-enable-mic.sh"
 
 # wallpaper
-exec --no-startup-id monitors
+exec --no-startup-id sleep 10; monitors
 # hold key repeat rate
 exec --no-startup-id xset r rate 300 32
 exec --no-startup-id dropbox
