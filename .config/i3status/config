@@ -42,23 +42,23 @@ disk "/" {
 }
 
 disk "/home" {
-        format = "<span background='#600060'> @ %free </span>"
+        format = "<span background='#600060'> 🏠 %free </span>"
 }
 
 memory {
-        format = "<span background='#600000'> ⌁ %available </span>"
+        format = "<span background='#600000'>  🗲 %available </span>"
         memory_used_method = "memavailable"
         threshold_degraded = "10%"
         threshold_critical = "5%"
 }
 
 ethernet wlan0 {
-        format_up = "<span background='#604000'> LAN: %ip </span>"
+        format_up = "<span background='#604000'> 🔌 %ip </span>"
         format_down = "<span background='#800000'> LAN: Disconnected </span>"
 }
 
 wireless wlp2s0 {
-        format_up = "<span background='#604000'>%quality %essid </span>"
+        format_up = "<span background='#604000'> 📡%quality %essid </span>"
         format_down = "<span background='#800000'> Disconnected </span>"
 }
 
@@ -71,12 +71,12 @@ volume master {
 }
 
 battery 0 {
-        format = "<span background='#206000'> %status: %percentage </span>"
+        format = "<span background='#206000'> %status %percentage </span>"
         format_down = "No Battery"
-        status_chr = "Chr"
-        status_bat = "Bat"
-        status_unk = "Unk"
-        status_full = "Crd"
+        status_chr = "🔌"
+        status_bat = "🔋"
+        status_unk = "?"
+        status_full = "Full"
         path = "/sys/class/power_supply/BAT%d/uevent"
         low_threshold = 12
         threshold_type = "percentage"
