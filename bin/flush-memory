@@ -2,3 +2,4 @@
 
 sudo tee /proc/sys/vm/drop_caches <<< 1
 sudo swapoff -a && sudo swapon -a
+sudo tee /proc/sys/vm/drop_caches <<< 1
