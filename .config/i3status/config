@@ -9,7 +9,6 @@
 general {
         output_format = "i3bar"
         colors = true
-        #colors = false
         markup = pango
         interval = 5
         color_good = "#ffffff"
@@ -23,9 +22,8 @@ order += "cpu_temperature 0"
 order += "disk /"
 order += "disk /home"
 order += "memory"
-order += "wireless wlp2s0"
+order += "wireless wlp5s0"
 order += "volume master"
-order += "battery 0"
 order += "tztime local"
 
 load {
@@ -41,24 +39,20 @@ disk "/" {
         format = "<span background='#600060'> / %free </span>"
 }
 
-disk "/home" {
-        format = "<span background='#600060'> 🏠 %free </span>"
-}
-
 memory {
-        format = "<span background='#600000'>  🗲 %available </span>"
+        format = "<span background='#600000'> Mem %available </span>"
         memory_used_method = "memavailable"
         threshold_degraded = "10%"
         threshold_critical = "5%"
 }
 
 ethernet wlan0 {
-        format_up = "<span background='#604000'> 🔌 %ip </span>"
+        format_up = "<span background='#604000'> LAN %ip </span>"
         format_down = "<span background='#800000'> LAN: Disconnected </span>"
 }
 
-wireless wlp2s0 {
-        format_up = "<span background='#604000'> 📡%quality %essid </span>"
+wireless wlp5s0 {
+        format_up = "<span background='#604000'> Wifi%quality %essid </span>"
         format_down = "<span background='#800000'> Disconnected </span>"
 }
 
