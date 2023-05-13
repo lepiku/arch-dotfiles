@@ -12,7 +12,8 @@ font = Source Code Pro Medium 10
 # If markup is not allowed, those tags will be stripped out of the
 # message.
 markup = yes
-plain_text = no
+# DEPRECATED
+#plain_text = no
 
 # The format of the message.  Possible variables are:
 #   %a  appname
@@ -34,11 +35,12 @@ indicate_hidden = yes
 # Possible values are "left", "center" and "right".
 alignment = left
 
+# DEPRECATED
 # The frequency with wich text that is longer than the notification
 # window allows bounces back and forth.
 # This option conflicts with "word_wrap".
 # Set to 0 to disable.
-bounce_freq = 0
+# bounce_freq = 0
 
 # Show age of message if message is older than show_age_threshold
 # seconds.
@@ -133,7 +135,8 @@ separator_color = frame
 # Print a notification on startup.
 # This is mainly for error detection, since dbus (re-)starts dunst
 # automatically after a crash.
-startup_notification = false
+# DEPRECATED
+#startup_notification = false
 
 # dmenu path.
 dmenu = /usr/bin/dmenu -p dunst:
@@ -151,26 +154,27 @@ icon_path = /usr/share/icons/Papirus-Dark/24x24/actions:/usr/share/icons/Papirus
 frame_width = 2
 frame_color = "#8EC07C"
 
-[shortcuts]
-
-# Shortcuts are specified as [modifier+][modifier+]...key
-# Available modifiers are "ctrl", "mod1" (the alt-key), "mod2",
-# "mod3" and "mod4" (windows-key).
-# Xev might be helpful to find names for keys.
-
-# Close notification.
-close = ctrl+space
-
-# Close all notifications.
-close_all = ctrl+shift+space
-
-# Redisplay last message(s).
-# On the US keyboard layout "grave" is normally above TAB and left
-# of "1".
-history = ctrl+grave
-
-# Context menu.
-context = ctrl+shift+period
+# DEPRECATED
+# [shortcuts]
+# 
+# # Shortcuts are specified as [modifier+][modifier+]...key
+# # Available modifiers are "ctrl", "mod1" (the alt-key), "mod2",
+# # "mod3" and "mod4" (windows-key).
+# # Xev might be helpful to find names for keys.
+# 
+# # Close notification.
+# close = ctrl+space
+# 
+# # Close all notifications.
+# close_all = ctrl+shift+space
+# 
+# # Redisplay last message(s).
+# # On the US keyboard layout "grave" is normally above TAB and left
+# # of "1".
+# history = ctrl+grave
+# 
+# # Context menu.
+# context = ctrl+shift+period
 
 [urgency_low]
 # IMPORTANT: colors have to be defined in quotation marks.
