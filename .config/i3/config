@@ -288,7 +288,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- lock
 #exec --no-startup-id bash "$HOME/bin/auto-enable-mic.sh"
 
 # wallpaper
-exec --no-startup-id sleep 10; monitors
+exec --no-startup-id sleep 1; monitors
 # hold key repeat rate
 exec --no-startup-id xset r rate 300 32
 exec --no-startup-id dropbox
@@ -300,3 +300,4 @@ exec --no-startup-id wrap-sigterm run-xidlehook
 exec --no-startup-id systemctl --user start dispad.service
 exec --no-startup-id picom -b
 exec --no-startup-id dunst
+exec --no-startup-id lxsession
