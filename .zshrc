@@ -76,6 +76,7 @@ plugins=(
 	fzf
 	#gradle-completion
 	zsh-syntax-highlighting
+	zsh-autosuggestions
 )
 
 
