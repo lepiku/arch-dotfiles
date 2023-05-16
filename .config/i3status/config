@@ -36,11 +36,11 @@ cpu_temperature 0 {
 }
 
 disk "/" {
-        format = "<span background='#600060'> / %free </span>"
+        format = "<span background='#600060'> / %used/%total </span>"
 }
 
 memory {
-        format = "<span background='#600000'> Mem %available </span>"
+        format = "<span background='#600000'> 🗲 %used/%total </span>"
         memory_used_method = "memavailable"
         threshold_degraded = "10%"
         threshold_critical = "5%"
