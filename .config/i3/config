@@ -244,7 +244,7 @@ bindsym $mod+Shift+e    exec steam-runtime
 bindsym $mod+g          exec chromium
 bindsym $mod+Shift+g    exec chromium --incognito
 
-bindsym $mod+i          $exe $terme sudo iftop -Bm 20M -i wlp5s0
+bindsym $mod+i          $exe $terme sudo iftop -Bm 30M -i wlp5s0
 
 bindsym $mod+m          $exe $terme ranger
 bindsym $mod+Shift+m    exec pcmanfm
@@ -288,9 +288,9 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- lock
 #exec --no-startup-id bash "$HOME/bin/auto-enable-mic.sh"
 
 # wallpaper
-exec --no-startup-id sleep 1; monitors
+exec --no-startup-id sleep 2; monitors
 # hold key repeat rate
-exec --no-startup-id xset r rate 300 32
+exec --no-startup-id input-settings
 exec --no-startup-id dropbox
 exec --no-startup-id blueman-applet
 exec --no-startup-id nm-applet
