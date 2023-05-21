@@ -35,6 +35,7 @@ bin/assets/
 
 # other
 !settings.md
+!setup.md
 !.config/dunst/
 !.config/dunst/**
 !.config/feh/
