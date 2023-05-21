@@ -18,6 +18,10 @@ Plug 'dart-lang/dart-vim-plugin'
 Plug 'godlygeek/tabular'
 Plug 'jiangmiao/auto-pairs'
 Plug 'leafOfTree/vim-vue-plugin'
+
+Plug 'preservim/vim-markdown'
+let g:vim_markdown_folding_disabled = 1
+
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'tomasiser/vim-code-dark'
@@ -27,8 +31,9 @@ Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-test/vim-test'
 
+
 if has('nvim')
-    "Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
     Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
     let g:coc_global_extensions = [
@@ -43,12 +48,10 @@ if has('nvim')
                 \'coc-java',
                 \'coc-jedi',
                 \'coc-json',
-                \'coc-markdown-preview-enhanced',
                 \'coc-prettier',
                 \'coc-pyright',
                 \'coc-tsserver',
                 \'coc-vue',
-                \'coc-webview',
                 \'@yaegassy/coc-volar',
                 \]
 endif
@@ -436,8 +439,8 @@ augroup extension
     " force indentation
     autocmd BufRead,BufNewFile *.html,*.css,*.js,*.jsx,*.json setlocal sw=2 ts=2 sts=2 expandtab
     " force filetypes
-    autocmd BufRead,BufNewFile *.jsx,*js setlocal filetype=javascript
-    autocmd BufRead,BufNewFile *.mdx setlocal filetype=markdown
+    "autocmd BufRead,BufNewFile *.jsx,*.js setlocal filetype=javascript
+    autocmd BufRead,BufNewFile *.md,*.mdx setlocal filetype=markdown
 augroup end
 
 augroup postWrite
