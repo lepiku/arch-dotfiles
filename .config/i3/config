@@ -50,6 +50,9 @@ bindsym XF86AudioRaiseVolume $exe audio-adjust raise
 bindsym XF86AudioLowerVolume $exe audio-adjust lower
 bindsym XF86AudioMute $exe audio-adjust mute
 bindsym XF86AudioMicMute $exe audio-adjust mic-mute
+bindsym XF86AudioPlay $exe playerctl play-pause
+bindsym XF86AudioPrev $exe playerctl previous
+bindsym XF86AudioNext $exe playerctl next
 
 # adjust backlight
 bindsym XF86MonBrightnessUp $exe sh -c 'tee /sys/class/backlight/intel_backlight/brightness <<<$(( $(cat /sys/class/backlight/intel_backlight/brightness) + 10 ))'
