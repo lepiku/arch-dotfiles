@@ -22,7 +22,7 @@ order += "cpu_temperature 0"
 order += "disk /"
 order += "disk /home"
 order += "memory"
-order += "wireless wlp5s0"
+order += "wireless wlp8s0"
 order += "volume master"
 order += "tztime local"
 
@@ -51,7 +51,7 @@ ethernet wlan0 {
         format_down = "<span background='#800000'> LAN: Disconnected </span>"
 }
 
-wireless wlp5s0 {
+wireless wlp8s0 {
         format_up = "<span background='#604000'> Wifi%quality %essid </span>"
         format_down = "<span background='#800000'> Disconnected </span>"
 }
