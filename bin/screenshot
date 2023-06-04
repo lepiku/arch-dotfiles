@@ -2,12 +2,13 @@
 
 source ~/.config/dotfiles.conf
 : '
+$screenshot_image_name_format
 $screenshot_image_dir
 $screenshot_image_temp_dir
 '
 
 args=" ${@:2} "
-image_name="$(date +%F_%H-%M-%S-%N | cut -c -23).png"
+image_name="`eval $screenshot_image_name_format`.png"
 
 _maim() {
     case $args in
@@ -21,7 +22,7 @@ _maim() {
             image_path="$screenshot_image_temp_dir/$image_name"
     esac
 
-    maim $* $image_path &&
+    maim $* -m 10 $image_path &&
         xclip -selection clipboard -t image/png $image_path
 }
 
