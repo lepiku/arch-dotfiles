@@ -460,5 +460,5 @@ augroup toggleCocExtensions
         endif
     endfunction
     autocmd BufEnter *.vue call CommandTsserver('deactivateExtension')
-    autocmd BufEnter *.js,*.jsx,*.ts,*.tsx call CommandTsserver('activeExtension')
+    autocmd BufLeave *.vue call CommandTsserver('activeExtension')
 augroup end
