@@ -21,6 +21,8 @@ Plug 'leafOfTree/vim-vue-plugin'
 
 Plug 'preservim/vim-markdown'
 let g:vim_markdown_folding_disabled = 1
+" https://github.com/preservim/vim-markdown#syntax-concealing
+set conceallevel=0
 
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'scrooloose/nerdcommenter'
@@ -110,7 +112,6 @@ set dir=~/.swapdir
 
 " italic fonts in urxvt
 "set term=rxvt-unicode-256color
-set conceallevel=2
 
 " permanent undo and clipboard behaviour
 set undofile
@@ -451,14 +452,14 @@ augroup postWrite
     autocmd BufWritePost .Xresources silent !xrdb ~/.Xresources
 augroup end
 
-augroup toggleCocExtensions
-    autocmd!
-    function CommandTsserver(command)
-        let stats = CocAction('extensionStats')
-        if filter(stats, 'v:val["id"] == "coc-tsserver"')[0]['state'] != 'disabled'
-            call CocAction(a:command, 'coc-tsserver')
-        endif
-    endfunction
-    autocmd BufEnter *.vue call CommandTsserver('deactivateExtension')
-    autocmd BufLeave *.vue call CommandTsserver('activeExtension')
-augroup end
+"augroup toggleCocExtensions
+"    autocmd!
+"    function CommandTsserver(command)
+"        let stats = CocAction('extensionStats')
+"        if filter(stats, 'v:val["id"] == "coc-tsserver"')[0]['state'] != 'disabled'
+"            call CocAction(a:command, 'coc-tsserver')
+"        endif
+"    endfunction
+"    autocmd BufEnter *.vue,*.spec.ts call CommandTsserver('deactivateExtension')
+"    autocmd BufLeave *.vue,*.spec.ts call CommandTsserver('activeExtension')
+"augroup end
