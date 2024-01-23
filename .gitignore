@@ -51,6 +51,8 @@ bin/assets/
 !.config/redshift.conf
 !.config/rofi/
 !.config/rofi/**
+!.config/pipewire/
+!.config/pipewire/**
 !.dispad
 !.xinitrc
 !.Xmodmap
