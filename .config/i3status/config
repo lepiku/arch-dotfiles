@@ -22,7 +22,8 @@ order += "cpu_temperature 0"
 order += "disk /"
 order += "disk /home"
 order += "memory"
-order += "wireless wlp8s0"
+order += "ethernet enp9s0"
+#order += "wireless wlp8s0"
 order += "volume master"
 order += "tztime local"
 
@@ -46,14 +47,14 @@ memory {
         threshold_critical = "5%"
 }
 
-ethernet wlan0 {
-        format_up = "<span background='#604000'> LAN %ip </span>"
-        format_down = "<span background='#800000'> LAN: Disconnected </span>"
+ethernet enp9s0 {
+        format_up = "<span background='#604000'> Eth %ip </span>"
+        format_down = "<span background='#800000'> Eth Down </span>"
 }
 
 wireless wlp8s0 {
-        format_up = "<span background='#604000'> Wifi%quality %essid </span>"
-        format_down = "<span background='#800000'> Disconnected </span>"
+        format_up = "<span background='#604000'> Wifi%quality %essid %ip </span>"
+        format_down = "<span background='#800000'> Wifi Down </span>"
 }
 
 volume master {
