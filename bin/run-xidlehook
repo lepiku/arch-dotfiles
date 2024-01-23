@@ -3,18 +3,24 @@
 source ~/.config/dotfiles.conf
 : '
 $autosuspend_screen_off_seconds
-$autosuspend_sleep_seconds
+$autosuspend_sleep_after_screen_off_seconds
 '
+
+#xset dpms \
+#    $autosuspend_screen_off_seconds \
+#    $autosuspend_screen_off_seconds \
+#    $autosuspend_screen_off_seconds
+#xset dpms 0 0 0
 
 xidlehook \
   `# Don't lock when there's a fullscreen application` \
   --not-when-fullscreen \
   `# Don't lock when there's audio playing` \
-  `#--not-when-audio` \
+  --not-when-audio \
   `# sleep after 10 minutes` \
   --timer $autosuspend_screen_off_seconds \
     'xset dpms force off' \
     'xset dpms force on' \
-  --timer $autosuspend_sleep_seconds \
+  --timer $autosuspend_sleep_after_screen_off_seconds \
     'systemctl suspend' \
     ''

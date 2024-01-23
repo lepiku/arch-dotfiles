@@ -13,14 +13,18 @@ image_name="`eval $screenshot_image_name_format`.png"
 _maim() {
     case $args in
         *" --save "* | *" -s "*)
-            image_path="$screenshot_image_dir/$image_name"
+            image_dir="$screenshot_image_dir"
             ;;
         *)
-            if [ ! -d "$screenshot_image_temp_dir" ]; then
-                mkdir "$screenshot_image_temp_dir"
-            fi
-            image_path="$screenshot_image_temp_dir/$image_name"
+            image_dir="$screenshot_image_temp_dir"
+            ;;
     esac
+
+    if [ ! -d "$image_dir" ]; then
+        mkdir "$image_dir"
+    fi
+
+    image_path="$image_dir/$image_name"
 
     maim $* -m 10 $image_path &&
         xclip -selection clipboard -t image/png $image_path
