@@ -181,3 +181,32 @@
   background=<path/to/wallpaper>
   theme-name=<gtk-theme>
   ```
+
+- Setup PostgreSQL
+
+  Sources:
+
+  - https://wiki.archlinux.org/title/PostgreSQL#Initial_configuration
+  - https://wiki.archlinux.org/title/PostgreSQL#Upgrading_PostgreSQL
+  - https://wiki.archlinux.org/title/Btrfs#Copy-on-Write_(CoW)
+
+  ```sh
+  sudo mkdir /var/lib/postgres/data
+  sudo chown postgres:postgres /var/lib/postgres/data
+  sudo chattr +C /dir/file
+  sudo -u postgres initdb -D /var/lib/postgres/data --locale=C.UTF-8 --encoding=UTF8 --data-checksums
+  ```
+
+- NTFS Mount Error
+
+  If you run:
+
+  ```sh
+  sudo ntfsfix /dev/nvme0n1p3
+  ```
+
+  Would show error on mounting NTFS with PCManFM. Fix it with:
+
+  ```sh
+  sudo ntfsfix -d /dev/nvme0n1p3
+  ```
