@@ -34,8 +34,6 @@ bin/assets/
 !.tmux.conf
 
 # other
-!settings.md
-!setup.md
 !.config/dunst/
 !.config/dunst/**
 !.config/feh/
@@ -70,3 +68,7 @@ bin/web-shortcuts-mapping.txt
 # termux
 !.termux/
 !.termux/**
+
+# markdowns
+!markdowns/
+!markdowns/**
