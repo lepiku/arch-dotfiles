@@ -190,7 +190,7 @@ echo 'okto-swifty' > /etc/hostname
 ## 6. Configure the system
 
 ```sh
-pacman -Sy git tmux python ranger cron htop firefox btrfs-progs efibootmgr networkmanager  man
+pacman -Sy git tmux python ranger cron htop firefox btrfs-progs efibootmgr networkmanager man
 ```
 
 ### 6.1. Bootloader
@@ -265,10 +265,14 @@ yay -S sway swaylock swayidle swayimg swaybg greetd i3status
 Edit `/etc/greetd/config.toml` to launch sway on login
 
 ```conf
-# ...
 [default_session]
 command = "agreety --cmd sway"
-# ...
+```
+
+Create symbolic link for `i3status` config:
+
+```sh
+ln -s ~/.config/i3status/config-swifty ~/.config/i3status/config
 ```
 
 Start and Enable `greetd`
@@ -286,7 +290,7 @@ With [foot](https://codeberg.org/dnkl/foot#index) and
 [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
 
 ```sh
-yay -S foot zsh fzf
+yay -S foot zsh fzf fd zsh-autosuggestions zsh-syntax-highlighting
 ```
 
 Change user shell to `zsh`:
@@ -295,6 +299,12 @@ Change user shell to `zsh`:
 chsh
 #Password:
 #Shell: /bin/zsh
+```
+
+Create symbolic link to zsh plugins in `~/.oh-my-zsh`:
+
+```sh
+ln -s /usr/share/zsh/plugins ~/.oh-my-zsh
 ```
 
 ### 6.\_. Clone dotfiles
