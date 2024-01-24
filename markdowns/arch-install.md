@@ -190,7 +190,7 @@ echo 'okto-swifty' > /etc/hostname
 ## 6. Configure the system
 
 ```sh
-pacman -Sy intel-ucode refind git tmux python ranger cron htop firefox chromium btrfs-progs efibootmgr networkmanager sudo sway pipewire pipewire-alsa pipewire-pulse pipewire-jack zsh openssh man
+pacman -Sy git tmux python ranger cron htop firefox btrfs-progs efibootmgr networkmanager  man
 ```
 
 ### 6.1. Bootloader
@@ -259,14 +259,23 @@ makepkg -si
 With [Sway](https://wiki.archlinux.org/title/Sway)
 
 ```sh
-yay -S sway greetd
+yay -S sway swaylock swayidle swayimg swaybg greetd i3status
 ```
 
 Edit `/etc/greetd/config.toml` to launch sway on login
 
 ```conf
+# ...
 [default_session]
 command = "agreety --cmd sway"
+# ...
+```
+
+Start and Enable `greetd`
+
+```sh
+sudo systemctl enable greetd.service
+sudo systemctl start greetd.service
 ```
 
 > TODO replace with gui greeter
@@ -312,7 +321,23 @@ Then copy
 ### 6.\_. Editor (Neovim)
 
 ```sh
-yay -S neovim
+yay -S neovim nodejs npm
+```
+
+> Nodejs and NPM needed for some Neovim plugins
+
+Install [vim-plug](https://github.com/junegunn/vim-plug):
+
+```sh
+sh -c 'curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+```
+
+Then, install plugins:
+
+```sh
+nvim
+#:PlugInstall
 ```
 
 ### 6.4. SSH
@@ -325,4 +350,16 @@ Generate SSH key: (use defaults and no password)
 
 ```sh
 ssh-keygen -t rsa -b 4096
+```
+
+### 6.\_. Audio
+
+```sh
+yay -S pipewire pipewire-alsa pipewire-pulse pipewire-jack pipewire-v4l2 pipewire-docs wireplumber rtkit
+```
+
+enable services:
+
+```sh
+systemctl
 ```
