@@ -38,17 +38,21 @@ bin/assets/
 !.config/dunst/**
 !.config/feh/
 !.config/feh/**
-!.config/feh/buttons
+!.config/foot/
+!.config/foot/**
 !.config/i3/
 !.config/i3/**
 !.config/i3status/
 !.config/i3status/**
+.config/i3status/config
 !.config/picom.conf
 !.config/ranger/
 !.config/ranger/**
 !.config/redshift.conf
 !.config/rofi/
 !.config/rofi/**
+!.config/sway/
+!.config/sway/**
 !.config/pipewire/
 !.config/pipewire/**
 !.dispad
@@ -61,9 +65,6 @@ bin/assets/
 
 # background picture
 !.fehbg
-
-# web shortcuts
-bin/web-shortcuts-mapping.txt
 
 # termux
 !.termux/
