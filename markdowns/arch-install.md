@@ -3,6 +3,8 @@
 Links
 
 - https://wiki.archlinux.org/title/Installation_guide
+- https://gist.github.com/mjkstra/96ce7a5689d753e7a6bdd92cdc169bae
+- https://wiki.archlinux.org/title/User:Altercation/Bullet_Proof_Arch_Install
 
 ## 1. Verify the boot mode:
 
@@ -259,7 +261,7 @@ makepkg -si
 With [Sway](https://wiki.archlinux.org/title/Sway)
 
 ```sh
-yay -S sway swaylock swayidle swayimg swaybg greetd i3status
+yay -S sway swaylock swayidle swayimg swaybg greetd i3status mako
 ```
 
 Edit `/etc/greetd/config.toml` to launch sway on login
@@ -368,8 +370,19 @@ ssh-keygen -t rsa -b 4096
 yay -S pipewire pipewire-alsa pipewire-pulse pipewire-jack pipewire-v4l2 pipewire-docs wireplumber rtkit
 ```
 
-enable services:
+### 7.\_. Bluetooth
 
 ```sh
-systemctl
+yay -S bluez bluez-utils
+```
+
+Enable `bluetooth.service`:
+
+```sh
+sudo systemctl enable bluetooth.service
+sudo systemctl start bluetooth.service
+rfkill unblock bluetooth
+
+sudoedit /etc/bluetooth/main.conf
+# uncomment 'AutoEnable=true'
 ```
