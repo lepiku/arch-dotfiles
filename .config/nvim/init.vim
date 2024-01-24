@@ -35,7 +35,7 @@ Plug 'vim-test/vim-test'
 
 
 if has('nvim')
-    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install'  }
     Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
     let g:coc_global_extensions = [
