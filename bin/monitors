@@ -16,6 +16,10 @@ elif xrandr --query | grep "HDMI-A-0 connected" -A 1 | grep -q "1920x1080.* 144\
 then
     echo "Preset PC GPU HDMI"
     xrandr --output HDMI-A-0 --mode 1920x1080 --rate 144
+elif xrandr --query | grep "DisplayPort-0 connected" -A 1 | grep -q "1920x1080.* 144\."
+then
+    echo "Preset PC GPU DisplayPort"
+    xrandr --output DisplayPort-0 --mode 1920x1080 --rate 144
 #elif xrandr --query | grep -q "HDMI1 connected"
 #then
 #    xrandr --output HDMI1 --left-of eDP1
