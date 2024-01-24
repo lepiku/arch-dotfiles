@@ -9,24 +9,24 @@
 # shell
 !.bashrc
 !.bash_aliases
-!.oh-my-zsh/
+!.oh-my-zsh
 !.oh-my-zsh/**
-.oh-my-zsh/plugins/
+.oh-my-zsh/plugins
 !.profile
 !.zshrc
 !.zsh_aliases
 
 # scripts
-!bin/
+!bin
 !bin/**
-bin/assets/
-!scripts/
+bin/assets
+!scripts
 !scripts/**
 
 # vim
 !.vimrc
-!.config/
-!.config/nvim/
+!.config
+!.config/nvim
 !.config/nvim/**
 .config/nvim/.netrwhist
 
@@ -34,26 +34,26 @@ bin/assets/
 !.tmux.conf
 
 # other
-!.config/dunst/
+!.config/dunst
 !.config/dunst/**
-!.config/feh/
+!.config/feh
 !.config/feh/**
-!.config/foot/
+!.config/foot
 !.config/foot/**
-!.config/i3/
+!.config/i3
 !.config/i3/**
-!.config/i3status/
+!.config/i3status
 !.config/i3status/**
 .config/i3status/config
 !.config/picom.conf
-!.config/ranger/
+!.config/ranger
 !.config/ranger/**
 !.config/redshift.conf
-!.config/rofi/
+!.config/rofi
 !.config/rofi/**
-!.config/sway/
+!.config/sway
 !.config/sway/**
-!.config/pipewire/
+!.config/pipewire
 !.config/pipewire/**
 !.dispad
 !.xinitrc
@@ -67,9 +67,9 @@ bin/assets/
 !.fehbg
 
 # termux
-!.termux/
+!.termux
 !.termux/**
 
 # markdowns
-!markdowns/
+!markdowns
 !markdowns/**
