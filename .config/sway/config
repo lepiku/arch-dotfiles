@@ -15,33 +15,35 @@ set $alt Mod1
 set $term foot
 set $terme foot -e
 set $termi foot -e zsh -ic
-set $exe exec --no-startup-id
+set $exe exec
 set $shutdown systemctl poweroff
 set $suspend systemctl suspend
 set $reboot systemctl reboot
-set $logoff i3-msg exit
+set $logoff swaymsg exit
 
 # Input Configuration
 input "type:touchpad" {
+    # for Type: Touchpad
     dwt enabled
     tap enabled
     natural_scroll enabled
     middle_emulation enabled
+    accel_profile "adaptive"
+    pointer_accel 0
+    scroll_factor 0.2
+}
+input "type:pointer" {
+    # for Type: Mouse
+    accel_profile "flat"
+    pointer_accel -0.8
 }
 
-input "type:mouse" {
-    dwt enabled
-    tap enabled
-    natural_scroll enabled
-    middle_emulation enabled
-}
 
 # Output Configuration
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-
-# set variabled for resizing
-set $resizeFloat 20
-set $resizeTile 2
+set $edp1 eDP-1
+set $hdmi HDMI-A-1
+xwayland disable
+output * bg ~/.config/sway/wallpaper.png fill
 
 # set size for focused border
 for_window [class="^.*"] border pixel 2
@@ -90,8 +92,9 @@ bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
 #bindsym $mod+d $exe dmenu_run -fn "Source Code Pro-11"
 #bindsym $mod+Shift+d $exe i3-dmenu-desktop --dmenu='dmenu -i -fn "Source Code Pro-11"'
-bindsym $mod+d $exe rofi -show drun
-bindsym $mod+Shift+d $exe rofi -show run -theme android_notification
+#bindsym $mod+d $exe rofi -show drun
+bindsym $mod+d $exe fuzzel
+#bindsym $mod+Shift+d $exe rofi -show run -theme android_notification
 
 # ---------- Managing Windows ---------- #
 focus_wrapping no
@@ -120,6 +123,8 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # resize with mod + alt
+set $resizeFloat 32
+set $resizeTile 4
 bindsym $mod+$alt+h     resize shrink width  $resizeFloat px or $resizeTile ppt
 bindsym $mod+$alt+j     resize grow   height $resizeFloat px or $resizeTile ppt
 bindsym $mod+$alt+k     resize shrink height $resizeFloat px or $resizeTile ppt
@@ -130,10 +135,11 @@ bindsym $mod+$alt+Up    resize shrink height $resizeFloat px or $resizeTile ppt
 bindsym $mod+$alt+Right resize grow   width  $resizeFloat px or $resizeTile ppt
 
 # resize gaps with mod + alt + shift
-bindsym $mod+$alt+Shift+h gaps outer current minus 4
-bindsym $mod+$alt+Shift+j gaps inner current plus 4
-bindsym $mod+$alt+Shift+k gaps inner current minus 4
-bindsym $mod+$alt+Shift+l gaps outer current plus 4
+set $resizeGap 4
+bindsym $mod+$alt+Shift+h gaps outer current minus $resizeGap
+bindsym $mod+$alt+Shift+j gaps inner current plus $resizeGap
+bindsym $mod+$alt+Shift+k gaps inner current minus $resizeGap
+bindsym $mod+$alt+Shift+l gaps outer current plus $resizeGap
 bindsym $mod+$alt+Shift+0 gaps inner current set 0; gaps outer current set 0
 
 # Define names for default workspaces for which we configure key bindings later on.
@@ -149,18 +155,16 @@ set $ws9 "9"
 set $ws10 "10"
 
 # setup workspace's monitor
-set $monitor_main eDP-1
-set $monitor_hdmi HDMI-A-1
-workspace $ws1 output $monitor_main
-workspace $ws2 output $monitor_hdmi
-workspace $ws3 output $monitor_hdmi
-workspace $ws4 output $monitor_main
-workspace $ws5 output $monitor_main
-workspace $ws6 output $monitor_hdmi
-workspace $ws7 output $monitor_hdmi
-workspace $ws8 output $monitor_main
-workspace $ws9 output $monitor_main
-workspace $ws10 output $monitor_hdmi
+workspace $ws1 output $edp1
+workspace $ws2 output $hdmi
+workspace $ws3 output $hdmi
+workspace $ws4 output $edp1
+workspace $ws5 output $edp1
+workspace $ws6 output $hdmi
+workspace $ws7 output $hdmi
+workspace $ws8 output $edp1
+workspace $ws9 output $edp1
+workspace $ws10 output $hdmi
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -210,16 +214,16 @@ bindsym $mod+Shift+a focus child
 # reload the configuration file
 bindsym $mod+r reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+#bindsym $mod+Shift+r restart
 
 # power modes
 set $mode_power "[E]xit | [L]ock | sus[P]end | [R]eboot | [S]hutdown"
 mode $mode_power {
-    bindsym e $exe sh $HOME/scripts/i3exit.sh; exec $logoff
-    bindsym l $exe lock, mode "default"
+    bindsym e $exe $logoff
+    #bindsym l $exe lock, mode "default"
     bindsym p $exe $suspend, mode "default"
-    bindsym r $exe sh $HOME/scripts/i3exit.sh; $exe $reboot
-    bindsym s $exe sh $HOME/scripts/i3exit.sh; $exe $shutdown
+    bindsym r $exe $reboot
+    bindsym s $exe $shutdown
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -253,13 +257,13 @@ bar {
     }
 }
 # ---------- Launch Applications ---------- #
-bindsym $mod+apostrophe exec i3-sensible-terminal
+#bindsym $mod+apostrophe exec i3-sensible-terminal
 
 bindsym $mod+b          exec firefox
 bindsym $mod+Shift+b    exec firefox --private-window
 
-bindsym $mod+c          exec calibre
-bindsym $mod+Shift+c    $exe $termi i3config
+#bindsym $mod+c          exec calibre
+#bindsym $mod+Shift+c    $exe $termi i3config
 
 bindsym $mod+e          exec sudo bluetooth toggle
 bindsym $mod+Shift+e    exec steam-runtime
@@ -295,34 +299,6 @@ bindsym $mod+w exec bash scripts/web-shortcuts.sh \
     `bash scripts/web-shortcuts.sh | rofi -dmenu -i -p "Web Shortcuts"`
 
 # ---------- Autostart Programs ---------- #
-# default workspace
-exec --no-startup-id i3-msg workspace $ws1
-
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- lock
-
-# unused
-#exec --no-startup-id urxvtd -q
-#exec --no-startup-id xinput set-prop "ELAN0504:00 04F3:3091 Touchpad" \
-    #"libinput Tapping Enabled" 1
-#exec --no-startup-id xinput set-prop "ELAN0504:00 04F3:3091 Touchpad" \
-    #"libinput Disable While Typing Enabled" 0
-#exec --no-startup-id xautolock -time 15 -locker "systemctl suspend"
-#exec --no-startup-id bash "$HOME/bin/auto-enable-mic.sh"
-
-# wallpaper
-exec --no-startup-id sleep 1 && monitors
-# hold key repeat rate
-exec --no-startup-id input-settings
-#exec --no-startup-id dropbox
-exec --no-startup-id blueman-applet
-exec --no-startup-id nm-applet
-exec --no-startup-id wrap-sigterm redshift-gtk
-# autosuspend
-exec --no-startup-id wrap-sigterm run-xidlehook
-exec --no-startup-id systemctl --user start dispad.service
-#exec --no-startup-id picom -b
-exec --no-startup-id sleep 1 && xcompmgr -c
-exec --no-startup-id dunst
-exec --no-startup-id lxsession
+#exec mako
+exec dunst
+#exec nm-applet

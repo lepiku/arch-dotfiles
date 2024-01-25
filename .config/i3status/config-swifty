@@ -20,7 +20,6 @@ general {
 order += "load"
 order += "cpu_temperature 0"
 order += "disk /"
-order += "disk /home"
 order += "memory"
 order += "wireless wlp2s0"
 order += "volume master"
@@ -47,13 +46,13 @@ memory {
         threshold_critical = "5%"
 }
 
-ethernet enp9s0 {
-        format_up = "<span background='#604000'> Eth %ip </span>"
-        format_down = "<span background='#800000'> Eth Down </span>"
-}
+#ethernet enp9s0 {
+#        format_up = "<span background='#604000'> Eth %ip </span>"
+#        format_down = "<span background='#800000'> Eth Down </span>"
+#}
 
 wireless wlp2s0 {
-        format_up = "<span background='#604000'> Wifi%quality (%essid) %ip </span>"
+        format_up = "<span background='#604000'> %essid%quality %ip </span>"
         format_down = "<span background='#800000'> Wifi Down </span>"
 }
 

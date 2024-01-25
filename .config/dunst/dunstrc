@@ -65,7 +65,7 @@ corner_radius = 8
 
 # position
 origin = top-right
-offset = 18x44
+offset = 18x20
 
 # Shrink window if it's smaller than the width.  Will be ignored if
 # width is 0.

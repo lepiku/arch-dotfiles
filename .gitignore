@@ -53,6 +53,7 @@ bin/assets
 !.config/rofi/**
 !.config/sway
 !.config/sway/**
+.config/sway/wallpaper.png
 !.config/pipewire
 !.config/pipewire/**
 !.dispad
