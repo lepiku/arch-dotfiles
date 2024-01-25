@@ -37,6 +37,9 @@ input "type:pointer" {
     accel_profile "flat"
     pointer_accel -0.8
 }
+input "type:keyboard" {
+    xkb_options caps:swapescape
+}
 
 
 # Output Configuration
