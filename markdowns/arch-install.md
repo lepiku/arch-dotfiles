@@ -156,7 +156,7 @@ swapon /mnt/swapfile
 ## 5. Installation of essential packages
 
 ```sh
-pacstrap -K /mnt base base-devel linux linux-firmware vi nvim
+pacstrap -K /mnt base base-devel linux linux-firmware nvim networkmanager
 ```
 
 Generate `fstab` and enter chroot:
@@ -181,11 +181,9 @@ vi /etc/locale.gen # uncomment en_US.UTF-8 UTF-8
 locale-gen
 echo 'LANG=en_US.UTF-8' > /etc/locale.conf
 
-# Network
+# Set computer name as 'okto-swifty'
 echo 'okto-swifty' > /etc/hostname
 ```
-
-> Replace `okto-swifty` with your own hostname
 
 ## 6. Configure the system
 
@@ -193,13 +191,23 @@ echo 'okto-swifty' > /etc/hostname
 pacman -Sy git tmux python ranger cron htop firefox btrfs-progs efibootmgr networkmanager man
 ```
 
+### 6.1. Network
+
+Use [NetworkManager]() to connect to a Wifi
+
+```sh
+nmcli device wifi connect <SSID> password <PASSWORD>
+```
+
 ### 6.1. Bootloader
 
 With [rEFInd](https://wiki.archlinux.org/title/REFInd):
 
 ```sh
-pacman -Sy intel-ucode refind btrfs-progs
+pacman -Sy intel-ucode refind btrfs-progs mkinitcpio-firmware
 ```
+
+Install bootloader (rEFInd):
 
 ```sh
 refind-install
@@ -218,6 +226,10 @@ Now you can reboot to your system!
 ```sh
 reboot
 ```
+
+#### 6.1.1. Secure boot
+
+> TODO
 
 ### 6.2. Setup user
 
@@ -254,12 +266,19 @@ cd yay
 makepkg -si
 ```
 
+Update pacman mirrorlist with `reflector`:
+
+```sh
+yay -S reflector
+sudo reflector --latest 10 --country SG,ID --protocol https --save /etc/pacman.d/mirrorlist --sort score
+```
+
 ### 6.3. Window manager
 
 With [Sway](https://wiki.archlinux.org/title/Sway)
 
 ```sh
-yay -S sway swaylock swayidle swayimg swaybg greetd i3status
+yay -S sway swaylock swayidle swayimg swaybg greetd i3status papirus dunst
 ```
 
 Edit `/etc/greetd/config.toml` to launch sway on login
@@ -282,7 +301,7 @@ sudo systemctl enable greetd.service
 sudo systemctl start greetd.service
 ```
 
-> TODO replace with gui greeter
+> TODO change to gui greeter
 
 ### 6.4. Terminal
 
@@ -362,14 +381,33 @@ Generate SSH key: (use defaults and no password)
 ssh-keygen -t rsa -b 4096
 ```
 
+Share `~/.ssh/id_rsa.pub` or save other PC's ssh keys on `~/.ssh/authorized_keys`.
+
 ### 6.\_. Audio
 
 ```sh
-yay -S pipewire pipewire-alsa pipewire-pulse pipewire-jack pipewire-v4l2 pipewire-docs wireplumber rtkit
+yay -S pipewire pipewire-alsa pipewire-pulse pipewire-jack pipewire-v4l2 pipewire-docs wireplumber rtkit pavucontrol
 ```
 
-enable services:
+#### 6.\_.1. Fix no audio
+
+> Acer Swift 3 SF314-54G
+>
+> ```sh
+> lspci | grep audio
+> #Multimedia audio controller: Intel Corporation Sunrise Point-LP HD Audio
+> ```
 
 ```sh
-systemctl
+yay -S sof-firmware
 ```
+
+Source: https://bbs.archlinux.org/viewtopic.php?id=265211
+
+Create `/etc/modprobe.d/sound.conf`:
+
+```sh
+options snd-intel-dspcfg dsp_driver=1
+```
+
+Then reboot.
