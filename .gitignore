@@ -37,7 +37,6 @@ bin/assets
 !.config/ranger/**
 !.config/tmux
 !.config/tmux/tmux.conf
-!.fehbg
 !.termux
 !.termux/**
 !.vimrc
