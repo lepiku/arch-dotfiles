@@ -54,6 +54,8 @@ bin/assets
 !.config/sway
 !.config/sway/**
 .config/sway/wallpaper.png
+!.config/swaylock
+!.config/swaylock/**
 !.config/pipewire
 !.config/pipewire/**
 !.dispad

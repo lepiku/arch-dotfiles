@@ -20,6 +20,7 @@ set $shutdown systemctl poweroff
 set $suspend systemctl suspend
 set $reboot systemctl reboot
 set $logoff swaymsg exit
+set $lock swaylock
 
 # Input Configuration
 input "type:touchpad" {
@@ -223,7 +224,7 @@ bindsym $mod+r reload
 set $mode_power "[E]xit | [L]ock | sus[P]end | [R]eboot | [S]hutdown"
 mode $mode_power {
     bindsym e $exe $logoff
-    #bindsym l $exe lock, mode "default"
+    bindsym l $exe $lock, mode "default"
     bindsym p $exe $suspend, mode "default"
     bindsym r $exe $reboot
     bindsym s $exe $shutdown
