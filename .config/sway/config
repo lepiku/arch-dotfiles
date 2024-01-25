@@ -15,22 +15,23 @@ set $lock swaylock
 
 # Input Configuration
 input "type:touchpad" {
-    # for Type: Touchpad
     dwt enabled
     tap enabled
     natural_scroll enabled
     middle_emulation enabled
-    accel_profile "adaptive"
+    accel_profile adaptive
     pointer_accel 0
     scroll_factor 0.2
 }
 input "type:pointer" {
     # for Type: Mouse
-    accel_profile "flat"
+    accel_profile flat
     pointer_accel -0.8
 }
 input "type:keyboard" {
     xkb_options caps:swapescape
+    repeat_delay 300
+    repeat_rate 30
 }
 
 
