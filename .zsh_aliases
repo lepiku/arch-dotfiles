@@ -5,6 +5,7 @@
 alias rc="nvim ~/.zshrc"
 alias nvimrc="nvim ~/.config/nvim/init.vim"
 alias i3config="nvim ~/.config/i3/config"
+alias swayconfig="nvim ~/.config/sway/config"
 alias zshalias="nvim ~/.zsh_aliases"
 alias nvimft="nvim ~/.config/nvim/ftplugin"
 alias conda-run="source ~/scripts/conda-run.sh"
