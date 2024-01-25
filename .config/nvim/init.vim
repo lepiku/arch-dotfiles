@@ -368,6 +368,9 @@ let g:airline#extensions#tabline#enabled = 1
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.js,*.jsx,*.vue'
 
 " ------------ Mapping / Remaped keys ------------ "
+" save with ctrl-s
+nnoremap ZX :w<CR>
+
 " change indent in visual mode
 vnoremap > >gv
 vnoremap < <gv
