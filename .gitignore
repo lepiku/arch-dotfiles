@@ -35,10 +35,11 @@ bin/assets
 .config/nvim/.netrwhist
 !.config/ranger
 !.config/ranger/**
+!.config/tmux
+!.config/tmux/tmux.conf
 !.fehbg
 !.termux
 !.termux/**
-!.tmux.conf
 !.vimrc
 
 ## xorg
