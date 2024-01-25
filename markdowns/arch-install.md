@@ -185,21 +185,7 @@ echo 'LANG=en_US.UTF-8' > /etc/locale.conf
 echo 'okto-swifty' > /etc/hostname
 ```
 
-## 6. Configure the system
-
-```sh
-pacman -Sy git tmux python ranger cron htop firefox btrfs-progs efibootmgr networkmanager man
-```
-
-### 6.1. Network
-
-Use [NetworkManager]() to connect to a Wifi
-
-```sh
-nmcli device wifi connect <SSID> password <PASSWORD>
-```
-
-### 6.1. Bootloader
+## 6. Bootloader
 
 With [rEFInd](https://wiki.archlinux.org/title/REFInd):
 
@@ -227,11 +213,25 @@ Now you can reboot to your system!
 reboot
 ```
 
-#### 6.1.1. Secure boot
+### 6.1. Secure boot
 
 > TODO
 
-### 6.2. Setup user
+## 7. Configure the system
+
+```sh
+pacman -Sy git tmux python ranger cron htop firefox btrfs-progs efibootmgr networkmanager man
+```
+
+### 7.1. Network
+
+Use [NetworkManager]() to connect to a Wifi
+
+```sh
+nmcli device wifi connect <SSID> password <PASSWORD>
+```
+
+### 7.2. Setup user
 
 ```sh
 pacman -Sy sudo zsh
@@ -255,7 +255,7 @@ passwd dimas
 EDITOR=nvim visudo
 ```
 
-### 6.3. Install AUR Helper
+### 7.3. Install AUR Helper
 
 After logged in as the user, install [yay](https://github.com/Jguer/yay):
 
@@ -273,7 +273,7 @@ yay -S reflector
 sudo reflector --latest 10 --country SG,ID --protocol https --save /etc/pacman.d/mirrorlist --sort score
 ```
 
-### 6.3. Window manager
+### 7.3. Window manager
 
 With [Sway](https://wiki.archlinux.org/title/Sway)
 
@@ -303,7 +303,7 @@ sudo systemctl start greetd.service
 
 > TODO change to gui greeter
 
-### 6.4. Terminal
+### 7.4. Terminal
 
 With [foot](https://codeberg.org/dnkl/foot#index) and
 [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
@@ -326,7 +326,7 @@ Create symbolic link to zsh plugins in `~/.oh-my-zsh`:
 ln -s /usr/share/zsh/plugins ~/.oh-my-zsh
 ```
 
-### 6.\_. Clone dotfiles
+### 7.\_. Clone dotfiles
 
 Clone git on another directory, example:
 
@@ -347,7 +347,7 @@ cp -rf .bashrc bin/ .condarc .dispad .fehbg .git/ .gitignore .global-gitignore m
 
 Then copy
 
-### 6.\_. Editor (Neovim)
+### 7.\_. Editor (Neovim)
 
 ```sh
 yay -S neovim nodejs npm
@@ -369,7 +369,7 @@ nvim
 #:PlugInstall
 ```
 
-### 6.4. SSH
+### 7.4. SSH
 
 ```sh
 yay -S openssh
@@ -383,13 +383,39 @@ ssh-keygen -t rsa -b 4096
 
 Share `~/.ssh/id_rsa.pub` or save other PC's ssh keys on `~/.ssh/authorized_keys`.
 
-### 6.\_. Audio
+### 7.\_. Bluetooth
+
+```sh
+yay -S bluez bluez-utils
+```
+
+Enable bluetooth
+
+```sh
+sudo systemctl enable bluetooth.service
+sudo systemctl start bluetooth.service
+rfkill unblock bluetooth
+sudoedit /etc/bluetooth/main.conf # uncomment 'AutoEnable=true'
+```
+
+Connect with your bluetooth device
+
+```sh
+bluetoothctl
+#scan on
+#pair <device>
+#connect <device>
+#trust <device>
+#exit
+```
+
+### 7.\_. Audio
 
 ```sh
 yay -S pipewire pipewire-alsa pipewire-pulse pipewire-jack pipewire-v4l2 pipewire-docs wireplumber rtkit pavucontrol
 ```
 
-#### 6.\_.1. Fix no audio
+#### 7.\_.1. Fix no audio
 
 > Acer Swift 3 SF314-54G
 >
