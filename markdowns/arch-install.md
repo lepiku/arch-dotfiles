@@ -190,7 +190,7 @@ echo 'okto-swifty' > /etc/hostname
 ## 6. Configure the system
 
 ```sh
-pacman -Sy intel-ucode refind git tmux python ranger cron htop firefox chromium btrfs-progs efibootmgr networkmanager sudo sway pipewire pipewire-alsa pipewire-pulse pipewire-jack zsh openssh man
+pacman -Sy git tmux python ranger cron htop firefox btrfs-progs efibootmgr networkmanager man
 ```
 
 ### 6.1. Bootloader
@@ -243,8 +243,9 @@ passwd dimas
 EDITOR=nvim visudo
 ```
 
-After logged in as the user, install [yay](https://github.com/Jguer/yay) to
-install AUR packages:
+### 6.3. Install AUR Helper
+
+After logged in as the user, install [yay](https://github.com/Jguer/yay):
 
 ```sh
 pacman -S --needed git base-devel
@@ -258,7 +259,7 @@ makepkg -si
 With [Sway](https://wiki.archlinux.org/title/Sway)
 
 ```sh
-pacman -S sway greetd
+yay -S sway swaylock swayidle swayimg swaybg greetd i3status
 ```
 
 Edit `/etc/greetd/config.toml` to launch sway on login
@@ -268,16 +269,107 @@ Edit `/etc/greetd/config.toml` to launch sway on login
 command = "agreety --cmd sway"
 ```
 
+Create symbolic link for `i3status` config:
+
+```sh
+ln -s ~/.config/i3status/config-swifty ~/.config/i3status/config
+```
+
+Start and Enable `greetd`
+
+```sh
+sudo systemctl enable greetd.service
+sudo systemctl start greetd.service
+```
+
 > TODO replace with gui greeter
+
+### 6.4. Terminal
+
+With [foot](https://codeberg.org/dnkl/foot#index) and
+[oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
+
+```sh
+yay -S foot zsh fzf fd zsh-autosuggestions zsh-syntax-highlighting
+```
+
+Change user shell to `zsh`:
+
+```sh
+chsh
+#Password:
+#Shell: /bin/zsh
+```
+
+Create symbolic link to zsh plugins in `~/.oh-my-zsh`:
+
+```sh
+ln -s /usr/share/zsh/plugins ~/.oh-my-zsh
+```
+
+### 6.\_. Clone dotfiles
+
+Clone git on another directory, example:
+
+```sh
+mkdir -p ~/Projects/github
+git clone git@github.com:lepiku/arch-dotfiles.git
+cd ~/Projects/github/arch-dotfiles
+git checkout wayland
+```
+
+Copy files to home:
+
+```sh
+cd ~/Projects/github/arch-dotfiles
+cp -r .config/* ~/.config
+cp -rf .bashrc bin/ .condarc .dispad .fehbg .git/ .gitignore .global-gitignore markdowns/ .oh-my-zsh/ .profile README.md scripts/ .termux/ .tmux.conf .vimrc .xinitrc .Xresources .zsh_aliases .zshrc ~/
+```
+
+Then copy
+
+### 6.\_. Editor (Neovim)
+
+```sh
+yay -S neovim nodejs npm
+```
+
+> Nodejs and NPM needed for some Neovim plugins
+
+Install [vim-plug](https://github.com/junegunn/vim-plug):
+
+```sh
+sh -c 'curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+```
+
+Then, install plugins:
+
+```sh
+nvim
+#:PlugInstall
+```
 
 ### 6.4. SSH
 
 ```sh
-pacman -S openssh
+yay -S openssh
 ```
 
 Generate SSH key: (use defaults and no password)
 
 ```sh
 ssh-keygen -t rsa -b 4096
+```
+
+### 6.\_. Audio
+
+```sh
+yay -S pipewire pipewire-alsa pipewire-pulse pipewire-jack pipewire-v4l2 pipewire-docs wireplumber rtkit
+```
+
+enable services:
+
+```sh
+systemctl
 ```
