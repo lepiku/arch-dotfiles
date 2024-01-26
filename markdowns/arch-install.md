@@ -213,6 +213,8 @@ Now you can reboot to your system!
 reboot
 ```
 
+Customize rEFInd: https://rodsbooks.com/refind/themes.html#banners
+
 ### 6.1. Secure boot
 
 > TODO
@@ -228,6 +230,7 @@ pacman -Sy git tmux python ranger cron htop firefox btrfs-progs efibootmgr netwo
 Use [NetworkManager]() to connect to a Wifi
 
 ```sh
+nmcli device wifi rescan
 nmcli device wifi connect <SSID> password <PASSWORD>
 ```
 
@@ -278,7 +281,7 @@ sudo reflector --latest 10 --country SG,ID --protocol https --save /etc/pacman.d
 With [Sway](https://wiki.archlinux.org/title/Sway)
 
 ```sh
-yay -S sway swaylock swayidle swayimg swaybg greetd i3status papirus dunst
+yay -S sway swaylock swayidle swayimg swaybg greetd i3status papirus dunst xorg-wayland
 ```
 
 Edit `/etc/greetd/config.toml` to launch sway on login

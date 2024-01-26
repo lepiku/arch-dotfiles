@@ -38,8 +38,8 @@ input "type:keyboard" {
 # Output Configuration
 set $edp1 eDP-1
 set $hdmi HDMI-A-1
-xwayland disable
 output * bg ~/.config/sway/wallpaper.png fill
+#xwayland disable
 
 # set size for focused border
 for_window [class="^.*"] border pixel 2
