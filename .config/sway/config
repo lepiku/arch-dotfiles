@@ -261,22 +261,22 @@ bindsym $mod+Shift+b    exec firefox --private-window
 #bindsym $mod+c          exec calibre
 bindsym $mod+Shift+c    $exe $termi swayconfig
 
-bindsym $mod+e          exec sudo bluetooth toggle
-bindsym $mod+Shift+e    exec steam-runtime
+#bindsym $mod+e          exec sudo bluetooth toggle
+#bindsym $mod+Shift+e    exec steam-runtime
 
-bindsym $mod+g          exec chromium
-bindsym $mod+Shift+g    exec chromium --incognito
+#bindsym $mod+g          exec chromium
+#bindsym $mod+Shift+g    exec chromium --incognito
 
 bindsym $mod+i          $exe $terme speedometer -r enp9s0 -t enp9s0 -l -m 5000000
 bindsym $mod+Shift+i    $exe $terme speedometer -r wlp8s0 -t wlp8s0 -l -m 5000000
 
 bindsym $mod+m          $exe $terme ranger
-bindsym $mod+Shift+m    exec pcmanfm
+bindsym $mod+Shift+m    exec nautilus
 
-bindsym $mod+o          $exe monitors
-bindsym $mod+Shift+o    $exe monitors --no-hdmi
+#bindsym $mod+o          $exe monitors
+#bindsym $mod+Shift+o    $exe monitors --no-hdmi
 
-bindsym $mod+p          exec arandr
+#bindsym $mod+p          exec arandr
 bindsym $mod+Shift+p    $exe suspend-toggle
 
 bindsym $mod+t          $exe $terme htop
@@ -284,11 +284,11 @@ bindsym $mod+t          $exe $terme htop
 bindsym $mod+v          exec pavucontrol
 bindsym $mod+Shift+v    exec code
 
-bindsym $mod+z          $exe screenshot select
-bindsym $mod+Shift+z    $exe screenshot select --save
+bindsym $mod+z          exec /usr/share/sway/scripts/grimshot copy area
+bindsym $mod+Shift+z    exec /usr/share/sway/scripts/grimshot save area
 
-bindsym Print           $exe screenshot screen
-bindsym Shift+Print     $exe screenshot screen --save
+bindsym Print           exec /usr/share/sway/scripts/grimshot -n copy screen
+bindsym Shift+Print     exec /usr/share/sway/scripts/grimshot -n save screen
 
 # ---------- Browser Shortcuts ---------- #
 bindsym $mod+w exec bash scripts/web-shortcuts.sh \

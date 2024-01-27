@@ -222,7 +222,7 @@ Customize rEFInd: https://rodsbooks.com/refind/themes.html#banners
 ## 7. Configure the system
 
 ```sh
-pacman -Sy git tmux python ranger cron htop firefox btrfs-progs efibootmgr networkmanager man
+pacman -Sy git tmux python ranger cron htop firefox btrfs-progs efibootmgr networkmanager man zoom speedometer eog
 ```
 
 ### 7.1. Network
@@ -305,6 +305,15 @@ sudo systemctl start greetd.service
 ```
 
 > TODO change to gui greeter
+
+### 7.\_. Gnome
+
+Hide close button:
+https://askubuntu.com/questions/948313/how-do-i-hide-disable-close-buttons-for-gnome-windows#948321
+
+```sh
+gsettings set org.gnome.desktop.wm.preferences button-layout :
+```
 
 ### 7.4. Terminal
 
