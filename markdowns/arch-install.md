@@ -3,6 +3,9 @@
 Links
 
 - https://wiki.archlinux.org/title/Installation_guide
+- https://gist.github.com/mjkstra/96ce7a5689d753e7a6bdd92cdc169bae
+- https://wiki.archlinux.org/title/User:Altercation/Bullet_Proof_Arch_Install
+- https://medium.com/the-foss-albatross/5-steps-to-set-up-your-new-sway-desktop-d3e0928c471f
 
 ## 1. Verify the boot mode:
 
@@ -291,7 +294,7 @@ sudo reflector --latest 10 --country SG,ID --protocol https --save /etc/pacman.d
 With [Sway](https://wiki.archlinux.org/title/Sway)
 
 ```sh
-yay -S sway swaylock swayidle swayimg swaybg greetd i3status papirus dunst xorg-wayland
+yay -S sway swaylock swayidle swayimg swaybg greetd i3status papirus dunst xorg-wayland fuzzel
 ```
 
 Edit `/etc/greetd/config.toml` to launch sway on login
@@ -364,10 +367,12 @@ Copy files to home:
 ```sh
 cd ~/Projects/github/arch-dotfiles
 cp -r .config/* ~/.config
-cp -rf .bashrc bin/ .condarc .dispad .fehbg .git/ .gitignore .global-gitignore markdowns/ .oh-my-zsh/ .profile README.md scripts/ .termux/ .tmux.conf .vimrc .xinitrc .Xresources .zsh_aliases .zshrc ~/
+cp -rf .git ~
+cd ~
+git reset --hard
 ```
 
-Then copy
+Then make some commits!
 
 ### 7.\_. Editor (Neovim)
 
@@ -570,3 +575,12 @@ Set mount options for that partition in `/etc/udisks2/mount_options.conf`
 [/dev/disk/by-uuid/d9969466-c979-4244-8d05-bb3cc767a736]
 btrfs_defaults=noatime,compress=zstd:9
 ```
+
+### graphics
+
+???
+libva-mesa-driver
+
+### other
+
+yay -S extra/code
