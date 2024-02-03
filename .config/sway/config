@@ -28,6 +28,9 @@ input "type:pointer" {
     accel_profile flat
     pointer_accel -0.8
 }
+input "1133:45083:M585/M590_Mouse" {
+    pointer_accel -0.6
+}
 input "type:keyboard" {
     xkb_options caps:swapescape
     repeat_delay 300
@@ -277,7 +280,7 @@ bindsym $mod+Shift+m    exec nautilus
 #bindsym $mod+Shift+o    $exe monitors --no-hdmi
 
 #bindsym $mod+p          exec arandr
-bindsym $mod+Shift+p    $exe suspend-toggle
+#bindsym $mod+Shift+p    $exe suspend-toggle
 
 bindsym $mod+t          $exe $terme htop
 
