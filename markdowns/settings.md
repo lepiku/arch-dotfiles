@@ -210,3 +210,11 @@
   ```sh
   sudo ntfsfix -d /dev/nvme0n1p3
   ```
+
+- Convert .heic to .jpg
+
+  ```sh
+  for f in *.heic; do heif-convert -q 100 $f jpgs/$f.jpg; done
+  exiftool -n -Orientation=1 *.jpg
+  exiftool -delete_original *.jpg
+  ```
