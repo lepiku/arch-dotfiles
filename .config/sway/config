@@ -57,7 +57,9 @@ for_window [class="^join\?action=join"] floating enable
 #for_window [title="^Android Emulator"] border pixel 0
 
 # set gaps
+smart_borders on
 gaps inner 8
+gaps outer -8
 
 # font
 font pango:Source Code Pro Medium 10

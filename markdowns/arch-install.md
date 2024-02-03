@@ -317,6 +317,12 @@ sudo systemctl enable greetd.service
 sudo systemctl start greetd.service
 ```
 
+Set wallpaper
+
+```sh
+ln -sf "~/Pictures/Wallpapers/oshino shinobu linux.png" ~/.config/sway/wallpaper.png
+```
+
 > TODO change to gui greeter
 
 ### 7.\_. Gnome
