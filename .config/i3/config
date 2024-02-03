@@ -25,6 +25,7 @@ set $resizeFloat 20
 set $resizeTile 2
 
 # set size for focused border
+smart_borders on
 for_window [class="^.*"] border pixel 2
 #for_window [title="albert — Albert"] border pixel 0
 for_window [class="jetbrains-studio" window_type="dialog" title="^win\d+$"] border pixel 0
@@ -38,6 +39,7 @@ for_window [class="^join\?action=join"] floating enable
 
 # set gaps
 gaps inner 8
+gaps outer -8
 
 # font
 font pango:Source Code Pro Medium 10
