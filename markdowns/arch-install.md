@@ -68,7 +68,7 @@ Current structure:
 Create linux partition with `fdisk`:
 
 ```sh
-fdisk
+fdisk /dev/nvme0n1p5
 
 # m for help
 m ENTER
@@ -205,6 +205,16 @@ Modify `/boot/refind_linux.conf` options (find you UUID in `/etc/fstab`):
 "Boot with standard options"  "root=UUID=<Insert UUID> rw rootflags=subvol=@ loglevel=3"
 "Boot to single-user mode"    "root=UUID=<Insert UUID> rw rootflags=subvol=@ loglevel=3 single"
 "Boot with minimal options"   "ro root=/dev/nvme0n1p5"
+```
+
+Set background/banner:
+
+```sh
+scp "scp://192.168.1.24/Pictures/Wallpapers/Pacil/grub pacil 80.png" Downloads/bootloader_pacil_80.png
+sudo cp Downloads/bootloader_pacil_80.png /efi/EFI/refind/
+sudoedit /efi/EFI/refind/refind.conf
+# add 'banner bootloader_pacil_80.png'
+# uncomment 'banner_scale fillscreen'
 ```
 
 Now you can reboot to your system!
