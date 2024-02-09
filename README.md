@@ -47,9 +47,6 @@ View config in [`init.vim`](.config/nvim/init.vim)
   Colorcode preview
 - [scrooloose/nerdcommenter](https://github.com/scrooloose/nerdcommenter):
   Commenting code
-- ~~[scrooloose/nerdtree](https://github.com/scrooloose/nerdtree):
-  Folder tree sidebar~~
-  > Replaced by `coc-explorer`
 - [tomasiser/vim-code-dark](https://github.com/tomasiser/vim-code-dark):
   Dark theme for vim-airline plugin
 - [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive):

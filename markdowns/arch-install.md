@@ -1,13 +1,46 @@
 # Arch Install
 
-Links
+This is my arch install guide written while I setup my Arch Linux install on my laptop. Windows is already installed and this guide is going to install Arch Linux as a **dual boot**.
 
-- https://wiki.archlinux.org/title/Installation_guide
-- https://gist.github.com/mjkstra/96ce7a5689d753e7a6bdd92cdc169bae
-- https://wiki.archlinux.org/title/User:Altercation/Bullet_Proof_Arch_Install
-- https://medium.com/the-foss-albatross/5-steps-to-set-up-your-new-sway-desktop-d3e0928c471f
+For more than 4 years I have used this laptop for Computer Science college. I installed Windows and Arch Linux on the laptop. Although the Linux Operating works fine after more than 4 years, Windows is a different story. It might take 10 minutes just to get to the lock screen on Windows, even though I can boot Linux in less than a minute. One of the main reason why it's slow is that I used a spinning hard disk drive (HDD) for booting Windows. Therefore I decided to reinstall my Windows on a brand new SSD.
 
-## 1. Verify the boot mode:
+Fortunately, I can add an NVME SSD on my laptop, thus I can use the HDD as a backup drive. Here's what I did:
+
+## 1. Preparation
+
+Hardware:
+
+- Laptop (Acer Swift 3 - SF314-54G from 2018)
+
+Drives:
+
+- [WD Blue WD10SPZX](https://www.westerndigital.com/products/internal-drives/wd-blue-mobile-sata-hdd?sku=WD10SPZX) 1TB HDD
+- [WD Black SN850X](https://www.westerndigital.com/products/internal-drives/wd-black-sn850x-nvme-ssd?sku=WDS100T2X0E) 1TB NVME SSD
+
+Plan:
+
+I would install Arch Linux on the remaining 443GB unallocated space on the SSD, then I would reuse the HDD as a backup drive.
+
+- 1TB NVME SSD
+  1. 100MB EFI (FAT32)
+  2. 16MB Windows Reserved
+  3. 447GB Windows C:\ (NTFS)
+  4. 746MB Windows Recovery Environment
+  5. **TODO: 443GB Linux (BTRFS)**
+- 1TB HDD
+  1. **TODO: 1TB Backup (BTRFS)**
+
+## 2. Boot on the live USB
+
+Download and create arch linux boot drive using this [guide](https://wiki.archlinux.org/title/USB_flash_installation_medium). To boot the live USB:
+
+1. Turn off the computer.
+2. Plug in the USB.
+3. Enter the BIOS by turning on the computer and pressing F2 repeatedly.
+4. Disable `Secure Boot`, change the `Boot Order` by putting the USB drive on the top of the boot order, and `Save and exit` on the BIOS.
+5. Start the Arch Linux live USB.
+
+## 3. Verify the boot mode
 
 ```sh
 cat /sys/firmware/efi/fw_platform_size
@@ -16,7 +49,7 @@ cat /sys/firmware/efi/fw_platform_size
 
 Should outputs `64`
 
-## 2. Connect to the internet
+## 4. Connect to the internet
 
 ```text
 iwctl
@@ -44,7 +77,7 @@ Update the clock:
 timedatectl
 ```
 
-## 3. Partition the disks
+## 5. Partition the disks
 
 Check your SSD/HDD:
 
@@ -58,7 +91,7 @@ lsblk
 > - Change `SATA Operation` mode to `AHCI`
 > - Save Changes in BIOS
 >
-> https://community.acer.com/en/discussion/comment/809010/#Comment_809010
+> <https://community.acer.com/en/discussion/comment/809010/#Comment_809010>
 
 Current structure:
 
@@ -92,7 +125,7 @@ p ENTER
 w ENTER
 ```
 
-## 4. Create BTRFS Partition
+## 6. Create BTRFS Partition
 
 This instruction is for partition file `/dev/nvme0n1p5` with label `Linux` and
 `/dev/nvme0n1p1` efi partition.
@@ -103,7 +136,7 @@ Format Partition to BTRFS:
 mkfs.btrfs --label Linux /dev/nvme0n1p5
 ```
 
-### 4.1. Create subvolumes in root filesystem
+### 6.1. Create subvolumes in root filesystem
 
 ```sh
 mount /dev/nvme0n1p5 /mnt
@@ -117,13 +150,13 @@ umount /mnt
 
 > Default mount options:
 >
-> https://btrfs.readthedocs.io/en/latest/ch-mount-options.html
+> <https://btrfs.readthedocs.io/en/latest/ch-mount-options.html>
 >
 > - `space_cache=v2`
 > - `discard=async` autodetect device
 > - `ssd` autodetect
 
-### 4.2. Mount subvolumes and EFI
+### 6.2. Mount subvolumes and EFI
 
 My mount options:
 
@@ -147,7 +180,7 @@ mount -o $o_btrfs,subvol=@varcache  /dev/nvme0n1p5 /mnt/var/cache
 mount /dev/nvme0n1p1 /mnt/efi
 ```
 
-### 4.3. Enable swapfile
+### 6.3. Enable swapfile
 
 **16GB** for 12GB RAM computer:
 
@@ -156,7 +189,7 @@ btrfs filesystem mkswapfile --size 16G /mnt/swapfile
 swapon /mnt/swapfile
 ```
 
-## 5. Installation of essential packages
+## 7. Installation of essential packages
 
 ```sh
 pacstrap -K /mnt base base-devel linux linux-firmware nvim networkmanager arch-install-scripts
@@ -188,7 +221,7 @@ echo 'LANG=en_US.UTF-8' > /etc/locale.conf
 echo 'okto-swifty' > /etc/hostname
 ```
 
-## 6. Bootloader
+## 8. Bootloader
 
 With [rEFInd](https://wiki.archlinux.org/title/REFInd):
 
@@ -226,19 +259,19 @@ Now you can reboot to your system!
 reboot
 ```
 
-Customize rEFInd: https://rodsbooks.com/refind/themes.html#banners
+Customize rEFInd: <https://rodsbooks.com/refind/themes.html#banners>
 
-### 6.1. Secure boot
+### 8.1. Secure boot
 
 > TODO
 
-## 7. Configure the system
+## 9. Configure the system
 
 ```sh
 pacman -Sy git tmux python ranger cron htop firefox btrfs-progs efibootmgr networkmanager man zoom speedometer eog
 ```
 
-### 7.1. Network
+### 9.1. Network
 
 Use [NetworkManager]() to connect to a Wifi
 
@@ -247,7 +280,7 @@ nmcli device wifi rescan
 nmcli device wifi connect <SSID> password <PASSWORD>
 ```
 
-### 7.2. Setup user
+### 9.2. Setup user
 
 ```sh
 pacman -Sy sudo zsh
@@ -271,7 +304,7 @@ passwd dimas
 EDITOR=nvim visudo
 ```
 
-### 7.3. Install AUR helper
+### 9.3. Install AUR helper
 
 After logged in as the user, install [yay](https://github.com/Jguer/yay):
 
@@ -289,7 +322,7 @@ yay -S reflector
 sudo reflector --latest 10 --country SG,ID --protocol https --save /etc/pacman.d/mirrorlist --sort score
 ```
 
-### 7.4. Window manager
+### 9.4. Window manager
 
 With [Sway](https://wiki.archlinux.org/title/Sway)
 
@@ -325,10 +358,10 @@ ln -sf "~/Pictures/Wallpapers/oshino shinobu linux.png" ~/.config/sway/wallpaper
 
 > TODO change to gui greeter
 
-### 7.5. Gnome
+### 9.5. Gnome
 
 Hide close button:
-https://askubuntu.com/questions/948313/how-do-i-hide-disable-close-buttons-for-gnome-windows#948321
+<https://askubuntu.com/questions/948313/how-do-i-hide-disable-close-buttons-for-gnome-windows#948321>
 
 ```sh
 gsettings set org.gnome.desktop.wm.preferences button-layout :
@@ -336,7 +369,7 @@ gsettings set org.gnome.desktop.wm.preferences button-layout :
 
 > TODO: uninstall gnome
 
-### 7.6. Terminal
+### 9.6. Terminal
 
 With [foot](https://codeberg.org/dnkl/foot#index) and
 [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
@@ -359,7 +392,7 @@ Create symbolic link to zsh plugins in `~/.oh-my-zsh`:
 ln -s /usr/share/zsh/plugins ~/.oh-my-zsh
 ```
 
-### 7.7. Clone dotfiles
+### 9.7. Clone dotfiles
 
 Clone git on another directory, example:
 
@@ -382,7 +415,7 @@ git reset --hard
 
 Then make some commits!
 
-### 7.8. Editor (Neovim)
+### 9.8. Editor (Neovim)
 
 ```sh
 yay -S neovim nodejs npm
@@ -404,7 +437,7 @@ nvim
 #:PlugInstall
 ```
 
-### 7.9. SSH
+### 9.9. SSH
 
 ```sh
 yay -S openssh
@@ -418,7 +451,7 @@ ssh-keygen -t rsa -b 4096
 
 Share `~/.ssh/id_rsa.pub` or save other PC's ssh keys on `~/.ssh/authorized_keys`.
 
-### 7.10. Bluetooth
+### 9.10. Bluetooth
 
 ```sh
 yay -S bluez bluez-utils
@@ -444,13 +477,13 @@ bluetoothctl
 #exit
 ```
 
-### 7.11. Audio
+### 9.11. Audio
 
 ```sh
 yay -S pipewire pipewire-alsa pipewire-pulse pipewire-jack pipewire-v4l2 pipewire-docs wireplumber rtkit pavucontrol
 ```
 
-#### 7.11.1. Fix no audio
+#### Fix no audio
 
 > Acer Swift 3 SF314-54G
 >
@@ -463,7 +496,7 @@ yay -S pipewire pipewire-alsa pipewire-pulse pipewire-jack pipewire-v4l2 pipewir
 yay -S sof-firmware
 ```
 
-Source: https://bbs.archlinux.org/viewtopic.php?id=265211
+Source: <https://bbs.archlinux.org/viewtopic.php?id=265211>
 
 Create `/etc/modprobe.d/sound.conf`:
 
@@ -473,19 +506,19 @@ options snd-intel-dspcfg dsp_driver=1
 
 Then reboot.
 
-### 7.12. Graphics
+### 9.12. Graphics
 
 ```sh
 libva-mesa-driver
 ```
 
-### 7.13. Other
+### 9.13. Other
 
 ```sh
 yay -S extra/code
 ```
 
-## 8. Backup Drive
+## 10. Backup Drive
 
 ```sh
 yay -S btrbk sysstat
@@ -680,3 +713,10 @@ Set mount options for that partition in `/etc/udisks2/mount_options.conf`
 [/dev/disk/by-uuid/d9969466-c979-4244-8d05-bb3cc767a736]
 btrfs_defaults=noatime,compress=zstd:9
 ```
+
+## Reference Links
+
+- <https://wiki.archlinux.org/title/Installation_guide>
+- <https://gist.github.com/mjkstra/96ce7a5689d753e7a6bdd92cdc169bae>
+- <https://wiki.archlinux.org/title/User:Altercation/Bullet_Proof_Arch_Install>
+- <https://medium.com/the-foss-albatross/5-steps-to-set-up-your-new-sway-desktop-d3e0928c471f>
