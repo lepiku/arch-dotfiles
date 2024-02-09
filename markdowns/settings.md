@@ -147,6 +147,13 @@
     layout.css.has-selector.enabled = true
     ```
 
+  - Decrease scroll speed (on Sway)
+
+    ```
+    mousewheel.default.delta_multiplier_x = 40 (default 100)
+    mousewheel.default.delta_multiplier_y = 40 (default 100)
+    ```
+
 - Show bluetooth devices battery level
 
   Source: https://askubuntu.com/a/1420501
