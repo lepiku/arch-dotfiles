@@ -20,8 +20,8 @@
 !bin
 !bin/**
 bin/assets
-!markdowns
-!markdowns/**
+!docs
+!docs/**
 !scripts
 !scripts/**
 

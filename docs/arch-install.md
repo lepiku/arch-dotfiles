@@ -30,7 +30,7 @@ Partitions:
 - 1TB HDD
   1. 1TB Backup (BTRFS) \*
 
-> \* Read this [guide](markdowns/backup.md) on how to create a backup drive.
+> \* Read this [guide](./backup.md) on how to create a backup drive.
 
 ## 2. Boot the live USB
 

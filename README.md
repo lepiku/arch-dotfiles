@@ -11,12 +11,12 @@ I use [Sway](https://swaywm.org) as my window manager,
 
 Here are notes containing how to setup my linux.
 
-- [`arch-install.md`](markdowns/arch-install.md)
+- [`arch-install.md`](./docs/arch-install.md)
 
   My arch linux installation guide, starting from a blank partition until
   installing and configuring other programs. Work in progress.
 
-- [`settings.md`](markdowns/settings.md)
+- [`settings.md`](./docs/settings.md)
 
   Guides on how to configure programs that are not included in `arch-install.md`.
 
