@@ -2,7 +2,6 @@
 
 set $mod Mod4
 set $alt Mod1
-# replace st with foot
 set $term foot
 set $terme foot -e
 set $termi foot -e zsh -ic
@@ -21,7 +20,7 @@ input "type:touchpad" {
     middle_emulation enabled
     accel_profile adaptive
     pointer_accel 0
-    #scroll_factor 0.2 # makes scrolling on terminal slow
+    #scroll_factor 0.2 # makes scrolling very slow on terminal
 }
 input "type:pointer" {
     # for Type: Mouse
@@ -42,7 +41,8 @@ input "type:keyboard" {
 set $edp1 eDP-1
 set $hdmi HDMI-A-1
 output * bg ~/.config/sway/wallpaper.png fill
-#xwayland disable
+output $edp1 position 0 0
+output $hdmi position 0 -1080
 
 # set size for focused border
 for_window [class="^.*"] border pixel 2
@@ -141,13 +141,13 @@ bindsym $mod+$alt+Shift+h gaps outer current minus $resizeGap
 bindsym $mod+$alt+Shift+j gaps inner current plus $resizeGap
 bindsym $mod+$alt+Shift+k gaps inner current minus $resizeGap
 bindsym $mod+$alt+Shift+l gaps outer current plus $resizeGap
-bindsym $mod+$alt+Shift+0 gaps inner current set 0; gaps outer current set 0
+bindsym $mod+$alt+Shift+0 gaps inner current set 8; gaps outer current set -8
 
 # Define names for default workspaces for which we configure key bindings later on.
 set $ws1 "1: main"
 set $ws2 "2: work"
-set $ws3 "3: browser"
-set $ws4 "4: shell"
+set $ws3 "3: shell"
+set $ws4 "4: browser"
 set $ws5 "5: media"
 set $ws6 "6"
 set $ws7 "7"
@@ -158,12 +158,12 @@ set $ws10 "10"
 # setup workspace's monitor
 workspace $ws1 output $edp1
 workspace $ws2 output $hdmi
-workspace $ws3 output $hdmi
-workspace $ws4 output $edp1
+workspace $ws3 output $edp1
+workspace $ws4 output $hdmi
 workspace $ws5 output $edp1
 workspace $ws6 output $hdmi
-workspace $ws7 output $hdmi
-workspace $ws8 output $edp1
+workspace $ws7 output $edp1
+workspace $ws8 output $hdmi
 workspace $ws9 output $edp1
 workspace $ws10 output $hdmi
 
@@ -178,6 +178,12 @@ bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
+
+# workspace navigation
+bindsym $mod+Control+h workspace prev_on_output
+bindsym $mod+Control+l workspace next_on_output
+bindgesture swipe:3:right workspace prev_on_output
+bindgesture swipe:3:left workspace next_on_output
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
@@ -277,10 +283,8 @@ bindsym $mod+i          $exe $terme speedometer -r wlp2s0 -t wlp2s0 -l -m 600000
 bindsym $mod+m          $exe $terme ranger
 bindsym $mod+Shift+m    exec nautilus
 
-#bindsym $mod+o          $exe monitors
-#bindsym $mod+Shift+o    $exe monitors --no-hdmi
+bindsym $mod+o          output $hdmi toggle
 
-#bindsym $mod+p          exec arandr
 #bindsym $mod+Shift+p    $exe suspend-toggle
 
 bindsym $mod+t          $exe $terme htop
