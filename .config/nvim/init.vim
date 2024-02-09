@@ -18,12 +18,7 @@ Plug 'dart-lang/dart-vim-plugin'
 Plug 'godlygeek/tabular'
 Plug 'jiangmiao/auto-pairs'
 Plug 'leafOfTree/vim-vue-plugin'
-
 Plug 'preservim/vim-markdown'
-let g:vim_markdown_folding_disabled = 1
-" https://github.com/preservim/vim-markdown#syntax-concealing
-set conceallevel=0
-
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'tomasiser/vim-code-dark'
@@ -32,7 +27,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-test/vim-test'
-
 
 if has('nvim')
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install'  }
@@ -126,6 +120,11 @@ set termguicolors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 let g:Hexokinase_highlighters = ['backgroundfull']
+
+" vim-markdown
+let g:vim_markdown_folding_disabled = 1
+" https://github.com/preservim/vim-markdown#syntax-concealing
+set conceallevel=0
 
 " ------------ coc.nvim settings ----------------- "
 " https://github.com/neoclide/coc.nvim#example-vim-configuration
