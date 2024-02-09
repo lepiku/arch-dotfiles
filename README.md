@@ -159,7 +159,7 @@ swapon /mnt/swapfile
 ## 5. Installation of essential packages
 
 ```sh
-pacstrap -K /mnt base base-devel linux linux-firmware nvim networkmanager
+pacstrap -K /mnt base base-devel linux linux-firmware nvim networkmanager arch-install-scripts
 ```
 
 Generate `fstab` and enter chroot:
@@ -271,7 +271,7 @@ passwd dimas
 EDITOR=nvim visudo
 ```
 
-### 7.3. Install AUR Helper
+### 7.3. Install AUR helper
 
 After logged in as the user, install [yay](https://github.com/Jguer/yay):
 
@@ -289,7 +289,7 @@ yay -S reflector
 sudo reflector --latest 10 --country SG,ID --protocol https --save /etc/pacman.d/mirrorlist --sort score
 ```
 
-### 7.3. Window manager
+### 7.4. Window manager
 
 With [Sway](https://wiki.archlinux.org/title/Sway)
 
@@ -325,7 +325,7 @@ ln -sf "~/Pictures/Wallpapers/oshino shinobu linux.png" ~/.config/sway/wallpaper
 
 > TODO change to gui greeter
 
-### 7.\_. Gnome
+### 7.5. Gnome
 
 Hide close button:
 https://askubuntu.com/questions/948313/how-do-i-hide-disable-close-buttons-for-gnome-windows#948321
@@ -334,7 +334,9 @@ https://askubuntu.com/questions/948313/how-do-i-hide-disable-close-buttons-for-g
 gsettings set org.gnome.desktop.wm.preferences button-layout :
 ```
 
-### 7.4. Terminal
+> TODO: uninstall gnome
+
+### 7.6. Terminal
 
 With [foot](https://codeberg.org/dnkl/foot#index) and
 [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
@@ -357,7 +359,7 @@ Create symbolic link to zsh plugins in `~/.oh-my-zsh`:
 ln -s /usr/share/zsh/plugins ~/.oh-my-zsh
 ```
 
-### 7.\_. Clone dotfiles
+### 7.7. Clone dotfiles
 
 Clone git on another directory, example:
 
@@ -380,7 +382,7 @@ git reset --hard
 
 Then make some commits!
 
-### 7.\_. Editor (Neovim)
+### 7.8. Editor (Neovim)
 
 ```sh
 yay -S neovim nodejs npm
@@ -402,7 +404,7 @@ nvim
 #:PlugInstall
 ```
 
-### 7.4. SSH
+### 7.9. SSH
 
 ```sh
 yay -S openssh
@@ -416,7 +418,7 @@ ssh-keygen -t rsa -b 4096
 
 Share `~/.ssh/id_rsa.pub` or save other PC's ssh keys on `~/.ssh/authorized_keys`.
 
-### 7.\_. Bluetooth
+### 7.10. Bluetooth
 
 ```sh
 yay -S bluez bluez-utils
@@ -442,13 +444,13 @@ bluetoothctl
 #exit
 ```
 
-### 7.\_. Audio
+### 7.11. Audio
 
 ```sh
 yay -S pipewire pipewire-alsa pipewire-pulse pipewire-jack pipewire-v4l2 pipewire-docs wireplumber rtkit pavucontrol
 ```
 
-#### 7.\_.1. Fix no audio
+#### 7.11.1. Fix no audio
 
 > Acer Swift 3 SF314-54G
 >
@@ -471,7 +473,92 @@ options snd-intel-dspcfg dsp_driver=1
 
 Then reboot.
 
-## Backup Drive
+### 7.12. Graphics
+
+```sh
+libva-mesa-driver
+```
+
+### 7.13. Other
+
+```sh
+yay -S extra/code
+```
+
+## 8. Backup Drive
+
+```sh
+yay -S btrbk sysstat
+```
+
+- `btrbk`: backup utility
+- `sysstat`: provide `iostat` to check disk write speed
+
+### Create `backup` User on PC
+
+```sh
+# Create user
+sudo useradd -m backup          # create user with home
+sudo passwd backup              # set password
+sudo gpasswd -a dimas backup    # add dimas to backup group
+
+# Create backup directory
+su backup
+    chmod 755 /home/backup
+    mkdir /home/backup/backup-1
+    chmod 775 /home/backup/backup-1
+exit
+
+# Create btrfs subvolume
+sudo mount /dev/nvme0n1p5 /mnt
+sudo btrfs subvolume create /mnt/@backup-1
+sudo umount /mnt
+
+# mount subvolume and save to fstab
+sudo mount -o nosuid,nodev,noatime,compress=zstd,subvol=@backup-1 /dev/nvme0n1p5 /home/backup/backup-1
+genfstab -U /                   # verify mount options
+sudoedit /etc/fstab             # add the partition to mount on boot
+```
+
+Then put files to backup on `/home/backup/backup-1`!
+
+### Create `backup` User on Laptop
+
+```sh
+# Create user
+sudo useradd -m backup          # create user with home
+sudo passwd backup              # set password
+
+# Create backup directory
+su backup
+    chmod 755 /home/backup
+    mkdir /home/backup/backup-1
+    chmod 775 /home/backup/backup-1
+exit
+```
+
+> TODO: backup ssh config
+
+### Wipe the drive
+
+> <span style="color: red">WARNING!</span> Make sure it's the correct drive.
+> This example uses `/dev/sda`.
+
+```sh
+sudo shred -v -n 1 --random-source=/dev/urandom -z /dev/sda
+```
+
+Log write speed to a file:
+
+```sh
+while :
+do
+    sudo iostat -dmxy sda 1 1 \
+        | awk -v date=`date +%T` \
+        '$1 == "sda" { printf("%s,%s,%s,%s,%s,%s,%s\n", $1,$8,$9,$14,$15,$23,date) }' \
+        >> sda-shred-stats.csv
+done
+```
 
 ### Create Partition
 
@@ -492,9 +579,6 @@ ENTER # default partition number
 ENTER # default start, at the begining of unallocated
 ENTER # default end, at the end of the drive
 
-Partition #1 contains a vfat signature.
-Do you want to remove the signature? [Y]es/[N]o: y
-
 # print partition table, check the new partition
 p ENTER
 
@@ -502,7 +586,22 @@ p ENTER
 w ENTER
 ```
 
-Format Partition to BTRFS:
+### Encrypt with LUKS
+
+```sh
+su backup
+cd
+dd bs=512 count=4 if=/dev/urandom of=backup-keyfile iflag=fullblock
+```
+
+```sh
+PART=/dev/sda1
+sudo cryptsetup
+```
+
+> TODO view history in bash
+
+### Format Partition to BTRFS
 
 ```sh
 sudo mkfs.btrfs --label Backup /dev/sda1
@@ -581,12 +680,3 @@ Set mount options for that partition in `/etc/udisks2/mount_options.conf`
 [/dev/disk/by-uuid/d9969466-c979-4244-8d05-bb3cc767a736]
 btrfs_defaults=noatime,compress=zstd:9
 ```
-
-### graphics
-
-???
-libva-mesa-driver
-
-### other
-
-yay -S extra/code
