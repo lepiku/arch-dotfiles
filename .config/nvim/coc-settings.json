@@ -14,5 +14,8 @@
   "explorer.keyMappings.global": {
     "<cr>": ["wait", "expandable?", "expand", "open"],
     "v": "open:vsplit"
+  },
+  "markdownlint.config": {
+    "line-length": false
   }
 }
