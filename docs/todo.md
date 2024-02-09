@@ -1,10 +1,12 @@
 # TODO
 
+- [ ] write docs/arch-install.md
+- [ ] write docs/backup.md
 - [ ] windows set time to use utc
-- [ ] select files to backup
-- [ ] setup auto snapshot with btrbk
 - [ ] change login screen to gui
-- [ ] gnome gdm
+- [ ] remove gnome and gdm
+- [x] select files to backup
+- [x] setup auto snapshot with btrbk
 - [x] change refind theme
 - [x] vscode: copy config from pc
 - [x] keyboard repeat rate

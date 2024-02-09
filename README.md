@@ -16,9 +16,13 @@ Here are notes containing how to setup my linux.
   My arch linux installation guide, starting from a blank partition until
   installing and configuring other programs. Work in progress.
 
+- [`backup.md`](./docs/backup.md)
+
+  A Guide on how to create my backup drive setup using 2 Linux computers.
+
 - [`settings.md`](./docs/settings.md)
 
-  Guides on how to configure programs that are not included in `arch-install.md`.
+  A Guide on how to configure programs that are not included in `arch-install.md`.
 
 ## Neovim plugins
 

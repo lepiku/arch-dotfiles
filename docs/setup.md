@@ -1,5 +1,7 @@
 # Setup
 
+> WORK IN PROGRESS
+
 Packages and configurations to-do after installing [Arch Linux](https://wiki.archlinux.org/).
 
 ## List of Packages to Install

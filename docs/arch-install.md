@@ -1,5 +1,7 @@
 # Arch Install
 
+> WORK IN PROGRESS
+
 This is my arch install guide written while I setup my Arch Linux install on my laptop. Windows is already installed and this guide is going to install Arch Linux as a **dual boot**.
 
 For more than 4 years I have used this laptop for Computer Science college. I installed Windows and Arch Linux on the laptop. Although the Linux Operating works fine after more than 4 years, Windows is a different story. It might take 10 minutes just to get to the lock screen on Windows, even though I can boot Linux in less than a minute. One of the main reason why it's slow is that I used a spinning hard disk drive (HDD) for booting Windows. Therefore I decided to reinstall my Windows on a brand new SSD.
@@ -30,31 +32,31 @@ Partitions:
 - 1TB HDD
   1. 1TB Backup (BTRFS) \*
 
-> \* Read this [guide](./backup.md) on how to create a backup drive.
+> \* Read this [guide](./backup.md) on how to create my backup drive.
 
 ## 2. Boot the live USB
 
-Download and create arch linux boot drive using this [guide](https://wiki.archlinux.org/title/USB_flash_installation_medium). To boot the live USB:
+Download and create arch linux boot drive using this [guide](https://wiki.archlinux.org/title/USB_flash_installation_medium). To enter the live USB:
 
 1. Turn off the computer.
 2. Plug in the USB.
 3. Enter the BIOS by turning on the computer and pressing F2 repeatedly.
 4. Disable `Secure Boot`, change the `Boot Order` by putting the USB drive on the top of the boot order, and `Save and exit` on the BIOS.
-5. Start the Arch Linux live USB.
+5. Start the computer and enter the live USB environment.
 
 ## 3. Verify the boot mode
 
 ```sh
-cat /sys/firmware/efi/fw_platform_size
-#64
+$ cat /sys/firmware/efi/fw_platform_size
+64
 ```
 
-Should outputs `64`
+Should outputs `64` to make sure it's using 64-bit x64 UEFI.
 
 ## 4. Connect to the internet
 
 ```text
-iwctl
+$ iwctl
 
 [iwd]# device list
 Ex: <Device Name> is wlan0
