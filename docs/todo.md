@@ -2,6 +2,7 @@
 
 - [ ] write docs/arch-install.md
 - [ ] write docs/backup.md
+- [ ] write docs hibernate
 - [ ] windows set time to use utc
 - [ ] change login screen to gui
 - [ ] remove gnome and gdm

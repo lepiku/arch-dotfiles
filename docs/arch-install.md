@@ -14,7 +14,7 @@ I would install Arch Linux on the remaining 443GB unallocated space on the SSD, 
 
 Hardware:
 
-- Laptop (Acer Swift 3 - SF314-54G from 2018)
+- Laptop ([Acer Swift 3 SF314-54G](https://www.acer.com/us-en/support/product-support/SF314-54G/) from 2018)
 
 Drives:
 
