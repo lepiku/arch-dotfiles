@@ -117,7 +117,7 @@ bindsym $mod+$alt+Shift+h gaps outer current minus 4
 bindsym $mod+$alt+Shift+j gaps inner current plus 4
 bindsym $mod+$alt+Shift+k gaps inner current minus 4
 bindsym $mod+$alt+Shift+l gaps outer current plus 4
-bindsym $mod+$alt+Shift+0 gaps inner current set 0; gaps outer current set 0
+bindsym $mod+$alt+Shift+0 gaps inner current set 8; gaps outer current set -8
 
 # Define names for default workspaces for which we configure key bindings later on.
 set $ws1 "1: main"
@@ -249,8 +249,8 @@ bindsym $mod+Shift+e    exec steam-runtime
 bindsym $mod+g          exec chromium
 bindsym $mod+Shift+g    exec chromium --incognito
 
-bindsym $mod+i          $exe $terme speedometer -r enp9s0 -t enp9s0 -l -m 5000000
-bindsym $mod+Shift+i    $exe $terme speedometer -r wlp8s0 -t wlp8s0 -l -m 5000000
+bindsym $mod+i          $exe $terme speedometer -r enp9s0 -t enp9s0 -l -m 7200000
+bindsym $mod+Shift+i    $exe $terme speedometer -r wlp8s0 -t wlp8s0 -l -m 7200000
 
 bindsym $mod+m          $exe $terme ranger
 bindsym $mod+Shift+m    exec pcmanfm
