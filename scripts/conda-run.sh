@@ -13,7 +13,7 @@ else
 	fi
 fi
 unset __conda_setup
-conda activate std
+#conda activate std
 # <<< conda initialize <<<
 
 #zstyle ':completion::complete:*' use-cache 1
