@@ -55,19 +55,24 @@ Should outputs `64` to make sure it's using 64-bit x64 UEFI.
 
 ## 4. Connect to the internet
 
+Connect to the wifi network.
+
 ```text
 $ iwctl
 
 [iwd]# device list
-Ex: <Device Name> is wlan0
-Ex: <Adapter> is phy0
+```
 
+> For example:
+> `<Device Name>` is `wlan0`,
+> `<Adapter>` is `phy0`, and
+> `<SSID>` is `LePC`.
+
+```text
 [iwd]# device wlan0 set-property Powered on
 [iwd]# adapter phy0 set-property Powered on
 [iwd]# station wlan0 scan
 [iwd]# station wlan0 get-networks
-Ex: <SSID> is LePC
-
 [iwd]# station wlan0 connect LePC
 Enter Passphrase:
 
@@ -95,15 +100,15 @@ lsblk
 > - Change `SATA Operation` mode to `AHCI`
 > - Save Changes in BIOS
 >
-> <https://community.acer.com/en/discussion/comment/809010/#Comment_809010>
+> https://community.acer.com/en/discussion/comment/809010/#Comment_809010
 
-Current structure:
+Before
 
-1. 100MB EFI
+1. 100MB EFI (FAT32)
 2. 16MB Windows Reserved
-3. 447GB Windows C:
+3. 447GB Windows C:\ (NTFS)
 4. 746MB Windows Recovery Environment
-5. 443GB Unallocated **(To-do install Linux Here)**
+5. **443GB Unallocated**
 
 Create linux partition with `fdisk`:
 
