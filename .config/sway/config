@@ -6,11 +6,13 @@ set $term foot
 set $terme foot -e
 set $termi foot -e zsh -ic
 set $exe exec
+
 set $shutdown systemctl poweroff
 set $suspend systemctl suspend-then-hibernate
 set $reboot systemctl reboot
 set $logoff swaymsg exit
 set $lock swaylock
+set $hibernate systemctl hibernate
 
 # Input Configuration
 input "type:touchpad" {
@@ -224,13 +226,14 @@ bindsym $mod+r reload
 #bindsym $mod+Shift+r restart
 
 # power modes
-set $mode_power "[E]xit | [L]ock | sus[P]end | [R]eboot | [S]hutdown"
+set $mode_power "[E]xit | [L]ock | sus[P]end | [R]eboot | [S]hutdown | [H]ibernate"
 mode $mode_power {
     bindsym e $exe $logoff
     bindsym l $exe $lock, mode "default"
     bindsym p $exe $suspend, mode "default"
     bindsym r $exe $reboot
     bindsym s $exe $shutdown
+    bindsym h $exe $hibernate, mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
