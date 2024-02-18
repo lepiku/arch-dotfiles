@@ -4,7 +4,7 @@ set $mod Mod4
 set $alt Mod1
 set $term foot
 set $terme foot -e
-set $termi foot -e zsh -ic
+set $termi foot -eic
 set $exe exec
 
 set $shutdown systemctl poweroff
@@ -86,7 +86,7 @@ bindsym XF86MonBrightnessDown $exe brightnessctl set 2%-
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return $exe $terme tmux -L zsh
+bindsym $mod+Return $exe $terme tmux
 bindsym $mod+Shift+Return $exe $term
 
 # kill focused window
