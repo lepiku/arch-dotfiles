@@ -225,3 +225,11 @@
   exiftool -n -Orientation=1 *.jpg
   exiftool -delete_original *.jpg
   ```
+
+- Hide close button in gnome
+
+  <https://askubuntu.com/questions/948313/how-do-i-hide-disable-close-buttons-for-gnome-windows#948321>
+
+  ```sh
+  gsettings set org.gnome.desktop.wm.preferences button-layout :
+  ```

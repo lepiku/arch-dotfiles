@@ -378,7 +378,7 @@ Install [Sway](https://wiki.archlinux.org/title/Sway):
 yay -S sway swaylock swayidle swayimg swaybg greetd i3status papirus dunst xorg-wayland fuzzel
 ```
 
-Edit `/etc/greetd/config.toml` to launch sway on login
+Edit `/etc/greetd/config.toml` to launch sway on login:
 
 ```conf
 [default_session]
@@ -391,40 +391,29 @@ Create symbolic link for `i3status` config:
 ln -s ~/.config/i3status/config-swifty ~/.config/i3status/config
 ```
 
-Start and Enable `greetd`
+Start and Enable `greetd`:
 
 ```sh
 sudo systemctl enable greetd.service
 sudo systemctl start greetd.service
 ```
 
-Set wallpaper
+Set the wallpaper:
 
 ```sh
+scp "scp://192.168.1.24/Pictures/Wallpapers/oshino shinobu linux.png" Pictures/Wallpapers
 ln -sf "~/Pictures/Wallpapers/oshino shinobu linux.png" ~/.config/sway/wallpaper.png
 ```
 
-> TODO change to gui greeter
+> TODO: change greeter to use graphical UI
 
-### 11.3. Gnome
-
-To hide close button:
-
-```sh
-gsettings set org.gnome.desktop.wm.preferences button-layout :
-```
-
-<https://askubuntu.com/questions/948313/how-do-i-hide-disable-close-buttons-for-gnome-windows#948321>
-
-> TODO: uninstall gnome
-
-### 11.4. Terminal
+### 11.3. Terminal
 
 With [foot](https://codeberg.org/dnkl/foot#index) and
 [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
 
 ```sh
-yay -S foot zsh fzf fd zsh-autosuggestions zsh-syntax-highlighting
+yay -S foot zsh aur/oh-my-zsh-git fzf fd zsh-autosuggestions zsh-syntax-highlighting
 ```
 
 Change user shell to `zsh`:
@@ -462,15 +451,13 @@ cd ~
 git reset --hard
 ```
 
-Then make some commits!
-
 ### 11.6. Editor (Neovim)
 
 ```sh
 yay -S neovim nodejs npm
 ```
 
-> Nodejs and NPM needed for some Neovim plugins
+> Node and NPM are needed for some Neovim plugins
 
 Install [vim-plug](https://github.com/junegunn/vim-plug):
 
@@ -479,79 +466,95 @@ sh -c 'curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 ```
 
-Then, install plugins:
+Install plugins listed in [`init.vim`](./.config/nvim/init.vim):
 
 ```sh
 nvim
 #:PlugInstall
 ```
 
+Restart Neovim to install [`coc.nvim`](https://github.com/neoclide/coc.nvim) plugins:
+
+```sh
+#:q
+nvim
+```
+
 ### 11.7. SSH
+
+Install [openssh](https://wiki.archlinux.org/title/OpenSSH):
 
 ```sh
 yay -S openssh
 ```
 
-Generate SSH key: (use defaults and no password)
+Generate SSH key:
 
 ```sh
 ssh-keygen -t rsa -b 4096
+# Use default on all prompts
 ```
 
 Share `~/.ssh/id_rsa.pub` or save other PC's ssh keys on `~/.ssh/authorized_keys`.
 
 ### 11.8. Bluetooth
 
+install [bluez](https://wiki.archlinux.org/title/Bluetooth):
+
 ```sh
 yay -S bluez bluez-utils
 ```
 
-Enable bluetooth
+Enable bluetooth:
 
 ```sh
 sudo systemctl enable bluetooth.service
 sudo systemctl start bluetooth.service
-rfkill unblock bluetooth
 sudoedit /etc/bluetooth/main.conf # uncomment 'AutoEnable=true'
 ```
 
-Connect with your bluetooth device
+Connect with your bluetooth device:
 
 ```sh
 bluetoothctl
-#scan on
-#pair <device>
-#connect <device>
-#trust <device>
-#exit
+
+scan on
+pair <device>
+connect <device>
+trust <device>
+exit
 ```
 
 ### 11.9. Audio
+
+Install [PipeWire](https://wiki.archlinux.org/title/PipeWire) and other tools:
 
 ```sh
 yay -S pipewire pipewire-alsa pipewire-pulse pipewire-jack pipewire-v4l2 pipewire-docs wireplumber rtkit pavucontrol
 ```
 
-#### Fix no audio
+#### Fix no audio on Acer Swift 3 SF314-54G
 
-> Acer Swift 3 SF314-54G
->
-> ```sh
-> lspci | grep audio
-> #Multimedia audio controller: Intel Corporation Sunrise Point-LP HD Audio
-> ```
+Make sure the audio device is detected:
+
+```sh
+lspci | grep audio
+#Multimedia audio controller: Intel Corporation Sunrise Point-LP HD Audio
+```
+
+Install sof-firmware
 
 ```sh
 yay -S sof-firmware
 ```
 
-Source: <https://bbs.archlinux.org/viewtopic.php?id=265211>
+add audio module options by creating `/etc/modprobe.d/sound.conf`:
 
-Create `/etc/modprobe.d/sound.conf`:
-
-```sh
+```text
 options snd-intel-dspcfg dsp_driver=1
 ```
+
+> <https://bbs.archlinux.org/viewtopic.php?id=265211>
 
 Then reboot.
 
