@@ -4,7 +4,7 @@
 
 This is my arch install guide written while I setup my Arch Linux install on my laptop. Windows is already installed and this guide is going to install Arch Linux as a **dual boot**.
 
-For more than 4 years I have used this laptop for Computer Science college. I installed Windows and Arch Linux on the laptop. Although the Linux Operating works fine after more than 4 years, Windows is a different story. It might take 10 minutes just to get to the lock screen on Windows, even though I can boot Linux in less than a minute. One of the main reason why it's slow is that I used a spinning hard disk drive (HDD) for booting Windows. Therefore I decided to reinstall my Windows on a brand new SSD.
+For more than 4 years I have used this laptop for Computer Science study at my college. I installed Windows and Arch Linux on the laptop. Although the Linux Operating works fine after more than 4 years, Windows is a different story. It might take 10 minutes just to get to the lock screen on Windows, even though I can boot Linux in less than a minute. One of the main reason why it's slow is that I used a spinning hard disk drive (HDD) for booting Windows. Therefore, I decided to reinstall my Windows on a brand new SSD.
 
 Fortunately, I can add an NVME SSD on my laptop, thus I can use the HDD as a backup drive. Here's what I did:
 
@@ -32,7 +32,7 @@ Partitions:
 - 1TB HDD
   1. 1TB Backup (BTRFS) \*
 
-> \* Read this [guide](./backup.md) on how to create my backup drive.
+> \* Read this [guide](./backup.md) on how I created my backup drive and setup.
 
 ## 2. Boot the live USB
 
@@ -40,7 +40,7 @@ Download and create arch linux boot drive using this [guide](https://wiki.archli
 
 1. Turn off the computer.
 2. Plug in the USB.
-3. Enter the BIOS by turning on the computer and pressing F2 repeatedly.
+3. Enter the BIOS by turning on the computer and pressing `F2` repeatedly.
 4. Disable `Secure Boot`, change the `Boot Order` by putting the USB drive on the top of the boot order, and `Save and exit` on the BIOS.
 5. Start the computer and enter the live USB environment.
 
@@ -94,15 +94,15 @@ Check your SSD/HDD:
 lsblk
 ```
 
-> If NVME isn't detected:
+> If your NVME SSD isn't detected:
 >
-> - Open BIOS
+> - Enter BIOS
 > - Change `SATA Operation` mode to `AHCI`
 > - Save Changes in BIOS
 >
-> https://community.acer.com/en/discussion/comment/809010/#Comment_809010
+> <https://community.acer.com/en/discussion/comment/809010/#Comment_809010>
 
-Before
+Before:
 
 1. 100MB EFI (FAT32)
 2. 16MB Windows Reserved
@@ -110,7 +110,7 @@ Before
 4. 746MB Windows Recovery Environment
 5. **443GB Unallocated**
 
-Create linux partition with `fdisk`:
+Create a linux partition with `fdisk`:
 
 ```sh
 fdisk /dev/nvme0n1p5
@@ -134,10 +134,17 @@ p ENTER
 w ENTER
 ```
 
+After:
+
+1. 100MB EFI (FAT32)
+2. 16MB Windows Reserved
+3. 447GB Windows C:\ (NTFS)
+4. 746MB Windows Recovery Environment
+5. **443GB Linux (Unformatted)**
+
 ## 6. Create BTRFS Partition
 
-This instruction is for partition file `/dev/nvme0n1p5` with label `Linux` and
-`/dev/nvme0n1p1` efi partition.
+> This instruction to create a `Linux` labeled partition for `/dev/nvme0n1p5` and had an EFI partition at `/dev/nvme0n1p1`.
 
 Format Partition to BTRFS:
 
@@ -146,6 +153,8 @@ mkfs.btrfs --label Linux /dev/nvme0n1p5
 ```
 
 ### 6.1. Create subvolumes in root filesystem
+
+Commands to create subvolumes:
 
 ```sh
 mount /dev/nvme0n1p5 /mnt
@@ -159,11 +168,11 @@ umount /mnt
 
 > Default mount options:
 >
-> <https://btrfs.readthedocs.io/en/latest/ch-mount-options.html>
->
 > - `space_cache=v2`
 > - `discard=async` autodetect device
 > - `ssd` autodetect
+>
+> <https://btrfs.readthedocs.io/en/latest/ch-mount-options.html>
 
 ### 6.2. Mount subvolumes and EFI
 
@@ -189,16 +198,22 @@ mount -o $o_btrfs,subvol=@varcache  /dev/nvme0n1p5 /mnt/var/cache
 mount /dev/nvme0n1p1 /mnt/efi
 ```
 
-### 6.3. Enable swapfile
+### 6.3. Create swapfile
 
-**16GB** for 12GB RAM computer:
+Find the recommended swap size for your computer RAM:
+
+<https://itsfoss.com/swap-size/#how-much-should-be-the-swap-size>
+
+I decided to create a **16GB** swap file for my computer which has 12GB RAM with hibernation:
 
 ```sh
 btrfs filesystem mkswapfile --size 16G /mnt/swapfile
 swapon /mnt/swapfile
 ```
 
-## 7. Installation of essential packages
+> To enable hibernation, read [here](#11.10.-hibernation).
+
+## 7. Installation of Arch Linux
 
 ```sh
 pacstrap -K /mnt base base-devel linux linux-firmware nvim networkmanager arch-install-scripts
@@ -213,7 +228,7 @@ cat /mnt/etc/fstab # check the fstab
 arch-chroot /mnt
 ```
 
-Run inside chroot:
+Update time and locale inside chroot:
 
 ```sh
 # Time
@@ -230,15 +245,15 @@ echo 'LANG=en_US.UTF-8' > /etc/locale.conf
 echo 'okto-swifty' > /etc/hostname
 ```
 
-## 8. Bootloader
+## 8. Install Bootloader
 
 With [rEFInd](https://wiki.archlinux.org/title/REFInd):
 
 ```sh
-pacman -Sy intel-ucode refind btrfs-progs mkinitcpio-firmware
+pacman -Sy refind intel-ucode btrfs-progs
 ```
 
-Install bootloader (rEFInd):
+Install rEFInd:
 
 ```sh
 refind-install
@@ -270,6 +285,8 @@ reboot
 
 Customize rEFInd: <https://rodsbooks.com/refind/themes.html#banners>
 
+> To fix [mkinitcpio warnings](https://wiki.archlinux.org/title/Mkinitcpio#Possibly_missing_firmware_for_module_XXXX), install `mkinitcpio-firmware` from AUR.
+
 ### 8.1. Secure boot
 
 > TODO
@@ -289,7 +306,15 @@ nmcli device wifi rescan
 nmcli device wifi connect <SSID> password <PASSWORD>
 ```
 
+or with `nmtui`:
+
+```sh
+nmtui
+```
+
 ### 9.2. Setup user
+
+Install `sudo` and `zsh`:
 
 ```sh
 pacman -Sy sudo zsh
@@ -299,10 +324,10 @@ Set password for root
 
 ```sh
 # Root password (oot6)
-passwd
+passwd root
 ```
 
-Create your user, creating user `dimas`:
+Create your user. Create `dimas` user and add it to `wheel` group so that the user can run sudo:
 
 ```sh
 useradd -mG wheel dimas
@@ -313,9 +338,23 @@ passwd dimas
 EDITOR=nvim visudo
 ```
 
-### 9.3. Install AUR helper
+## 10. Reboot to your Arch Linux
 
-After logged in as the user, install [yay](https://github.com/Jguer/yay):
+Reboot
+
+```sh
+reboot
+```
+
+Enter the BIOS and change the `boot order` to put NVME SSD on the top of the order, then `Save and exit`.
+
+## 11. Install more programs
+
+Configs can be viewed in this [repository](https://github.com/lepiku/arch-dotfiles).
+
+### 11.1. AUR helper
+
+Install [yay](https://github.com/Jguer/yay):
 
 ```sh
 pacman -S --needed git base-devel
@@ -331,9 +370,9 @@ yay -S reflector
 sudo reflector --latest 10 --country SG,ID --protocol https --save /etc/pacman.d/mirrorlist --sort score
 ```
 
-### 9.4. Window manager
+### 11.2. Window manager
 
-With [Sway](https://wiki.archlinux.org/title/Sway)
+Install [Sway](https://wiki.archlinux.org/title/Sway):
 
 ```sh
 yay -S sway swaylock swayidle swayimg swaybg greetd i3status papirus dunst xorg-wayland fuzzel
@@ -367,18 +406,19 @@ ln -sf "~/Pictures/Wallpapers/oshino shinobu linux.png" ~/.config/sway/wallpaper
 
 > TODO change to gui greeter
 
-### 9.5. Gnome
+### 11.3. Gnome
 
-Hide close button:
-<https://askubuntu.com/questions/948313/how-do-i-hide-disable-close-buttons-for-gnome-windows#948321>
+To hide close button:
 
 ```sh
 gsettings set org.gnome.desktop.wm.preferences button-layout :
 ```
 
+<https://askubuntu.com/questions/948313/how-do-i-hide-disable-close-buttons-for-gnome-windows#948321>
+
 > TODO: uninstall gnome
 
-### 9.6. Terminal
+### 11.4. Terminal
 
 With [foot](https://codeberg.org/dnkl/foot#index) and
 [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
@@ -401,7 +441,7 @@ Create symbolic link to zsh plugins in `~/.oh-my-zsh`:
 ln -s /usr/share/zsh/plugins ~/.oh-my-zsh
 ```
 
-### 9.7. Clone dotfiles
+### 11.5. Clone dotfiles
 
 Clone git on another directory, example:
 
@@ -424,7 +464,7 @@ git reset --hard
 
 Then make some commits!
 
-### 9.8. Editor (Neovim)
+### 11.6. Editor (Neovim)
 
 ```sh
 yay -S neovim nodejs npm
@@ -446,7 +486,7 @@ nvim
 #:PlugInstall
 ```
 
-### 9.9. SSH
+### 11.7. SSH
 
 ```sh
 yay -S openssh
@@ -460,7 +500,7 @@ ssh-keygen -t rsa -b 4096
 
 Share `~/.ssh/id_rsa.pub` or save other PC's ssh keys on `~/.ssh/authorized_keys`.
 
-### 9.10. Bluetooth
+### 11.8. Bluetooth
 
 ```sh
 yay -S bluez bluez-utils
@@ -486,7 +526,7 @@ bluetoothctl
 #exit
 ```
 
-### 9.11. Audio
+### 11.9. Audio
 
 ```sh
 yay -S pipewire pipewire-alsa pipewire-pulse pipewire-jack pipewire-v4l2 pipewire-docs wireplumber rtkit pavucontrol
@@ -515,13 +555,17 @@ options snd-intel-dspcfg dsp_driver=1
 
 Then reboot.
 
-### 9.12. Graphics
+### 11.10. Hibernation
+
+TODO btrfs hibernation
+
+### 11.11. Graphics
 
 ```sh
 libva-mesa-driver
 ```
 
-### 9.13. Other
+### 11.12. Other
 
 ```sh
 yay -S extra/code
