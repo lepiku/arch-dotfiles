@@ -68,49 +68,44 @@ ZSH_CUSTOM=$HOME/.oh-my-zsh/
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+zstyle ':omz:plugins:nvm' lazy yes
 plugins=(
-	git
-	nvm
-	#vi-mode
-	shrink-path
-	fzf
-	#gradle-completion
-	zsh-syntax-highlighting
-	zsh-autosuggestions
+    git
+    nvm
+    #vi-mode
+    shrink-path
+    fzf
+    #gradle-completion
+    zsh-syntax-highlighting
+    zsh-autosuggestions
 )
-
 
 # User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
+export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+export LANG=en_US.UTF-8
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+export ARCHFLAGS="-arch x86_64"
 
+# oh-my-zsh
 ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
-	mkdir $ZSH_CACHE_DIR
+    mkdir $ZSH_CACHE_DIR
 fi
 source $ZSH/oh-my-zsh.sh
 autoload -U compinit && compinit
 
+# aliases
 if [ -f ~/.zsh_aliases ]; then
-	. ~/.zsh_aliases
+    . ~/.zsh_aliases
 fi
 
 # enable/disable conda with 'conda-toggle'
 if [ -f ~/.condainit ]; then
-	. ~/.condainit
+    . ~/.condainit
 fi
 
 # fzf plugin settings
@@ -129,9 +124,6 @@ export LESS="$LESS --mouse --wheel-lines 2"
 # set nvim as default editor
 export EDITOR=/usr/bin/nvim
 export VISUAL=$EDITOR
-
-# enable nvm
-source /usr/share/nvm/init-nvm.sh
 
 if [[ ${SSH_TTY} ]]; then
     PROMPT="%{$fg[white]%}%n@%{$fg[yellow]%}%m%{$reset_color%} ${PROMPT}"
