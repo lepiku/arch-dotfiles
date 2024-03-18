@@ -13,6 +13,7 @@
 !.oh-my-zsh/**
 .oh-my-zsh/plugins
 !.profile
+!.zprofile
 !.zshrc
 !.zsh_aliases
 

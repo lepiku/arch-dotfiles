@@ -75,6 +75,7 @@ plugins=(
     #vi-mode
     shrink-path
     fzf
+    pyenv
     #gradle-completion
     zsh-syntax-highlighting
     zsh-autosuggestions

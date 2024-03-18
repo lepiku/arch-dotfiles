@@ -19,6 +19,13 @@ if [ -d "$HOME/Android/Sdk" ] ; then
     PATH="$PATH:$HOME/Android/Sdk/emulator"
 fi
 
+# for pyenv
+if [ -f /usr/bin/pyenv ] ; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init --path)"
+fi
+
 if [ -f ~/.keys ]; then
     . ~/.keys
 fi
