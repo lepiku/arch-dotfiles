@@ -38,20 +38,17 @@ input "type:keyboard" {
     repeat_rate 30
 }
 
-
 # Output Configuration
 set $edp1 eDP-1
 set $hdmi HDMI-A-1
 output * bg ~/.config/sway/wallpaper.png fill
 output $edp1 position 0 0
 output $hdmi position 0 -1080
-
-output 'ASUSTek COMPUTER INC ASUS VG249 0x00033567' {
-    mode 1920x1080@120Hz
-}
+output "ASUSTek COMPUTER INC ASUS VG249 0x00033567" mode 1920x1080@120Hz
 
 # set size for focused border
-for_window [class="^.*"] border pixel 2
+for_window [class=".*"] border pixel 2
+for_window [class=".*"] inhibit_idle fullscreen
 #for_window [title="albert — Albert"] border pixel 0
 for_window [class="jetbrains-studio" window_type="dialog" title="^win\d+$"] border pixel 0
 for_window [class="jetbrains-studio" title="^win\d+$"] focus
