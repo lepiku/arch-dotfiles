@@ -2,14 +2,29 @@
 
 > WORK IN PROGRESS
 
+I installed this programs for my backup configuration:
+
+- `btrfs`: Copy-on-write file system
+- `btrbk`: backup utility for `btrfs`
+- `sysstat` (optional): provide `iostat` to check disk write speed
+
+To install them in arch linux, run:
+
 ```sh
-yay -S btrbk sysstat
+pacman -S btrbk sysstat
 ```
 
-- `btrbk`: backup utility
-- `sysstat`: provide `iostat` to check disk write speed
+or in Ubuntu, run:
 
-## Create `backup` User on PC
+```sh
+sudo apt install btrbk sysstat
+```
+
+## Create main backup directory on PC
+
+My plan is to create a new btrfs subvolume in `/home/backup/backup-1`. Everytime I want to backup, I would copy my files here and create a snapshot of it.
+
+> WIP: only create dir and group, no need for a new user
 
 ```sh
 # Create user
@@ -19,8 +34,10 @@ sudo gpasswd -a dimas backup    # add dimas to backup group
 
 # Create backup directory
 su backup
-    chmod 755 /home/backup
+    # allow users with group "backup" to browse /home/backup
+    chmod 750 /home/backup
     mkdir /home/backup/backup-1
+    # allow other other user in group "backup" to add files in backup-1
     chmod 775 /home/backup/backup-1
 exit
 
@@ -32,12 +49,17 @@ sudo umount /mnt
 # mount subvolume and save to fstab
 sudo mount -o nosuid,nodev,noatime,compress=zstd,subvol=@backup-1 /dev/nvme0n1p5 /home/backup/backup-1
 genfstab -U /                   # verify mount options
-sudoedit /etc/fstab             # add the partition to mount on boot
 ```
 
-Then put files to backup on `/home/backup/backup-1`!
+If you want to mount the backup partition on boot, edit your `/etc/fstab`:
 
-## Create `backup` User on Laptop
+```sh
+sudoedit /etc/fstab
+```
+
+Then start putting your files to `/home/backup/backup-1`!
+
+## Create a backup directory on the laptop
 
 ```sh
 # Create user
@@ -49,15 +71,16 @@ su backup
     chmod 755 /home/backup
     mkdir /home/backup/backup-1
     chmod 775 /home/backup/backup-1
-exit
+    exit
 ```
 
 > TODO: backup ssh config
 
-## Wipe the drive
+## (Optional) Wipe the drive
 
-> <span style="color: red">WARNING!</span> Make sure it's the correct drive.
-> This example uses `/dev/sda`.
+Because I have previously used the drive, I wanted to wipe the drive to make sure that all my previous unencrypted data is erased.
+
+> <span style="color: red">WARNING!</span> Make sure it's the correct drive. This example uses `/dev/sda`.
 
 ```sh
 sudo shred -v -n 1 --random-source=/dev/urandom -z /dev/sda
