@@ -27,19 +27,14 @@ My plan is to create a new btrfs subvolume in `/home/backup/backup-1`. Everytime
 > WIP: only create dir and group, no need for a new user
 
 ```sh
-# Create user
-sudo useradd -m backup          # create user with home
-sudo passwd backup              # set password
-sudo gpasswd -a dimas backup    # add dimas to backup group
+# Create group
+sudo groupadd backup
+sudo gpasswd -a $USER backup # add your user to the backup group
 
-# Create backup directory
-su backup
-    # allow users with group "backup" to browse /home/backup
-    chmod 750 /home/backup
-    mkdir /home/backup/backup-1
-    # allow other other user in group "backup" to add files in backup-1
-    chmod 775 /home/backup/backup-1
-exit
+# Create backup directory (TO-TRY)
+sudo mkdir /backup
+sudo chgrp backup /backup
+sudo chmod 750 /backup 
 
 # Create btrfs subvolume
 sudo mount /dev/nvme0n1p5 /mnt
@@ -47,17 +42,18 @@ sudo btrfs subvolume create /mnt/@backup-1
 sudo umount /mnt
 
 # mount subvolume and save to fstab
-sudo mount -o nosuid,nodev,noatime,compress=zstd,subvol=@backup-1 /dev/nvme0n1p5 /home/backup/backup-1
-genfstab -U /                   # verify mount options
+sudo mount -o nosuid,nodev,noatime,compress=zstd,subvol=@backup-1 /dev/nvme0n1p5 /backup/backup-1
+genfstab -U / # verify mount options
 ```
 
 If you want to mount the backup partition on boot, edit your `/etc/fstab`:
 
 ```sh
-sudoedit /etc/fstab
+genfstab -U / | sudo tee -a /etc/fstab
+sudoedit /etc/fstab # delete duplicate entries
 ```
 
-Then start putting your files to `/home/backup/backup-1`!
+Then start putting your files to `/backup/backup-1`!
 
 ## Create a backup directory on the laptop
 
@@ -200,7 +196,7 @@ Create policy to allow mounting by `storage` group in `/etc/polkit-1/rules.d/10-
 // for users in the "storage" group.
 polkit.addRule(function(action, subject) {
     if ((action.id == "org.freedesktop.udisks2.filesystem-mount-system" ||
-         action.id == "org.freedesktop.udisks2.filesystem-mount") &&
+        action.id == "org.freedesktop.udisks2.filesystem-mount") &&
         subject.isInGroup("storage")) {
         return polkit.Result.YES;
     }
