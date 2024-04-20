@@ -2,6 +2,53 @@
 
 > WORK IN PROGRESS
 
+My google drive free storage is almost full and I don't want to pay a monthly subscription to backup my photos and videos from my phone.
+
+After it is done, here are the steps to backup your gallery from your phone:
+
+1. Connect your phone to computer 1 (main backup).
+   ```text
+   Phone >---(USB Cable or local network)---> Computer 1
+   ```
+2. Copy files from your phone to computer 1.
+3. (optional) Create a btrfs snapshot in computer 1.
+   This is optional because a snapshot will automatically be created when you ran the `btrbk` command on step 5.
+4. Connect computer 1 (main backup) to computer 2 (second backup).
+   You can either connect them to the same network or with a network cable.
+   ```text
+   Computer 1 >--(Network cable or local network)--> Computer 2
+   ```
+5. Run the `btrbk` command from computer 2 to sync the files with computer 2.
+6. Delete backed up files from your phone to free its storage.
+
+### Considerations
+
+There are some things you want to consider before creating this backup setup.
+
+Why:
+
+- I already have 2 computers (a desktop PC and a laptop) with free space for backup
+- With slight modification, you can also use the same program to backup with:
+  - 1 computer (Desktop PC or laptop) and 1 external hard drive
+  - 2 external hard drive (if you don't want to store the backup on the computer hard drive) and a linux computer only to run program backup and sync the files between them.
+
+What it **CAN** do:
+
+- Backup your data on separate computers.
+- Restore your data when one of your drive or computer broke.
+- Sync backup without an internet connection.
+
+What it **CAN'T** do:
+
+- **Frequent backup of your gallery.**
+  You need to connect your phone to computer 1 and later connect computer 1 to computer 2 to completely backup the files.
+
+  ```
+  Computer 1 >--(Network cable or local network)--> Computer 2
+  ```
+
+### Requirements
+
 I installed this programs for my backup configuration:
 
 - `btrfs`: Copy-on-write file system

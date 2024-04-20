@@ -2,26 +2,32 @@
 
 > WORK IN PROGRESS
 
-This is my arch install guide written while I setup my Arch Linux install on my laptop. Windows is already installed and this guide is going to install Arch Linux as a **dual boot**.
+This is my arch install guide written while I setup my Arch Linux install on my laptop.
+Windows is already installed and this guide is going to install Arch Linux as a **dual boot**.
 
-For more than 4 years I have used this laptop for Computer Science study at my college. I installed Windows and Arch Linux on the laptop. Although the Linux Operating works fine after more than 4 years, Windows is a different story. It might take 10 minutes just to get to the lock screen on Windows, even though I can boot Linux in less than a minute. One of the main reason why it's slow is that I used a spinning hard disk drive (HDD) for booting Windows. Therefore, I decided to reinstall my Windows on a brand new SSD.
-
-Fortunately, I can add an NVME SSD on my laptop, thus I can use the HDD as a backup drive. Here's what I did:
+Background:
+For more than 4 years I have used this laptop for Computer Science study at my college.
+I installed Windows and Arch Linux on the laptop.
+Although the Linux Operating works fine after more than 4 years, Windows is a different story.
+It might take 10 minutes just to get to the lock screen on Windows, even though I can boot Linux in less than a minute.
+One of the main reason why it's slow is that I used a spinning hard disk drive (HDD) for booting Windows.
+Therefore, I decided to reinstall my Windows on a brand new SSD.
+Fortunately, I can add an NVME SSD on my laptop, thus I can use the HDD as a backup drive.
 
 ## 1. Preparation
 
 I would install Arch Linux on the remaining 443GB unallocated space on the SSD, then I would reuse the HDD as a backup drive.
 
-Hardware:
+My hardware:
 
 - Laptop ([Acer Swift 3 SF314-54G](https://www.acer.com/us-en/support/product-support/SF314-54G/) from 2018)
 
-Drives:
+My drives:
 
 - [WD Blue WD10SPZX](https://www.westerndigital.com/products/internal-drives/wd-blue-mobile-sata-hdd?sku=WD10SPZX) 1TB HDD
 - [WD Black SN850X](https://www.westerndigital.com/products/internal-drives/wd-black-sn850x-nvme-ssd?sku=WDS100T2X0E) 1TB NVME SSD
 
-Partitions:
+Drive partitions:
 
 - 1TB NVME SSD
   1. 100MB EFI (FAT32)
@@ -299,6 +305,10 @@ pacman -Sy git tmux python ranger cron htop firefox btrfs-progs efibootmgr netwo
 
 ### 9.1. Network
 
+```sh
+pacman -S nm-connection-editor
+```
+
 Use [NetworkManager]() to connect to a Wifi
 
 ```sh
@@ -525,6 +535,10 @@ trust <device>
 exit
 ```
 
+#### 11.8.1. Sync audio devices on Linux and Windows
+
+> TODO
+
 ### 11.9. Audio
 
 Install [PipeWire](https://wiki.archlinux.org/title/PipeWire) and other tools:
@@ -571,7 +585,7 @@ libva-mesa-driver
 ### 11.12. Other
 
 ```sh
-yay -S extra/code
+yay -S extra/code tk pyenv nvm
 ```
 
 ## Reference Links
