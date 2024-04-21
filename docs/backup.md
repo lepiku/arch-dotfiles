@@ -2,52 +2,52 @@
 
 > WORK IN PROGRESS
 
-My google drive free storage is almost full and I don't want to pay a monthly subscription to backup my photos and videos from my phone.
+My google drive free account storage is almost full and I don't want to pay a monthly subscription to backup my photos and videos from my phone.
+So I decided to create my own backup.
 
-After it is done, here are the steps to backup your gallery from your phone:
+After it is done, here are the steps to backup my gallery from my phone:
 
-1. Connect your phone to computer 1 (main backup).
+1. Connect my phone to computer 1 (main backup).
    ```text
    Phone >---(USB Cable or local network)---> Computer 1
    ```
-2. Copy files from your phone to computer 1.
+2. Copy files from my phone to computer 1 (`/backup/backup-1/*`).
 3. (optional) Create a btrfs snapshot in computer 1.
-   This is optional because a snapshot will automatically be created when you ran the `btrbk` command on step 5.
+   > This is optional because a snapshot will automatically be created when I ran the `btrbk` command on step 5.
 4. Connect computer 1 (main backup) to computer 2 (second backup).
-   You can either connect them to the same network or with a network cable.
+   I can either connect them to the same network or with a network cable.
    ```text
    Computer 1 >--(Network cable or local network)--> Computer 2
    ```
-5. Run the `btrbk` command from computer 2 to sync the files with computer 2.
-6. Delete backed up files from your phone to free its storage.
+5. Run the `btrbk` command from computer 2 to sync the files with computer 1.
+6. **Done!** My files are backed up and I could delete backed up files from my phone to free its storage.
 
-### Considerations
+## 1. Considerations
 
-There are some things you want to consider before creating this backup setup.
+There are some things to consider before creating this backup strategy.
 
 Why:
-
-- I already have 2 computers (a desktop PC and a laptop) with free space for backup
-- With slight modification, you can also use the same program to backup with:
-  - 1 computer (Desktop PC or laptop) and 1 external hard drive
-  - 2 external hard drive (if you don't want to store the backup on the computer hard drive) and a linux computer only to run program backup and sync the files between them.
+The reason I choose this backup strategy is because I already have 2 computers (a desktop PC and a laptop) with free storage space, both running linux with one of them (desktop PC) already using btrfs.
 
 What it **CAN** do:
 
-- Backup your data on separate computers.
-- Restore your data when one of your drive or computer broke.
+- Backup my data on separate computers.
+- Restore my data when one of my drive or computer broke.
 - Sync backup without an internet connection.
+- With slight modification, I can also use the same program to backup with:
+  - 1 computer (Desktop PC or laptop) and 1 external hard drive
+  - 2 external hard drive and a linux computer for running the backup program.
 
 What it **CAN'T** do:
 
-- **Frequent backup of your gallery.**
-  You need to connect your phone to computer 1 and later connect computer 1 to computer 2 to completely backup the files.
+- Frequent backup:
+  I need to connect my phone to computer 1 and later connect computer 1 to computer 2 to backup (create 2 copies of the same file).
 
   ```
   Computer 1 >--(Network cable or local network)--> Computer 2
   ```
 
-### Requirements
+### 1.1. Requirements
 
 I installed this programs for my backup configuration:
 
@@ -58,30 +58,30 @@ I installed this programs for my backup configuration:
 To install them in arch linux, run:
 
 ```sh
-pacman -S btrbk sysstat
+pacman -S btrfs-progs btrbk sysstat
 ```
 
 or in Ubuntu, run:
 
 ```sh
-sudo apt install btrbk sysstat
+sudo apt install btrfs-progs btrbk sysstat
 ```
 
-## Create main backup directory on PC
+## 2. Create main backup directory on PC (Computer 1)
 
-My plan is to create a new btrfs subvolume in `/home/backup/backup-1`. Everytime I want to backup, I would copy my files here and create a snapshot of it.
+My plan is to create a new btrfs subvolume in `/backup/backup-1`. Everytime I want to backup, I would copy my files here and create a snapshot of it.
 
 > WIP: only create dir and group, no need for a new user
 
 ```sh
 # Create group
 sudo groupadd backup
-sudo gpasswd -a $USER backup # add your user to the backup group
+sudo gpasswd -a $USER backup # add the user to the backup group
 
 # Create backup directory (TO-TRY)
 sudo mkdir /backup
 sudo chgrp backup /backup
-sudo chmod 750 /backup 
+sudo chmod 750 /backup
 
 # Create btrfs subvolume
 sudo mount /dev/nvme0n1p5 /mnt
@@ -93,33 +93,28 @@ sudo mount -o nosuid,nodev,noatime,compress=zstd,subvol=@backup-1 /dev/nvme0n1p5
 genfstab -U / # verify mount options
 ```
 
-If you want to mount the backup partition on boot, edit your `/etc/fstab`:
+For more about btrfs mount options, read [btrfs mount options](https://btrfs.readthedocs.io/en/latest/ch-mount-options.html).
+
+Optional: To mount the backup partition on boot, edit the `/etc/fstab`:
 
 ```sh
 genfstab -U / | sudo tee -a /etc/fstab
 sudoedit /etc/fstab # delete duplicate entries
 ```
 
-Then start putting your files to `/backup/backup-1`!
+Then start putting the files to `/backup/backup-1/*`!
 
-## Create a backup directory on the laptop
+## 3. Create a backup directory on the laptop (Computer 2)
 
 ```sh
-# Create user
-sudo useradd -m backup          # create user with home
-sudo passwd backup              # set password
-
-# Create backup directory
-su backup
-    chmod 755 /home/backup
-    mkdir /home/backup/backup-1
-    chmod 775 /home/backup/backup-1
-    exit
+# Create group
+sudo groupadd backup
+sudo gpasswd -a $USER backup # add the user to the backup group
 ```
 
 > TODO: backup ssh config
 
-## (Optional) Wipe the drive
+### 3.1. (Optional) Wipe the drive
 
 Because I have previously used the drive, I wanted to wipe the drive to make sure that all my previous unencrypted data is erased.
 
@@ -129,7 +124,7 @@ Because I have previously used the drive, I wanted to wipe the drive to make sur
 sudo shred -v -n 1 --random-source=/dev/urandom -z /dev/sda
 ```
 
-Log write speed to a file:
+While running `shred`, you can log log its progress by running:
 
 ```sh
 while :
@@ -141,7 +136,7 @@ do
 done
 ```
 
-## Create Partition
+### 3.2. Create Partition
 
 Create empty partition
 
@@ -151,7 +146,7 @@ Create empty partition
 sudo fdisk /dev/sda
 
 # Create empty gpt partition table, wiping the drive
-# WARNING! All data will be lost (on write)!
+# WARNING! All data will be lost on write (w ENTER)!
 g ENTER
 
 # create new linux partition
@@ -167,25 +162,40 @@ p ENTER
 w ENTER
 ```
 
-## Encrypt with LUKS
+### 3.3. Encrypt with LUKS
+
+Create a key file, so I don't have to input a password everytime I want to unlock:
 
 ```sh
-su backup
-cd
-dd bs=512 count=4 if=/dev/urandom of=backup-keyfile iflag=fullblock
+sudo dd bs=512 count=4 if=/dev/urandom of=/root/backup-keyfile iflag=fullblock
+sudo chmod 600 /root/backup-keyfile
 ```
 
+Ecrypt the drive/partition:
+
 ```sh
-PART=/dev/sda1
-sudo cryptsetup
+sudo cryptsetup luksFormat /dev/sda1 /root/backup-keyfile
 ```
 
-> TODO view history in bash
+### 3.4. Create a btrfs paritition
 
-## Format Partition to BTRFS
+After encrypting the drive, unlock them:
 
 ```sh
-sudo mkfs.btrfs --label Backup /dev/sda1
+sudo cryptsetup open --key-file /root/backup-keyfile /dev/sda1 backup
+```
+
+> I will have to unlock the partition with `cryptsetup open` everytime I want to mount the partition.
+> To unlock or mount them on boot, edit the `/etc/fstab`.
+>
+> ```sh
+> backup UUID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx /root/backup-keyfile luks,noearly
+> ```
+
+Then, create a btrfs partition
+
+```sh
+sudo mkfs.btrfs --label Backup /dev/mapper/backup
 #btrfs-progs v6.7
 #See https://btrfs.readthedocs.io for more information.
 #
@@ -197,7 +207,7 @@ sudo mkfs.btrfs --label Backup /dev/sda1
 #      - enabled free-space-tree (-R free-space-tree)
 #
 #Label:              Backup
-#UUID:               d9969466-c979-4244-8d05-bb3cc767a736
+#UUID:               xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 #Node size:          16384
 #Sector size:        4096
 #Filesystem size:    931.51GiB
@@ -216,48 +226,18 @@ sudo mkfs.btrfs --label Backup /dev/sda1
 #    1   931.51GiB  /dev/sda1
 ```
 
-Mount options:
+### 3.5. Mount and unmount commands
 
-- noatime: best for Copy-on-write format
-- compress: higher zstd compression because it's for backup
-
-```sh
-o_btrfs=noatime,compress=zstd:9
-```
-
-## Set Permissions
-
-Add user to storage group
+To unlock and mount them:
 
 ```sh
-sudo gpasswd -a dimas storage
+sudo cryptsetup open --key-file /root/backup-keyfile /dev/sda1 backup
+sudo mount -o nosuid,nodev,noatime,compress=zstd:9,autodefrag /dev/mapper/backup /backup/btr-backup
 ```
 
-Create policy to allow mounting by `storage` group in `/etc/polkit-1/rules.d/10-udisk2.rules`
+To unmount and lock them:
 
-```text
-// See the polkit(8) man page for more information
-// about configuring polkit.
-
-// Allow udisks2 to mount devices without authentication
-// for users in the "storage" group.
-polkit.addRule(function(action, subject) {
-    if ((action.id == "org.freedesktop.udisks2.filesystem-mount-system" ||
-        action.id == "org.freedesktop.udisks2.filesystem-mount") &&
-        subject.isInGroup("storage")) {
-        return polkit.Result.YES;
-    }
-});
-```
-
-Set mount options for that partition in `/etc/udisks2/mount_options.conf`
-
-> Replace parititon UUID with your own UUID
-
-```conf
-# This file contains custom mount options for udisks 2.x
-# Typically placed at /etc/udisks2/mount_options.conf
-
-[/dev/disk/by-uuid/d9969466-c979-4244-8d05-bb3cc767a736]
-btrfs_defaults=noatime,compress=zstd:9
+```sh
+sudo umount /backup/btr-backup
+sudo cryptsetup close backup
 ```

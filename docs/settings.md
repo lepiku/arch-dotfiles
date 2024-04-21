@@ -233,3 +233,40 @@
   ```sh
   gsettings set org.gnome.desktop.wm.preferences button-layout :
   ```
+
+- Add permission for Nautilus to mount `btrfs` partition
+
+  Create a policy to allow mounting by `storage` group in `/etc/polkit-1/rules.d/10-udisk2.rules`:
+
+  ```text
+  // See the polkit(8) man page for more information
+  // about configuring polkit.
+
+  // Allow udisks2 to mount devices without authentication
+  // for users in the "storage" group.
+  polkit.addRule(function(action, subject) {
+      if ((action.id == "org.freedesktop.udisks2.filesystem-mount-system" ||
+          action.id == "org.freedesktop.udisks2.filesystem-mount") &&
+          subject.isInGroup("storage")) {
+          return polkit.Result.YES;
+      }
+  });
+  ```
+
+  Set mount options for that partition in `/etc/udisks2/mount_options.conf`
+
+  > Replace parititon UUID with your own UUID
+
+  ```conf
+  # This file contains custom mount options for udisks 2.x
+  # Typically placed at /etc/udisks2/mount_options.conf
+
+  [/dev/disk/by-uuid/d9969466-c979-4244-8d05-bb3cc767a736]
+  btrfs_defaults=noatime,compress=zstd:9
+  ```
+
+  Add user to storage group:
+
+  ```sh
+  sudo gpasswd -a dimas storage
+  ```
