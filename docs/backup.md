@@ -112,8 +112,6 @@ sudo groupadd backup
 sudo gpasswd -a $USER backup # add the user to the backup group
 ```
 
-> TODO: backup ssh config
-
 ### 3.1. (Optional) Wipe the drive
 
 Because I have previously used the drive, I wanted to wipe the drive to make sure that all my previous unencrypted data is erased.
@@ -241,3 +239,40 @@ To unmount and lock them:
 sudo umount /backup/btr-backup
 sudo cryptsetup close backup
 ```
+
+## 4. Configuration
+
+### 4.1. btrbk
+
+btrbk is the utility program to sync files between to btrfs partitions. It wraps [btrfs send/receive](https://btrfs.readthedocs.io/en/latest/Send-receive.html) command
+
+Computer 1:
+
+```conf
+
+```
+
+> TODO computer 1 config
+
+Computer 2: `/etc/btrbk/receive-backup-1.conf`
+
+```sh
+timestamp_format        long
+ssh_identity            /etc/btrbk/ssh/id_rsa
+snapshot_create         onchange
+
+target_preserve_min     no
+target_preserve         2d 4w *m
+
+subvolume ssh://192.168.12.1//backup/backup-1
+    snapshot_dir /.snapshots/backup-1
+    target /backup/btr-backup/backup-1
+```
+
+### 4.2. SSH
+
+Do stuff mentioned in [Setting up SSH](https://github.com/digint/btrbk?tab=readme-ov-file#setting-up-ssh) from `btrbk` readme.
+
+## 5. Done
+
+Now I felt more secure that my gallery are backed up in 2 places.
