@@ -370,8 +370,8 @@ let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.js,*.jsx,*.vue'
 " ------------ Mapping / Remaped keys ------------ "
 " change default up and down by line breaks
 " https://vim.fandom.com/wiki/Move_through_wrapped_lines
-inoremap <silent> <Down> <C-o>gj
-inoremap <silent> <Up> <C-o>gk
+"inoremap <silent> <Down> <C-o>gj
+"inoremap <silent> <Up> <C-o>gk
 noremap <silent> j gj
 noremap <silent> k gk
 
