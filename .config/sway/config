@@ -24,19 +24,19 @@ input "type:touchpad" {
     pointer_accel 0
     #scroll_factor 0.2 # makes scrolling very slow on terminal
 }
-input "type:pointer" {
-    # for Type: Mouse
-    accel_profile flat
-    pointer_accel -0.8
-}
-input "1133:45083:M585/M590_Mouse" {
-    pointer_accel -0.6
-}
 input "type:keyboard" {
     xkb_options caps:swapescape
     repeat_delay 300
     repeat_rate 30
 }
+input "1267:12433:ELAN0504:00_04F3:3091_Touchpad" {
+    accel_profile adaptive
+    pointer_accel 0.2
+}
+# for external mouse
+input "type:pointer" accel_profile flat
+input "1133:45083:M585/M590_Mouse" pointer_accel -0.6
+input "1133:45108:Logitech_MX_Master_3S" pointer_accel 0
 
 # Output Configuration
 set $edp1 eDP-1
@@ -44,6 +44,7 @@ set $hdmi HDMI-A-1
 output * bg ~/.config/sway/wallpaper.png fill
 output $edp1 position 0 0
 output $hdmi position 0 -1080
+output "Hewlett Packard LE1711 3CQ95126B5" position 1920 0
 output "ASUSTek COMPUTER INC ASUS VG249 0x00033567" mode 1920x1080@120Hz
 
 # set size for focused border
