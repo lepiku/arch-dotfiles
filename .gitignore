@@ -31,6 +31,8 @@ bin/assets
 !.config
 !.config/dunst
 !.config/dunst/**
+!.config/etc
+!.config/etc/**
 !.config/nvim
 !.config/nvim/**
 .config/nvim/.netrwhist

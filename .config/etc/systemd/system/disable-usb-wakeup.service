@@ -1,0 +1,15 @@
+[Unit]
+Description=Disable USB controllers in /proc/acpi/wakeup
+
+[Service]
+Type=oneshot
+ExecStart=bash -c '\
+    while read -r device _ status _; do \
+        [[ $device == +([EX]HC*|USB*|PS2*) && $status == "*enabled" ]] && \
+            echo $device > /proc/acpi/wakeup; \
+    done < /proc/acpi/wakeup; \
+    true \
+'
+
+[Install]
+WantedBy=multi-user.target

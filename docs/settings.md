@@ -270,3 +270,13 @@
   ```sh
   sudo gpasswd -a dimas storage
   ```
+
+- Disable wake up with mouse
+
+  Copy [disable-usb-wakeup-service](../.config/etc/systemd/system/disable-usb-wakeup.service) to `/etc/systemd/system` and enable the systemd service it.
+
+  ```sh
+  sudo cp ~/.config/etc/systemd/system/disable-usb-wakeup.service /etc/systemd/system
+  sudo systemctl daemon-reload
+  sudo systemctl enable disable-usb-wakeup.service
+  ```
