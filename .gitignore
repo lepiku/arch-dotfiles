@@ -29,6 +29,8 @@ bin/assets
 # configs
 !.condarc
 !.config
+!.config/dotfiles.example.conf
+!.config/dotfiles.example.state
 !.config/dunst
 !.config/dunst/**
 !.config/etc

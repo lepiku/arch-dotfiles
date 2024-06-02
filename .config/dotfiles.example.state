@@ -1,0 +1,4 @@
+#!/bin/sh
+
+battery_prev_plugged_in=false
+battery_notification_id=-1
