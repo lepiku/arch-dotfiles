@@ -8,7 +8,7 @@ $battery_high
 $battery_notify_high
 $battery_notify_time
 '
-source ~/.config/state.sh
+source ~/.config/dotfiles.state
 : '
 $battery_prev_plugged_in
 $battery_notification_id
@@ -20,6 +20,8 @@ plugged_in=`acpi -a | grep "^Adapter.*: on-line$"`
 level=`cat /sys/class/power_supply/BAT0/charge_now`
 full_level=`cat /sys/class/power_supply/BAT0/charge_full_design`
 current_level=`expr "$level" \* 100 / "$full_level"`
+
+echo "Current battery: $current_level%"
 
 if [ "$battery_notification_id" != -1 ]; then
     battery_is_notified=true
@@ -42,7 +44,7 @@ if [ ! -n "$plugged_in" ] && [ "$current_level" -le "$battery_low" ]; then
 elif [ "$battery_notify_high" = true ] \
         && [ -n "$plugged_in" ] \
         && [ "$current_level" -ge "$battery_high" ]; then
-    echo "Full battery."
+    echo "High battery."
     if [ $battery_is_notified = false ]; then
         echo -e "\tNotifying."
         notif_id=`
