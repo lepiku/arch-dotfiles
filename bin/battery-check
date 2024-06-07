@@ -49,7 +49,7 @@ elif [ "$battery_notify_high" = true ] \
         echo -e "\tNotifying."
         notif_id=`
             notify-send -u normal -a $app_name -i battery-full-charged \
-                -t $battery_notify_time -p "Full Battery ($current_level%)" \
+                -t $battery_notify_time -p "High Battery ($current_level%)" \
                 "Disconnect charger\!"`
         set-state "battery_notification_id" $notif_id
         echo "$(date): $current_level% Full Battery" >> /tmp/$app_name.log
