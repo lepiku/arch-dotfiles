@@ -281,8 +281,8 @@ bindsym $mod+Shift+c    $exe $termi swayconfig
 #bindsym $mod+e          exec sudo bluetooth toggle
 #bindsym $mod+Shift+e    exec steam-runtime
 
-#bindsym $mod+g          exec chromium
-#bindsym $mod+Shift+g    exec chromium --incognito
+bindsym $mod+g          exec chromium
+bindsym $mod+Shift+g    exec chromium --incognito
 
 bindsym $mod+i          $exe $terme speedometer -r wlp2s0 -t wlp2s0 -l -m 6000000
 
@@ -298,11 +298,11 @@ bindsym $mod+t          $exe $terme htop
 bindsym $mod+v          exec pavucontrol
 bindsym $mod+Shift+v    exec code
 
-bindsym $mod+z          exec /usr/share/sway/scripts/grimshot copy area
-bindsym $mod+Shift+z    exec /usr/share/sway/scripts/grimshot save area
+bindsym $mod+z          exec /usr/share/sway-contrib/grimshot copy area
+bindsym $mod+Shift+z    exec /usr/share/sway-contrib/grimshot save area
 
-bindsym Print           exec /usr/share/sway/scripts/grimshot -n copy screen
-bindsym Shift+Print     exec /usr/share/sway/scripts/grimshot -n save screen
+bindsym Print           exec /usr/share/sway-contrib/grimshot -n copy screen
+bindsym Shift+Print     exec /usr/share/sway-contrib/grimshot -n save screen
 
 # ---------- Browser Shortcuts ---------- #
 bindsym $mod+w exec bash scripts/web-shortcuts.sh \
