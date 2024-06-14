@@ -280,3 +280,9 @@
   sudo systemctl daemon-reload
   sudo systemctl enable disable-usb-wakeup.service
   ```
+
+- Use bluetooth keyboard on boot / login
+
+  Install [`mkinitcpio-bluetooth`](https://github.com/irreleph4nt/mkinitcpio-bluetooth/)
+
+  Follow the setup guide in there
