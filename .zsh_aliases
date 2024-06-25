@@ -31,7 +31,8 @@ alias git-commit-no-message="git commit --allow-empty-message -m ''"
 alias git-reset='git checkout HEAD --'
 
 # bluetooth
-alias bt-connect-buds2='bluetoothctl connect 38:8F:30:D7:3D:7D'
+alias bt-buds2-connect='bluetoothctl connect 38:8F:30:D7:3D:7D'
+alias bt-buds2-disconnect='bluetoothctl disconnect 38:8F:30:D7:3D:7D'
 
 # other
 alias restart-wifi="sudo systemctl restart wpa_supplicant@wlp2s0.service"
