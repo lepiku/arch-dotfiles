@@ -291,7 +291,7 @@ bindsym $mod+Shift+m    exec nautilus
 
 bindsym $mod+o          output $hdmi toggle
 
-#bindsym $mod+Shift+p    $exe suspend-toggle
+bindsym $mod+Shift+p    $exe swayidle-toggle
 
 bindsym $mod+t          $exe $terme htop
 
