@@ -58,8 +58,8 @@ bindsym XF86AudioPrev $exe playerctl previous
 bindsym XF86AudioNext $exe playerctl next
 
 # adjust backlight
-bindsym XF86MonBrightnessUp $exe brightnessctl set +4%
-bindsym XF86MonBrightnessDown $exe brightnessctl set 4%-
+bindsym XF86MonBrightnessUp $exe brightnessctl set +5%
+bindsym XF86MonBrightnessDown $exe brightnessctl set 5%-
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -251,7 +251,7 @@ bindsym $mod+g          exec chromium
 bindsym $mod+Shift+g    exec chromium --incognito
 
 bindsym $mod+i          $exe $terme speedometer -r enp9s0 -t enp9s0 -l -m 7200000
-bindsym $mod+Shift+i    $exe $terme speedometer -r wlp8s0 -t wlp8s0 -l -m 7200000
+bindsym $mod+Shift+i    $exe $terme speedometer -r wlp8s0 -t wlp8s0 -l -m 3600000
 
 bindsym $mod+m          $exe $terme ranger
 bindsym $mod+Shift+m    exec pcmanfm
