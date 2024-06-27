@@ -34,3 +34,7 @@ export CHROME_EXECUTABLE="/usr/bin/chromium"
 # ionic capacitor
 export CAPACITOR_ANDROID_STUDIO_PATH="/usr/bin/android-studio"
 export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+
+# dolphin
+# https://wiki.archlinux.org/title/Dolphin#Icons_not_showing
+export QT_QPA_PLATFORMTHEME="qt5ct"
