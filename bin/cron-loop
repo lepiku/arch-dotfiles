@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# Run the script every `interval` seconds for a minute.
+#
+# Used to run cron job more than once per minute
+#
+# example: run `battery-check` every 5 seconds
+# * * * * * run-loop-script 5 battery-check
+
+interval=$1
+script_command=$2
+
+for i in `seq 1 $(( 60 / $interval ))`; do
+    echo "$i: $(date +%T)"
+    $script_command
+    sleep $interval
+done

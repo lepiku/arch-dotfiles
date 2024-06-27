@@ -2,26 +2,32 @@
 
 > WORK IN PROGRESS
 
-This is my arch install guide written while I setup my Arch Linux install on my laptop. Windows is already installed and this guide is going to install Arch Linux as a **dual boot**.
+This is my arch install guide written while I setup my Arch Linux install on my laptop.
+Windows is already installed and this guide is going to install Arch Linux as a **dual boot**.
 
-For more than 4 years I have used this laptop for Computer Science college. I installed Windows and Arch Linux on the laptop. Although the Linux Operating works fine after more than 4 years, Windows is a different story. It might take 10 minutes just to get to the lock screen on Windows, even though I can boot Linux in less than a minute. One of the main reason why it's slow is that I used a spinning hard disk drive (HDD) for booting Windows. Therefore I decided to reinstall my Windows on a brand new SSD.
-
-Fortunately, I can add an NVME SSD on my laptop, thus I can use the HDD as a backup drive. Here's what I did:
+Background:
+For more than 4 years I have used this laptop for Computer Science study at my college.
+I installed Windows and Arch Linux on the laptop.
+Although the Linux Operating works fine after more than 4 years, Windows is a different story.
+It might take 10 minutes just to get to the lock screen on Windows, even though I can boot Linux in less than a minute.
+One of the main reason why it's slow is that I used a spinning hard disk drive (HDD) for booting Windows.
+Therefore, I decided to reinstall my Windows on a brand new SSD.
+Fortunately, I can add an NVME SSD on my laptop, thus I can use the HDD as a backup drive.
 
 ## 1. Preparation
 
 I would install Arch Linux on the remaining 443GB unallocated space on the SSD, then I would reuse the HDD as a backup drive.
 
-Hardware:
+My hardware:
 
-- Laptop (Acer Swift 3 - SF314-54G from 2018)
+- Laptop ([Acer Swift 3 SF314-54G](https://www.acer.com/us-en/support/product-support/SF314-54G/) from 2018)
 
-Drives:
+My drives:
 
 - [WD Blue WD10SPZX](https://www.westerndigital.com/products/internal-drives/wd-blue-mobile-sata-hdd?sku=WD10SPZX) 1TB HDD
 - [WD Black SN850X](https://www.westerndigital.com/products/internal-drives/wd-black-sn850x-nvme-ssd?sku=WDS100T2X0E) 1TB NVME SSD
 
-Partitions:
+Drive partitions:
 
 - 1TB NVME SSD
   1. 100MB EFI (FAT32)
@@ -32,7 +38,7 @@ Partitions:
 - 1TB HDD
   1. 1TB Backup (BTRFS) \*
 
-> \* Read this [guide](./backup.md) on how to create my backup drive.
+> \* Read this [guide](./backup.md) on how I created my backup drive and setup.
 
 ## 2. Boot the live USB
 
@@ -40,7 +46,7 @@ Download and create arch linux boot drive using this [guide](https://wiki.archli
 
 1. Turn off the computer.
 2. Plug in the USB.
-3. Enter the BIOS by turning on the computer and pressing F2 repeatedly.
+3. Enter the BIOS by turning on the computer and pressing `F2` repeatedly.
 4. Disable `Secure Boot`, change the `Boot Order` by putting the USB drive on the top of the boot order, and `Save and exit` on the BIOS.
 5. Start the computer and enter the live USB environment.
 
@@ -55,19 +61,24 @@ Should outputs `64` to make sure it's using 64-bit x64 UEFI.
 
 ## 4. Connect to the internet
 
+Connect to the wifi network.
+
 ```text
 $ iwctl
 
 [iwd]# device list
-Ex: <Device Name> is wlan0
-Ex: <Adapter> is phy0
+```
 
+> For example:
+> `<Device Name>` is `wlan0`,
+> `<Adapter>` is `phy0`, and
+> `<SSID>` is `LePC`.
+
+```text
 [iwd]# device wlan0 set-property Powered on
 [iwd]# adapter phy0 set-property Powered on
 [iwd]# station wlan0 scan
 [iwd]# station wlan0 get-networks
-Ex: <SSID> is LePC
-
 [iwd]# station wlan0 connect LePC
 Enter Passphrase:
 
@@ -89,23 +100,23 @@ Check your SSD/HDD:
 lsblk
 ```
 
-> If NVME isn't detected:
+> If your NVME SSD isn't detected:
 >
-> - Open BIOS
+> - Enter BIOS
 > - Change `SATA Operation` mode to `AHCI`
 > - Save Changes in BIOS
 >
 > <https://community.acer.com/en/discussion/comment/809010/#Comment_809010>
 
-Current structure:
+Before:
 
-1. 100MB EFI
+1. 100MB EFI (FAT32)
 2. 16MB Windows Reserved
-3. 447GB Windows C:
+3. 447GB Windows C:\ (NTFS)
 4. 746MB Windows Recovery Environment
-5. 443GB Unallocated **(To-do install Linux Here)**
+5. **443GB Unallocated**
 
-Create linux partition with `fdisk`:
+Create a linux partition with `fdisk`:
 
 ```sh
 fdisk /dev/nvme0n1p5
@@ -129,10 +140,17 @@ p ENTER
 w ENTER
 ```
 
+After:
+
+1. 100MB EFI (FAT32)
+2. 16MB Windows Reserved
+3. 447GB Windows C:\ (NTFS)
+4. 746MB Windows Recovery Environment
+5. **443GB Linux (Unformatted)**
+
 ## 6. Create BTRFS Partition
 
-This instruction is for partition file `/dev/nvme0n1p5` with label `Linux` and
-`/dev/nvme0n1p1` efi partition.
+> This instruction to create a `Linux` labeled partition for `/dev/nvme0n1p5` and had an EFI partition at `/dev/nvme0n1p1`.
 
 Format Partition to BTRFS:
 
@@ -141,6 +159,8 @@ mkfs.btrfs --label Linux /dev/nvme0n1p5
 ```
 
 ### 6.1. Create subvolumes in root filesystem
+
+Commands to create subvolumes:
 
 ```sh
 mount /dev/nvme0n1p5 /mnt
@@ -154,11 +174,11 @@ umount /mnt
 
 > Default mount options:
 >
-> <https://btrfs.readthedocs.io/en/latest/ch-mount-options.html>
->
 > - `space_cache=v2`
 > - `discard=async` autodetect device
 > - `ssd` autodetect
+>
+> <https://btrfs.readthedocs.io/en/latest/ch-mount-options.html>
 
 ### 6.2. Mount subvolumes and EFI
 
@@ -184,16 +204,22 @@ mount -o $o_btrfs,subvol=@varcache  /dev/nvme0n1p5 /mnt/var/cache
 mount /dev/nvme0n1p1 /mnt/efi
 ```
 
-### 6.3. Enable swapfile
+### 6.3. Create swapfile
 
-**16GB** for 12GB RAM computer:
+Find the recommended swap size for your computer RAM:
+
+<https://itsfoss.com/swap-size/#how-much-should-be-the-swap-size>
+
+I decided to create a **16GB** swap file for my computer which has 12GB RAM with hibernation:
 
 ```sh
 btrfs filesystem mkswapfile --size 16G /mnt/swapfile
 swapon /mnt/swapfile
 ```
 
-## 7. Installation of essential packages
+> To enable hibernation, read [here](#11.10.-hibernation).
+
+## 7. Installation of Arch Linux
 
 ```sh
 pacstrap -K /mnt base base-devel linux linux-firmware nvim networkmanager arch-install-scripts
@@ -208,7 +234,7 @@ cat /mnt/etc/fstab # check the fstab
 arch-chroot /mnt
 ```
 
-Run inside chroot:
+Update time and locale inside chroot:
 
 ```sh
 # Time
@@ -225,15 +251,15 @@ echo 'LANG=en_US.UTF-8' > /etc/locale.conf
 echo 'okto-swifty' > /etc/hostname
 ```
 
-## 8. Bootloader
+## 8. Install Bootloader
 
 With [rEFInd](https://wiki.archlinux.org/title/REFInd):
 
 ```sh
-pacman -Sy intel-ucode refind btrfs-progs mkinitcpio-firmware
+pacman -Sy refind intel-ucode btrfs-progs
 ```
 
-Install bootloader (rEFInd):
+Install rEFInd:
 
 ```sh
 refind-install
@@ -265,6 +291,8 @@ reboot
 
 Customize rEFInd: <https://rodsbooks.com/refind/themes.html#banners>
 
+> To fix [mkinitcpio warnings](https://wiki.archlinux.org/title/Mkinitcpio#Possibly_missing_firmware_for_module_XXXX), install `mkinitcpio-firmware` from AUR.
+
 ### 8.1. Secure boot
 
 > TODO
@@ -277,6 +305,10 @@ pacman -Sy git tmux python ranger cron htop firefox btrfs-progs efibootmgr netwo
 
 ### 9.1. Network
 
+```sh
+pacman -S nm-connection-editor
+```
+
 Use [NetworkManager]() to connect to a Wifi
 
 ```sh
@@ -284,7 +316,15 @@ nmcli device wifi rescan
 nmcli device wifi connect <SSID> password <PASSWORD>
 ```
 
+or with `nmtui`:
+
+```sh
+nmtui
+```
+
 ### 9.2. Setup user
+
+Install `sudo` and `zsh`:
 
 ```sh
 pacman -Sy sudo zsh
@@ -294,10 +334,10 @@ Set password for root
 
 ```sh
 # Root password (oot6)
-passwd
+passwd root
 ```
 
-Create your user, creating user `dimas`:
+Create your user. Create `dimas` user and add it to `wheel` group so that the user can run sudo:
 
 ```sh
 useradd -mG wheel dimas
@@ -308,9 +348,23 @@ passwd dimas
 EDITOR=nvim visudo
 ```
 
-### 9.3. Install AUR helper
+## 10. Reboot to your Arch Linux
 
-After logged in as the user, install [yay](https://github.com/Jguer/yay):
+Reboot
+
+```sh
+reboot
+```
+
+Enter the BIOS and change the `boot order` to put NVME SSD on the top of the order, then `Save and exit`.
+
+## 11. Install more programs
+
+Configs can be viewed in this [repository](https://github.com/lepiku/arch-dotfiles).
+
+### 11.1. AUR helper
+
+Install [yay](https://github.com/Jguer/yay):
 
 ```sh
 pacman -S --needed git base-devel
@@ -326,15 +380,15 @@ yay -S reflector
 sudo reflector --latest 10 --country SG,ID --protocol https --save /etc/pacman.d/mirrorlist --sort score
 ```
 
-### 9.4. Window manager
+### 11.2. Window manager
 
-With [Sway](https://wiki.archlinux.org/title/Sway)
+Install [Sway](https://wiki.archlinux.org/title/Sway):
 
 ```sh
 yay -S sway swaylock swayidle swayimg swaybg greetd i3status papirus dunst xorg-wayland fuzzel
 ```
 
-Edit `/etc/greetd/config.toml` to launch sway on login
+Edit `/etc/greetd/config.toml` to launch sway on login:
 
 ```conf
 [default_session]
@@ -347,39 +401,29 @@ Create symbolic link for `i3status` config:
 ln -s ~/.config/i3status/config-swifty ~/.config/i3status/config
 ```
 
-Start and Enable `greetd`
+Start and Enable `greetd`:
 
 ```sh
 sudo systemctl enable greetd.service
 sudo systemctl start greetd.service
 ```
 
-Set wallpaper
+Set the wallpaper:
 
 ```sh
+scp "scp://192.168.1.24/Pictures/Wallpapers/oshino shinobu linux.png" Pictures/Wallpapers
 ln -sf "~/Pictures/Wallpapers/oshino shinobu linux.png" ~/.config/sway/wallpaper.png
 ```
 
-> TODO change to gui greeter
+> TODO: change greeter to use graphical UI
 
-### 9.5. Gnome
-
-Hide close button:
-<https://askubuntu.com/questions/948313/how-do-i-hide-disable-close-buttons-for-gnome-windows#948321>
-
-```sh
-gsettings set org.gnome.desktop.wm.preferences button-layout :
-```
-
-> TODO: uninstall gnome
-
-### 9.6. Terminal
+### 11.3. Terminal
 
 With [foot](https://codeberg.org/dnkl/foot#index) and
 [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
 
 ```sh
-yay -S foot zsh fzf fd zsh-autosuggestions zsh-syntax-highlighting
+yay -S foot zsh aur/oh-my-zsh-git fzf fd zsh-autosuggestions zsh-syntax-highlighting
 ```
 
 Change user shell to `zsh`:
@@ -396,7 +440,7 @@ Create symbolic link to zsh plugins in `~/.oh-my-zsh`:
 ln -s /usr/share/zsh/plugins ~/.oh-my-zsh
 ```
 
-### 9.7. Clone dotfiles
+### 11.5. Clone dotfiles
 
 Clone git on another directory, example:
 
@@ -417,15 +461,13 @@ cd ~
 git reset --hard
 ```
 
-Then make some commits!
-
-### 9.8. Editor (Neovim)
+### 11.6. Editor (Neovim)
 
 ```sh
 yay -S neovim nodejs npm
 ```
 
-> Nodejs and NPM needed for some Neovim plugins
+> Node and NPM are needed for some Neovim plugins
 
 Install [vim-plug](https://github.com/junegunn/vim-plug):
 
@@ -434,92 +476,116 @@ sh -c 'curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 ```
 
-Then, install plugins:
+Install plugins listed in [`init.vim`](./.config/nvim/init.vim):
 
 ```sh
 nvim
 #:PlugInstall
 ```
 
-### 9.9. SSH
+Restart Neovim to install [`coc.nvim`](https://github.com/neoclide/coc.nvim) plugins:
+
+```sh
+#:q
+nvim
+```
+
+### 11.7. SSH
+
+Install [openssh](https://wiki.archlinux.org/title/OpenSSH):
 
 ```sh
 yay -S openssh
 ```
 
-Generate SSH key: (use defaults and no password)
+Generate SSH key:
 
 ```sh
 ssh-keygen -t rsa -b 4096
+# Use default on all prompts
 ```
 
 Share `~/.ssh/id_rsa.pub` or save other PC's ssh keys on `~/.ssh/authorized_keys`.
 
-### 9.10. Bluetooth
+### 11.8. Bluetooth
+
+install [bluez](https://wiki.archlinux.org/title/Bluetooth):
 
 ```sh
 yay -S bluez bluez-utils
 ```
 
-Enable bluetooth
+Enable bluetooth:
 
 ```sh
 sudo systemctl enable bluetooth.service
 sudo systemctl start bluetooth.service
-rfkill unblock bluetooth
 sudoedit /etc/bluetooth/main.conf # uncomment 'AutoEnable=true'
 ```
 
-Connect with your bluetooth device
+Connect with your bluetooth device:
 
 ```sh
 bluetoothctl
-#scan on
-#pair <device>
-#connect <device>
-#trust <device>
-#exit
+
+scan on
+pair <device>
+connect <device>
+trust <device>
+exit
 ```
 
-### 9.11. Audio
+#### 11.8.1. Sync audio devices on Linux and Windows
+
+> TODO
+
+### 11.9. Audio
+
+Install [PipeWire](https://wiki.archlinux.org/title/PipeWire) and other tools:
 
 ```sh
 yay -S pipewire pipewire-alsa pipewire-pulse pipewire-jack pipewire-v4l2 pipewire-docs wireplumber rtkit pavucontrol
 ```
 
-#### Fix no audio
+#### Fix no audio on Acer Swift 3 SF314-54G
 
-> Acer Swift 3 SF314-54G
->
-> ```sh
-> lspci | grep audio
-> #Multimedia audio controller: Intel Corporation Sunrise Point-LP HD Audio
-> ```
+Make sure the audio device is detected:
+
+```sh
+lspci | grep audio
+#Multimedia audio controller: Intel Corporation Sunrise Point-LP HD Audio
+```
+
+Install sof-firmware
 
 ```sh
 yay -S sof-firmware
 ```
 
-Source: <https://bbs.archlinux.org/viewtopic.php?id=265211>
+add audio module options by creating `/etc/modprobe.d/sound.conf`:
 
-Create `/etc/modprobe.d/sound.conf`:
-
-```sh
+```text
 options snd-intel-dspcfg dsp_driver=1
 ```
 
+> <https://bbs.archlinux.org/viewtopic.php?id=265211>
+
 Then reboot.
 
-### 9.12. Graphics
+### 11.10. Hibernation
+
+TODO btrfs hibernation
+
+### 11.11. Graphics
 
 ```sh
 libva-mesa-driver
 ```
 
-### 9.13. Other
+### 11.12. Other
 
 ```sh
-yay -S extra/code
+yay -S extra/code tk pyenv nvm
 ```
 
 ## Reference Links

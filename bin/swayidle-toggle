@@ -1,0 +1,22 @@
+#!/bin/sh
+# Toggle to enable/disable auto suspend
+
+source ~/.config/dotfiles.conf
+: '
+$suspend_toggle_notif_id
+'
+
+app_name="swayidle-toggle"
+enabled=`pidof swayidle`
+
+if [ ! -n "$enabled" ]; then
+    echo "Enabling auto suspend"
+    notify-send -a $app_name "Enabling auto suspend" -t 2000 \
+        -r $suspend_toggle_notif_id
+    nohup swayidle &> /dev/null & disown
+else
+    echo "Disabling auto suspend"
+    notify-send -a $app_name "Disabling auto suspend" -t 2000 -u critical \
+        -r $suspend_toggle_notif_id
+    pkill swayidle
+fi

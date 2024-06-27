@@ -13,6 +13,7 @@
 !.oh-my-zsh/**
 .oh-my-zsh/plugins
 !.profile
+!.zprofile
 !.zshrc
 !.zsh_aliases
 
@@ -28,15 +29,20 @@ bin/assets
 # configs
 !.condarc
 !.config
+!.config/dotfiles.example.conf
+!.config/dotfiles.example.state
 !.config/dunst
 !.config/dunst/**
+!.config/etc
+!.config/etc/**
 !.config/nvim
 !.config/nvim/**
 .config/nvim/.netrwhist
 !.config/ranger
 !.config/ranger/**
 !.config/tmux
-!.config/tmux/tmux.conf
+!.config/tmux/**
+.config/tmux/tmux.conf
 !.termux
 !.termux/**
 !.vimrc

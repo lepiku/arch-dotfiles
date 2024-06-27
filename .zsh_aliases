@@ -30,6 +30,10 @@ alias gitpullall='find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} 
 alias git-commit-no-message="git commit --allow-empty-message -m ''"
 alias git-reset='git checkout HEAD --'
 
+# bluetooth
+alias bt-buds2-connect='bluetoothctl connect 38:8F:30:D7:3D:7D'
+alias bt-buds2-disconnect='bluetoothctl disconnect 38:8F:30:D7:3D:7D'
+
 # other
 alias restart-wifi="sudo systemctl restart wpa_supplicant@wlp2s0.service"
 alias restart-network="sudo systemctl restart systemd-networkd.service"

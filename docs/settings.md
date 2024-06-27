@@ -225,3 +225,64 @@
   exiftool -n -Orientation=1 *.jpg
   exiftool -delete_original *.jpg
   ```
+
+- Hide close button in gnome
+
+  <https://askubuntu.com/questions/948313/how-do-i-hide-disable-close-buttons-for-gnome-windows#948321>
+
+  ```sh
+  gsettings set org.gnome.desktop.wm.preferences button-layout :
+  ```
+
+- Add permission for Nautilus to mount `btrfs` partition
+
+  Create a policy to allow mounting by `storage` group in `/etc/polkit-1/rules.d/10-udisk2.rules`:
+
+  ```text
+  // See the polkit(8) man page for more information
+  // about configuring polkit.
+
+  // Allow udisks2 to mount devices without authentication
+  // for users in the "storage" group.
+  polkit.addRule(function(action, subject) {
+      if ((action.id == "org.freedesktop.udisks2.filesystem-mount-system" ||
+          action.id == "org.freedesktop.udisks2.filesystem-mount") &&
+          subject.isInGroup("storage")) {
+          return polkit.Result.YES;
+      }
+  });
+  ```
+
+  Set mount options for that partition in `/etc/udisks2/mount_options.conf`
+
+  > Replace parititon UUID with your own UUID
+
+  ```conf
+  # This file contains custom mount options for udisks 2.x
+  # Typically placed at /etc/udisks2/mount_options.conf
+
+  [/dev/disk/by-uuid/d9969466-c979-4244-8d05-bb3cc767a736]
+  btrfs_defaults=noatime,compress=zstd:9
+  ```
+
+  Add user to storage group:
+
+  ```sh
+  sudo gpasswd -a dimas storage
+  ```
+
+- Disable wake up with mouse
+
+  Copy [disable-usb-wakeup-service](../.config/etc/systemd/system/disable-usb-wakeup.service) to `/etc/systemd/system` and enable the systemd service it.
+
+  ```sh
+  sudo cp ~/.config/etc/systemd/system/disable-usb-wakeup.service /etc/systemd/system
+  sudo systemctl daemon-reload
+  sudo systemctl enable disable-usb-wakeup.service
+  ```
+
+- Use bluetooth keyboard on boot / login
+
+  Install [`mkinitcpio-bluetooth`](https://github.com/irreleph4nt/mkinitcpio-bluetooth/)
+
+  Follow the setup guide in there
