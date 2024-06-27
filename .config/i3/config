@@ -36,6 +36,7 @@ for_window [class="zoom" title="^zoom$"] floating enable border pixel 0
 for_window [class="zoom" title="^Settings$"] floating enable
 for_window [class="^join\?action=join"] floating enable
 #for_window [title="^Android Emulator"] border pixel 0
+for_window [class="Ulauncher.*"] floating enable border pixel 0
 
 # set gaps
 gaps inner 8
@@ -73,8 +74,8 @@ bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
 #bindsym $mod+d $exe dmenu_run -fn "Source Code Pro-11"
 #bindsym $mod+Shift+d $exe i3-dmenu-desktop --dmenu='dmenu -i -fn "Source Code Pro-11"'
-bindsym $mod+d $exe rofi -show drun
-bindsym $mod+Shift+d $exe rofi -show run -theme android_notification
+#bindsym $mod+Shift+d $exe rofi -show run -theme android_notification
+bindsym $mod+d $exe ulauncher-toggle
 
 # ---------- Managing Windows ---------- #
 focus_wrapping no
