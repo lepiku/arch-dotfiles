@@ -306,6 +306,7 @@ exec --no-startup-id wrap-sigterm redshift-gtk
 exec --no-startup-id wrap-sigterm run-xidlehook
 exec --no-startup-id systemctl --user start dispad.service
 #exec --no-startup-id picom -b
-exec --no-startup-id sleep 1 && xcompmgr -c
+exec --no-startup-id sleep 2 && xcompmgr -c
 exec --no-startup-id dunst
 exec --no-startup-id lxsession
+exec --no-startup-id sleep 2 && systemctl --user start ulauncher.service
