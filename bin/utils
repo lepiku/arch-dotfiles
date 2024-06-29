@@ -1,0 +1,40 @@
+#!/bin/sh
+
+source ~/.config/dotfiles.conf
+: '
+$utils_notif_id
+$utils_brightness_delta
+'
+
+app_name="utils"
+args=" ${@:2} "
+
+_notify() {
+    message="$1"
+    icon="$2"
+
+    notif_id=`
+    notify-send -u low -a $app_name -t 1000 -r "$utils_notif_id" \
+        "$message"`
+    }
+
+    case $1 in
+        brightness)
+            case $2 in
+                increase)
+                    ddcutil --bus 6 setvcp 10 + $utils_brightness_delta
+                    value=`ddcutil --bus 6 getvcp 10 | sed 's/.*current value = *//;s/,.*//'`
+                    _notify "Brightness: $value%"
+                    ;;
+                decrease)
+                    ddcutil --bus 6 setvcp 10 - $utils_brightness_delta
+                    value=`ddcutil --bus 6 getvcp 10 | sed ';s/.*current value = *//;s/,.*//'`
+                    _notify "Brightness: $value%"
+                    ;;
+                *)
+                    _notify "Unknown brightness command: $2"
+            esac
+            ;;
+        *)
+            _notify "Unknown command: $1"
+    esac

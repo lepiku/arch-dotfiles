@@ -58,8 +58,9 @@ bindsym XF86AudioPrev $exe playerctl previous
 bindsym XF86AudioNext $exe playerctl next
 
 # adjust backlight
-bindsym XF86MonBrightnessUp $exe brightnessctl set +5%
-bindsym XF86MonBrightnessDown $exe brightnessctl set 5%-
+# get bus number with `ddcutil detect`
+bindsym XF86MonBrightnessUp $exe utils brightness increase
+bindsym XF86MonBrightnessDown $exe utils brightness decrease
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
