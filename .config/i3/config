@@ -275,10 +275,6 @@ bindsym $mod+Shift+z    $exe screenshot select --save
 bindsym Print           $exe screenshot screen
 bindsym Shift+Print     $exe screenshot screen --save
 
-# ---------- Browser Shortcuts ---------- #
-bindsym $mod+w exec bash scripts/web-shortcuts.sh \
-    `bash scripts/web-shortcuts.sh | rofi -dmenu -i -p "Web Shortcuts"`
-
 # ---------- Autostart Programs ---------- #
 # default workspace
 exec --no-startup-id i3-msg workspace $ws1

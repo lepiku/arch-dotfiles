@@ -3,7 +3,7 @@
 
 source ~/.config/dotfiles.conf
 : '
-$susped_toggle_notif_id
+$suspend_toggle_notif_id
 '
 
 app_name="suspend-toggle"

@@ -1,9 +1,0 @@
-#!/bin/sh
-
-if [ ! "$(ls -A ~/kawung)" ]; then
-	sshfs muhammad.oktoluqman@kawung.cs.ui.ac.id:/home/fasilkom/mahasiswa/m/muhammad.oktoluqman/ ~/kawung/
-else
-	echo "kawung: already mounted"
-fi
-
-cd ~/kawung/
