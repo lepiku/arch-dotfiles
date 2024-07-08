@@ -4,6 +4,10 @@ source ~/.config/dotfiles.conf
 : '
 $utils_notif_id
 $utils_brightness_delta
+$utils_network_ethernet_interface
+$utils_network_ethernet_max
+$utils_network_wifi_interface
+$utils_network_wifi_max
 '
 
 app_name="utils"
@@ -33,6 +37,23 @@ _notify() {
                     ;;
                 *)
                     _notify "Unknown brightness command: $2"
+            esac
+            ;;
+
+        network)
+            case $2 in
+                ethernet)
+                    speedometer \
+                        -r $utils_network_ethernet_interface \
+                        -t $utils_network_ethernet_interface \
+                        -l -m $utils_network_ethernet_max
+                        ;;
+                wifi)
+                    speedometer \
+                        -r $utils_network_wifi_interface \
+                        -t $utils_network_wifi_interface \
+                        -l -m $utils_network_wifi_max
+                        ;;
             esac
             ;;
         *)

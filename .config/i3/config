@@ -37,6 +37,7 @@ for_window [class="zoom" title="^Settings$"] floating enable
 for_window [class="^join\?action=join"] floating enable
 #for_window [title="^Android Emulator"] border pixel 0
 for_window [class="Ulauncher.*"] floating enable border pixel 0
+for_window [class="pavucontrol"] floating enable
 
 # set gaps
 gaps inner 8
@@ -252,7 +253,7 @@ bindsym $mod+g          exec chromium
 bindsym $mod+Shift+g    exec chromium --incognito
 
 bindsym $mod+i          $exe $terme speedometer -r enp9s0 -t enp9s0 -l -m 7200000
-bindsym $mod+Shift+i    $exe $terme speedometer -r wlp8s0 -t wlp8s0 -l -m 3600000
+bindsym $mod+Shift+i    $exe $terme speedometer -r wlp8s0 -t wlp8s0 -l -m 7200000
 
 bindsym $mod+m          $exe $terme ranger
 bindsym $mod+Shift+m    exec pcmanfm
