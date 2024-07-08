@@ -15,11 +15,10 @@ args=" ${@:2} "
 
 _notify() {
     message="$1"
-    icon="$2"
+    urgency="${2:-low}" # low | normal | critical
+    icon="${3:-gtk-info}" # located in `/usr/share/icons`
 
-    notif_id=`
-    notify-send -u low -a $app_name -t 1000 -r "$utils_notif_id" \
-        "$message"`
+    notify-send -a $app_name -r $utils_notif_id -t 1500 "$message" -u "$urgency" -i "$icon"
     }
 
     case $1 in
@@ -56,6 +55,35 @@ _notify() {
                         ;;
             esac
             ;;
+
+        swayidle-toggle)
+            enabled=`pidof swayidle`
+
+            if [ ! -n "$enabled" ]; then
+                echo "Enabling auto suspend"
+                _notify "Enabling auto suspend" normal
+                nohup swayidle &> /dev/null & disown
+            else
+                echo "Disabling auto suspend"
+                _notify "Disabling auto suspend" critical
+                pkill swayidle
+            fi
+            ;;
+
+        xidlehook-toggle)
+            enabled=`pidof xidlehook`
+
+            if [ ! -n "$enabled" ]; then
+                echo "Enabling auto suspend"
+                _notify "Enabling auto suspend" normal
+                nohup wrap-sigterm run-xidlehook &> /dev/null & disown
+            else
+                echo "Disabling auto suspend"
+                _notify "Disabling auto suspend" critical
+                pkill xidlehook
+            fi
+            ;;
+
         *)
             _notify "Unknown command: $1"
     esac

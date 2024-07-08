@@ -258,22 +258,22 @@ bindsym $mod+Shift+i    $exe $terme speedometer -r wlp8s0 -t wlp8s0 -l -m 720000
 bindsym $mod+m          $exe $terme ranger
 bindsym $mod+Shift+m    exec pcmanfm
 
-bindsym $mod+o          $exe monitors
-bindsym $mod+Shift+o    $exe monitors --no-hdmi
+bindsym $mod+o          exec monitors
+bindsym $mod+Shift+o    exec monitors --no-hdmi
 
 bindsym $mod+p          exec arandr
-bindsym $mod+Shift+p    $exe suspend-toggle
+bindsym $mod+Shift+p    exec utils xidlehook-toggle
 
 bindsym $mod+t          $exe $terme htop
 
 bindsym $mod+v          exec pavucontrol
 bindsym $mod+Shift+v    exec code
 
-bindsym $mod+z          $exe screenshot select
-bindsym $mod+Shift+z    $exe screenshot select --save
+bindsym $mod+z          exec screenshot select
+bindsym $mod+Shift+z    exec screenshot select --save
 
-bindsym Print           $exe screenshot screen
-bindsym Shift+Print     $exe screenshot screen --save
+bindsym Print           exec screenshot screen
+bindsym Shift+Print     exec screenshot screen --save
 
 # ---------- Autostart Programs ---------- #
 # default workspace
