@@ -1,4 +1,3 @@
 #!/bin/sh
 
 i3lock -c 18181a -n
-bluetooth-autoconnect

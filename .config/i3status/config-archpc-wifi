@@ -1,0 +1,83 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+        output_format = "i3bar"
+        colors = true
+        markup = pango
+        interval = 5
+        color_good = "#ffffff"
+        color_degraded = "#ffff00"
+        color_bad = "#ff6644"
+}
+
+
+order += "load"
+order += "cpu_temperature 0"
+order += "disk /"
+order += "disk /home"
+order += "memory"
+#order += "ethernet enp9s0"
+order += "wireless wlp8s0"
+order += "volume master"
+order += "tztime local"
+
+load {
+        format = "<span background='#400060'> ▦ %1min Load </span>"
+}
+
+cpu_temperature 0 {
+        format = "<span background='#400060'> ♨ %degrees°C </span>"
+        path = "/sys/class/thermal/thermal_zone0/temp"
+}
+
+disk "/" {
+        format = "<span background='#600060'> / %used/%total </span>"
+}
+
+memory {
+        format = "<span background='#600000'> 🗲 %used/%total </span>"
+        memory_used_method = "memavailable"
+        threshold_degraded = "10%"
+        threshold_critical = "5%"
+}
+
+ethernet enp9s0 {
+        format_up = "<span background='#604000'> Eth %ip </span>"
+        format_down = "<span background='#800000'> Eth Down </span>"
+}
+
+wireless wlp8s0 {
+        format_up = "<span background='#604000'> Wifi%quality %essid %ip </span>"
+        format_down = "<span background='#800000'> Wifi Down </span>"
+}
+
+volume master {
+        format = "<span background='#606000'> ♫ %volume </span>"
+        format_muted = "<span background='#808000'> ♫ -M- </span>"
+        device = "default"
+        mixer = "Master"
+        mixer_idx = 0
+}
+
+battery 0 {
+        format = "<span background='#206000'> %status %percentage </span>"
+        format_down = "No Battery"
+        status_chr = "🔌"
+        status_bat = "🔋"
+        status_unk = "?"
+        status_full = "Full"
+        path = "/sys/class/power_supply/BAT%d/uevent"
+        low_threshold = 12
+        threshold_type = "percentage"
+}
+
+tztime local {
+        format = "<span background='#006060'> %a, %-d %b %H:%M </span>"
+        #format_time = "%a, %-d %b %H:%M"
+}

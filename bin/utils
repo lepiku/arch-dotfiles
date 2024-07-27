@@ -1,0 +1,89 @@
+#!/bin/sh
+
+source ~/.config/dotfiles.conf
+: '
+$utils_notif_id
+$utils_brightness_delta
+$utils_network_ethernet_interface
+$utils_network_ethernet_max
+$utils_network_wifi_interface
+$utils_network_wifi_max
+'
+
+app_name="utils"
+args=" ${@:2} "
+
+_notify() {
+    message="$1"
+    urgency="${2:-low}" # low | normal | critical
+    icon="${3:-gtk-info}" # located in `/usr/share/icons`
+
+    notify-send -a $app_name -r $utils_notif_id -t 1500 "$message" -u "$urgency" -i "$icon"
+    }
+
+    case $1 in
+        brightness)
+            case $2 in
+                increase)
+                    ddcutil --bus 6 setvcp 10 + $utils_brightness_delta
+                    value=`ddcutil --bus 6 getvcp 10 | sed 's/.*current value = *//;s/,.*//'`
+                    _notify "Brightness: $value%"
+                    ;;
+                decrease)
+                    ddcutil --bus 6 setvcp 10 - $utils_brightness_delta
+                    value=`ddcutil --bus 6 getvcp 10 | sed ';s/.*current value = *//;s/,.*//'`
+                    _notify "Brightness: $value%"
+                    ;;
+                *)
+                    _notify "Unknown brightness command: $2"
+            esac
+            ;;
+
+        network)
+            case $2 in
+                ethernet)
+                    speedometer \
+                        -r $utils_network_ethernet_interface \
+                        -t $utils_network_ethernet_interface \
+                        -l -m $utils_network_ethernet_max
+                        ;;
+                wifi)
+                    speedometer \
+                        -r $utils_network_wifi_interface \
+                        -t $utils_network_wifi_interface \
+                        -l -m $utils_network_wifi_max
+                        ;;
+            esac
+            ;;
+
+        swayidle-toggle)
+            enabled=`pidof swayidle`
+
+            if [ ! -n "$enabled" ]; then
+                echo "Enabling auto suspend"
+                _notify "Enabling auto suspend" normal
+                nohup swayidle &> /dev/null & disown
+            else
+                echo "Disabling auto suspend"
+                _notify "Disabling auto suspend" critical
+                pkill swayidle
+            fi
+            ;;
+
+        xidlehook-toggle)
+            enabled=`pidof xidlehook`
+
+            if [ ! -n "$enabled" ]; then
+                echo "Enabling auto suspend"
+                _notify "Enabling auto suspend" normal
+                nohup wrap-sigterm run-xidlehook &> /dev/null & disown
+            else
+                echo "Disabling auto suspend"
+                _notify "Disabling auto suspend" critical
+                pkill xidlehook
+            fi
+            ;;
+
+        *)
+            _notify "Unknown command: $1"
+    esac

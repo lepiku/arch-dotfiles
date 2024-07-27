@@ -36,6 +36,8 @@ for_window [class="zoom" title="^zoom$"] floating enable border pixel 0
 for_window [class="zoom" title="^Settings$"] floating enable
 for_window [class="^join\?action=join"] floating enable
 #for_window [title="^Android Emulator"] border pixel 0
+for_window [class="Ulauncher.*"] floating enable border pixel 0
+for_window [class="pavucontrol"] floating enable
 
 # set gaps
 gaps inner 8
@@ -57,8 +59,9 @@ bindsym XF86AudioPrev $exe playerctl previous
 bindsym XF86AudioNext $exe playerctl next
 
 # adjust backlight
-bindsym XF86MonBrightnessUp $exe sh -c 'tee /sys/class/backlight/intel_backlight/brightness <<<$(( $(cat /sys/class/backlight/intel_backlight/brightness) + 10 ))'
-bindsym XF86MonBrightnessDown $exe sh -c 'tee /sys/class/backlight/intel_backlight/brightness <<<$(( $(cat /sys/class/backlight/intel_backlight/brightness) - 10 ))'
+# get bus number with `ddcutil detect`
+bindsym XF86MonBrightnessUp $exe utils brightness increase
+bindsym XF86MonBrightnessDown $exe utils brightness decrease
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -73,8 +76,8 @@ bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
 #bindsym $mod+d $exe dmenu_run -fn "Source Code Pro-11"
 #bindsym $mod+Shift+d $exe i3-dmenu-desktop --dmenu='dmenu -i -fn "Source Code Pro-11"'
-bindsym $mod+d $exe rofi -show drun
-bindsym $mod+Shift+d $exe rofi -show run -theme android_notification
+#bindsym $mod+Shift+d $exe rofi -show run -theme android_notification
+bindsym $mod+d $exe ulauncher-toggle
 
 # ---------- Managing Windows ---------- #
 focus_wrapping no
@@ -255,26 +258,22 @@ bindsym $mod+Shift+i    $exe $terme speedometer -r wlp8s0 -t wlp8s0 -l -m 720000
 bindsym $mod+m          $exe $terme ranger
 bindsym $mod+Shift+m    exec pcmanfm
 
-bindsym $mod+o          $exe monitors
-bindsym $mod+Shift+o    $exe monitors --no-hdmi
+bindsym $mod+o          exec monitors
+bindsym $mod+Shift+o    exec monitors --no-hdmi
 
 bindsym $mod+p          exec arandr
-bindsym $mod+Shift+p    $exe suspend-toggle
+bindsym $mod+Shift+p    exec utils xidlehook-toggle
 
 bindsym $mod+t          $exe $terme htop
 
 bindsym $mod+v          exec pavucontrol
 bindsym $mod+Shift+v    exec code
 
-bindsym $mod+z          $exe screenshot select
-bindsym $mod+Shift+z    $exe screenshot select --save
+bindsym $mod+z          exec screenshot select
+bindsym $mod+Shift+z    exec screenshot select --save
 
-bindsym Print           $exe screenshot screen
-bindsym Shift+Print     $exe screenshot screen --save
-
-# ---------- Browser Shortcuts ---------- #
-bindsym $mod+w exec bash scripts/web-shortcuts.sh \
-    `bash scripts/web-shortcuts.sh | rofi -dmenu -i -p "Web Shortcuts"`
+bindsym Print           exec screenshot screen
+bindsym Shift+Print     exec screenshot screen --save
 
 # ---------- Autostart Programs ---------- #
 # default workspace
@@ -305,6 +304,7 @@ exec --no-startup-id wrap-sigterm redshift-gtk
 exec --no-startup-id wrap-sigterm run-xidlehook
 exec --no-startup-id systemctl --user start dispad.service
 #exec --no-startup-id picom -b
-exec --no-startup-id sleep 1 && xcompmgr -c
+exec --no-startup-id sleep 2 && xcompmgr -c
 exec --no-startup-id dunst
 exec --no-startup-id lxsession
+exec --no-startup-id sleep 2 && systemctl --user start ulauncher.service

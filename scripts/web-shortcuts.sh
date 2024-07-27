@@ -1,4 +1,9 @@
 #!/bin/bash
+#
+# used with rofi. Example:
+#
+# bash scripts/web-shortcuts.sh \
+#     `bash scripts/web-shortcuts.sh | rofi -dmenu -i -p "Web Shortcuts"`
 
 filename="$HOME/.config/web-shortcuts-mapping.txt"
 mapfile -t myArray < "$filename"

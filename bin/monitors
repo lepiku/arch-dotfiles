@@ -23,7 +23,7 @@ elif xrandr --query | grep "HDMI-A-0 connected" -A 1 | grep -q "1920x1080.* 144\
 then
     echo "Preset PC GPU HDMI"
     xrandr --output HDMI-A-0 --mode 1920x1080 --rate 144
-elif xrandr --query | grep "DisplayPort-0 connected" -A 1 | grep -q "1920x1080.* 144\."
+elif xrandr --query | grep -q "DisplayPort-0 connected" -A 1
 then
     echo "Preset PC GPU DisplayPort"
     xrandr --output DisplayPort-0 --mode 1920x1080 --rate 144
@@ -34,14 +34,13 @@ then
 #    xrandr --output HDMI1 --off
 fi
 
-# 2nd monitor resolution 1920x1080 normal orientation
-function monitor1080 {
-    xrandr --query | grep -q "HDMI1 connected 1920x1080"
-}
-#monitor1BelowMonitor2=`xrandr --query | grep -q "eDP1 connected primary 1920x1080+0+1080"`
-
-if monitor1080; then
-    feh --no-fehbg --image-bg "#171719" --bg-max "$fehbg_bg1" "$fehbg_bg2"
-else
-    feh --no-fehbg --image-bg "#171719" --bg-max "$fehbg_bg1"
-fi
+#function monitor1080 {
+#    xrandr --query | grep -q "HDMI1 connected 1920x1080"
+#}
+##monitor1BelowMonitor2=`xrandr --query | grep -q "eDP1 connected primary 1920x1080+0+1080"`
+#if monitor1080; then
+#    feh --no-fehbg --image-bg "#171719" --bg-max "$fehbg_bg1" "$fehbg_bg2"
+#else
+#    feh --no-fehbg --image-bg "#171719" --bg-max "$fehbg_bg1"
+#fi
+feh --no-fehbg --image-bg "#171719" --bg-max "$fehbg_bg1"
