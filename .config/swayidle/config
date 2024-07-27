@@ -1,6 +1,4 @@
-# turn off display after 5 minutes, sleep after 10 minutes
-
-#timeout 150 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'
-timeout 300 'swaymsg "exec \$suspend"'
+timeout 290 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'
 before-sleep 'swaymsg "exec \$lock"'
+timeout 300 'swaymsg "exec \$suspend"'
 #lock 'swaymsg "exec \$lock"'
