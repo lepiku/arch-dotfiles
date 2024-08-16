@@ -7,12 +7,12 @@ set $terme foot -e
 set $termi foot -eic
 set $exe exec
 
-set $shutdown systemctl poweroff
-set $suspend systemctl suspend-then-hibernate
-set $reboot systemctl reboot
-set $logoff swaymsg exit
-set $lock swaylock
-set $hibernate systemctl hibernate
+set $shutdown utils shutdown
+set $suspend utils suspend-then-hibernate
+set $reboot utils reboot
+set $logoff utils lock
+set $lock utils lock
+set $hibernate utils hibernate
 
 # Input Configuration
 input "type:touchpad" {
