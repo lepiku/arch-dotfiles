@@ -26,33 +26,37 @@ hotspot_running=`pidof wihotspot-gui`
 create_ap_running=`pidof --with-workers create_ap`
 
 case $1 in
+    prepare-exit)
+        pkill cron-loop
+        sleep 1
+        ;;
     lock)
         echo "Lock"
-        swaylock
+        swaylock &
         ;;
 
     logoff)
         echo "Logoff"
-        pkill cron-loop
+        utils prepare-exit
         swaymsg exit
         ;;
 
     shutdown)
         echo "Shutdown"
-        pkill cron-loop
+        utils prepare-exit
         systemctl poweroff
         ;;
 
     reboot)
         echo "Reboot"
-        pkill cron-loop
+        utils prepare-exit
         systemctl reboot
         ;;
 
     hibernate)
         if [ -z "$hotspot_running" ] && [ -z "$create_ap_running" ]; then
             echo "Hibernate"
-            pkill cron-loop
+            utils prepare-exit
             systemctl hibernate
         else
             echo "No hibernate"
@@ -63,8 +67,11 @@ case $1 in
 
     suspend-then-hibernate)
         if [ -z "$hotspot_running" ] && [ -z "$create_ap_running" ]; then
-            echo "Suspend"
-            utils lock & sleep 1; systemctl suspend-then-hibernate
+            utils lock
+            utils prepare-exit
+            sleep 1
+            echo "Suspend then Hibernate"
+            systemctl suspend-then-hibernate
         else
             echo "No suspend"
             _notify "Hotspot running, not sleeping!" critical 3000
