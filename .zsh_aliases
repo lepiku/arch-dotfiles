@@ -20,6 +20,8 @@ alias adpro="cd ~/Projects/adpro/chroom-eatery"
 alias ppw-lab="conda deactivate && conda activate ppw-lab && cd ~/Projects/ppw/ppw-lab"
 alias iguide="cd ~/Projects/flutter/iguide"
 alias basdat="conda deactivate && conda activate basdat && export LOCAL_DATABASE_URL='postgres://localhost:5432/dimas?currentSchema=medikago' && cd ~/Projects/django/medika-go"
+alias cp-fast-views="cp ~/Projects/ckb/fastweb/parts/views/* ~/Projects/ckb/fastweb/smb/system/application/views"
+alias cp-fast-controllers="cp ~/Projects/ckb/fastweb/parts/controllers/* ~/Projects/ckb/fastweb/smb/system/application/controllers"
 
 # search inside files
 alias search="grep -Rne"
