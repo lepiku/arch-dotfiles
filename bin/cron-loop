@@ -11,7 +11,7 @@ interval=$1
 script_command=$2
 
 for i in `seq 1 $(( 60 / $interval ))`; do
-    echo "$i: $(date +%T)"
+    #echo "$i: $(date +%T)"
     $script_command
     sleep $interval
 done
