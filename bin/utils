@@ -140,6 +140,11 @@ case $1 in
         fi
         ;;
 
+    color-picker)
+        grim -g "$(slurp -p)" -t ppm - \
+            | magick - -format '%[pixel:p{0,0}]' txt:-
+        ;;
+
     *)
         _notify "Unknown command: $1"
 esac

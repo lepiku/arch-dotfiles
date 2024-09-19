@@ -45,7 +45,7 @@ input "type:pointer" {
 # Output Configuration
 set $edp1 eDP-1
 set $hdmi HDMI-A-1
-output * bg ~/.config/sway/wallpaper.png fill
+output * bg ~/.config/sway/wallpaper fill
 output $edp1 position 0 0
 output $hdmi position 0 -1080
 output "Hewlett Packard LE1711 3CQ95126B5" position 1920 0
@@ -158,9 +158,9 @@ bindsym $mod+$alt+Shift+0 gaps inner current set 8; gaps outer current set -8
 
 # Define names for default workspaces for which we configure key bindings later on.
 set $ws1 "1: main"
-set $ws2 "2: work"
-set $ws3 "3: shell"
-set $ws4 "4: browser"
+set $ws2 "2: browser"
+set $ws3 "3: network"
+set $ws4 "4: term"
 set $ws5 "5: media"
 set $ws6 "6"
 set $ws7 "7"
@@ -263,22 +263,28 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000     #0c0c0c
 client.background       #ffffff
 
 # Start i3bar to display a workspace bar (plus the system information i3status)
+
 bar {
-    status_command i3status
-    #status_command while echo "`date +'%Y-%m-%d %I:%M:%S %p'` `acpi`"; do sleep 1; done
-    position top
-
-    colors {
-        background #18181a
-        separator #18181a
-
-        focused_workspace  #1640b8 #1640b8 #ffffff
-        active_workspace   #333333 #5f676a #ffffff
-        inactive_workspace #333333 #222222 #888888
-        urgent_workspace   #ff0000 #f00000 #ffffff
-        binding_mode       #2f343a #900000 #ffffff
-    }
+    swaybar_command waybar
 }
+
+# i3status bar
+#bar {
+#    status_command i3status
+#    #status_command while echo "`date +'%Y-%m-%d %I:%M:%S %p'` `acpi`"; do sleep 1; done
+#    position top
+
+#    colors {
+#        background #18181a
+#        separator #18181a
+
+#        focused_workspace  #1640b8 #1640b8 #ffffff
+#        active_workspace   #333333 #5f676a #ffffff
+#        inactive_workspace #333333 #222222 #888888
+#        urgent_workspace   #ff0000 #f00000 #ffffff
+#        binding_mode       #2f343a #900000 #ffffff
+#    }
+#}
 # ---------- Launch Applications ---------- #
 #bindsym $mod+apostrophe exec i3-sensible-terminal
 

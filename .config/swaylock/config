@@ -1,2 +1,3 @@
-image=~/.config/sway/wallpaper.png
+image=~/.config/sway/wallpaper
 scaling=fill
+ignore-empty-password

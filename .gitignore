@@ -38,6 +38,8 @@ bin/assets
 !.config/nvim
 !.config/nvim/**
 .config/nvim/.netrwhist
+!.config/pipewire
+!.config/pipewire/**
 !.config/ranger
 !.config/ranger/**
 !.config/tmux
@@ -69,10 +71,10 @@ bin/assets
 !.config/foot/**
 !.config/sway
 !.config/sway/**
-.config/sway/wallpaper.png
+.config/sway/wallpaper
 !.config/swaylock
 !.config/swaylock/**
 !.config/swayidle
 !.config/swayidle/**
-!.config/pipewire
-!.config/pipewire/**
+!.config/waybar
+!.config/waybar/**

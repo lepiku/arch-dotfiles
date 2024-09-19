@@ -45,19 +45,19 @@ case $1 in
     raise)
         pactl set-sink-mute @DEFAULT_SINK@ no
         pactl set-sink-volume @DEFAULT_SINK@ $audio_inc
-        _refresh_i3status
-        _notify
+        #_refresh_i3status
+        #_notify
         ;;
     lower)
         pactl set-sink-mute @DEFAULT_SINK@ no
         pactl set-sink-volume @DEFAULT_SINK@ $audio_dec
-        _refresh_i3status
-        _notify
+        #_refresh_i3status
+        #_notify
         ;;
     mute)
         pactl set-sink-mute @DEFAULT_SINK@ toggle
-        _refresh_i3status
-        _notify
+        #_refresh_i3status
+        #_notify
         ;;
     mic-mute)
         pactl set-source-mute @DEFAULT_SOURCE@ toggle

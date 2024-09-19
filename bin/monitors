@@ -43,4 +43,4 @@ fi
 #else
 #    feh --no-fehbg --image-bg "#171719" --bg-max "$fehbg_bg1"
 #fi
-feh --no-fehbg --image-bg "#171719" --bg-max "$fehbg_bg1"
+#feh --no-fehbg --image-bg "#171719" --bg-max "$fehbg_bg1"
