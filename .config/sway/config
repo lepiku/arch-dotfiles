@@ -159,8 +159,8 @@ bindsym $mod+$alt+Shift+0 gaps inner current set 8; gaps outer current set -8
 # Define names for default workspaces for which we configure key bindings later on.
 set $ws1 "1: main"
 set $ws2 "2: browser"
-set $ws3 "3: network"
-set $ws4 "4: term"
+set $ws3 "3: term"
+set $ws4 "4: network"
 set $ws5 "5: media"
 set $ws6 "6"
 set $ws7 "7"
@@ -328,5 +328,5 @@ bindsym $mod+w exec bash scripts/web-shortcuts.sh \
 # ---------- Autostart Programs ---------- #
 exec swayidle
 exec dunst
-#exec nm-applet
+exec nm-applet
 exec sway-audio-idle-inhibit
