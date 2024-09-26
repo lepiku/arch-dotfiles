@@ -207,11 +207,17 @@
     "position": "top",
 
     // Module order
-    "modules-left": [],
+    "modules-left": [
+      "sway/window"
+    ],
     "modules-center": ["sway/workspaces"],
     "modules-right": [],
 
     // Module configurations
+    "sway/window": {
+      "icon": true,
+      "icon-size": 16
+    },
     "sway/workspaces": {
       "enable-bar-scroll": true,
       "disable-scroll-wraparound": true,
