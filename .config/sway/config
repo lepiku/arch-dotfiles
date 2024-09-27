@@ -158,11 +158,11 @@ bindsym $mod+$alt+Shift+0 gaps inner current set 8; gaps outer current set -8
 
 # Define names for default workspaces for which we configure key bindings later on.
 set $ws1 "1: main"
-set $ws2 "2: browser"
+set $ws2 "2: app"
 set $ws3 "3: term"
-set $ws4 "4: network"
-set $ws5 "5: media"
-set $ws6 "6"
+set $ws4 "4: browser"
+set $ws5 "5: network"
+set $ws6 "6: media"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"

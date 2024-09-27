@@ -33,10 +33,11 @@
       "format": "{icon}{name}",
       "format-icons": {
         "1: main": "",
-        "2: browser": "<span color=\"#FF8C15\"></span>",
+        "2: app": "",
         "3: term": "",
-        "4: network": "",
-        "5: media": "",
+        "4: browser": "<span color=\"#FF8C15\"></span>",
+        "5: network": "",
+        "6: media": "",
         "urgent": "",
         "default": ""
       }
@@ -225,10 +226,11 @@
       "format": "{icon}{name}",
       "format-icons": {
         "1: main": "",
-        "2: browser": "<span color=\"#FF8C15\"></span>",
+        "2: app": "",
         "3: term": "",
-        "4: network": "",
-        "5: media": "",
+        "4: browser": "<span color=\"#FF8C15\"></span>",
+        "5: network": "",
+        "6: media": "",
         "urgent": "",
         "default": ""
       }
