@@ -329,4 +329,5 @@ bindsym $mod+w exec bash scripts/web-shortcuts.sh \
 exec swayidle
 exec dunst
 exec nm-applet
+exec blueman-applet
 exec sway-audio-idle-inhibit
