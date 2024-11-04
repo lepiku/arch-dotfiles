@@ -191,8 +191,8 @@
 }
 #bluetooth {
   background: @nord_bg_blue;
-  font-size: 1.2em;
-  font-weight: bold;
+  /*font-size: 1.2em;*/
+  /*font-weight: bold;*/
   padding: 0 0.6em;
 }
 #custom-gpu {
