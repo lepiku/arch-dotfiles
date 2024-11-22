@@ -156,20 +156,26 @@
 
 /* Workspaces stuff */
 
+/*.modules-center {*/
+/*padding: 0;*/
+/*margin: 0;*/
+/*}*/
+
 #workspaces {
+  padding: 0;
+  margin: 0;
   /*   color: #D8DEE9;
     margin-right: 10px;*/
 }
 
 #workspaces button {
   font-weight: bold; /* Somewhy the bar-wide setting is ignored*/
-  padding: 0;
   color: #d8dee9;
-  /*color: #999;*/
   opacity: 1;
   background: none;
   font-size: 1em;
   padding: 0 0.4em;
+  /*min-height: 20px;*/
 }
 
 #workspaces button.focused {
@@ -185,8 +191,9 @@
 }
 
 #window {
-  margin-right: 16px;
-  margin-left: 16px;
+  margin: 0 16px;
+  /*margin-right: 16px;*/
+  /*margin-left: 16px;*/
   font-weight: normal;
 }
 #bluetooth {
