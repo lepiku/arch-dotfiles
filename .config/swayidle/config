@@ -1,4 +1,4 @@
-timeout 290 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'
+timeout 240 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'
 #before-sleep 'utils lock'
 timeout 300 'utils suspend-then-hibernate'
 #lock 'swaymsg "exec \$lock"'
