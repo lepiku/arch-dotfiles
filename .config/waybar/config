@@ -3,8 +3,8 @@
     "output": "eDP-1",
     "layer": "top",
     "position": "top",
+    "include": ["~/.config/waybar/default-modules.json"],
 
-    // Module order
     "modules-left": [
       "battery",
       "clock",
@@ -23,247 +23,17 @@
       "bluetooth",
       "network",
       "tray"
-    ],
-
-    // Module configurations
-    "sway/workspaces": {
-      "enable-bar-scroll": true,
-      "disable-scroll-wraparound": true,
-      "all-outputs": false,
-      "format": "{icon}{name}",
-      "format-icons": {
-        "1: main": "",
-        "2: app": "",
-        "3: term": "",
-        "4: browser": "<span color=\"#FF8C15\"></span>",
-        "5: network": "",
-        "6: media": "",
-        "urgent": "",
-        "default": ""
-      }
-    },
-    "sway/mode": {
-      "format": "<span style=\"italic\">{}</span>"
-    },
-    "sway/window": {
-      "icon": true,
-      "icon-size": 16
-    },
-    "bluetooth": {
-      "on-click": "blueman-manager",
-      "format": " {status}",
-      "format-connected": " {device_alias}",
-      "format-connected-battery": " {device_alias} {device_battery_percentage}%",
-      // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
-      "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
-      "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
-      "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-      "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
-    },
-    "idle_inhibitor": {
-      "tooltip": "true",
-      "format": "{icon}",
-      "format-icons": {
-        "activated": "",
-        "deactivated": ""
-      }
-    },
-    "tray": {
-      "spacing": 5
-    },
-    "clock": {
-      "format": " {:%H:%M  %e %b}",
-      "tooltip-format": "<tt>{calendar}</tt>",
-      "on-click": "gnome-calendar",
-      "calendar": {
-        "format": {
-          "today": "<b>{}</b>"
-        }
-      }
-    },
-    "cpu": {
-      "interval": "4",
-      "format": " {max_frequency}GHz | <span color=\"darkgray\">{usage}%</span>",
-      "min-length": 16,
-      "max-length": 16,
-      "on-click": "foot -e htop --sort-key PERCENT_CPU",
-      "tooltip": true
-    },
-    "temperature": {
-      //"thermal-zone": 0,
-      "hwmon-path": "/sys/class/hwmon/hwmon6/temp1_input",
-      "interval": "4",
-      "critical-threshold": 80,
-      "format-critical": " {temperatureC}°C",
-      "format": "{icon} {temperatureC}°C",
-      "format-icons": ["", "", ""],
-      "max-length": 7,
-      "min-length": 7,
-      "tooltip": false
-    },
-    "memory": {
-      "interval": 10,
-      "format": " {used} GB",
-      "min-length": 11,
-      "max-length": 11
-    },
-    "network": {
-      // "interface": "wlan0", // (Optional) To force the use of this interface,
-      "format-wifi": " {essid}",
-      "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
-      "format-linked": "{ifname} (No IP) ",
-      "format-disconnected": "",
-      "format-alt": "{ifname}: {ipaddr}/{cidr}",
-      "family": "ipv4",
-      "tooltip-format-wifi": " {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\n {bandwidthUpBits}  {bandwidthDownBits}",
-      "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n {bandwidthUpBits}  {bandwidthDownBits}"
-    },
-    "pulseaudio": {
-      "scroll-step": 2, // %, can be a float
-      "format": "{icon} {volume}% {format_source}",
-      "format-bluetooth": "{volume}% {icon}  {format_source}",
-      "format-bluetooth-muted": "  {icon}  {format_source}",
-      "format-muted": "  {format_source}",
-      "format-source": "",
-      "format-source-muted": "",
-      "format-icons": {
-        "headphone": "",
-        "hands-free": "",
-        "headset": "",
-        "phone": "",
-        "portable": "",
-        "car": "",
-        "default": ["", "", ""]
-      },
-      "on-click": "pavucontrol",
-      "on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
-    },
-    "battery": {
-      "bat": "BAT0",
-      "interval": 60,
-      //"design-capacity": true,
-      "states": {
-        "warning": 20,
-        "critical": 12
-      },
-      "format": "{capacity}% {icon}",
-      "format-icons": ["", "", "", "", ""],
-      "max-length": 25
-    },
-    "custom/scratchpad-indicator": {
-      "interval": 3,
-      "return-type": "json",
-      "exec": "swaymsg -t get_tree | jq --unbuffered --compact-output '( select(.name == \"root\") | .nodes[] | select(.name == \"__i3\") | .nodes[] | select(.name == \"__i3_scratch\") | .focus) as $scratch_ids | [..  | (.nodes? + .floating_nodes?) // empty | .[] | select(.id |IN($scratch_ids[]))] as $scratch_nodes | { text: \"\\($scratch_nodes | length)\", tooltip: $scratch_nodes | map(\"\\(.app_id // .window_properties.class) (\\(.id)): \\(.name)\") | join(\"\\n\") }'",
-      "format": "{} ",
-      "on-click": "exec swaymsg 'scratchpad show'",
-      "on-click-right": "exec swaymsg 'move scratchpad'"
-    }
-    //"sway/language": {
-    //  "format": "<big></big> {}",
-    //  "max-length": 5,
-    //  "min-length": 5
-    //},
-    //"custom/weather": {
-    //  "exec": "curl 'https://wttr.in/?format=1'",
-    //  "interval": 3600
-    //},
-    //"custom/gpu": {
-    //  "exec": "$HOME/.config/waybar/custom_modules/custom-gpu.sh",
-    //  "return-type": "json",
-    //  "format": "  {}",
-    //  "interval": 2,
-    //  "tooltip": "{tooltip}",
-    //  "max-length": 19,
-    //  "min-length": 19,
-    //  "on-click": "powerupp"
-    //},
-    //"custom/cpugovernor": {
-    //  "format": "{icon}",
-    //  "interval": "30",
-    //  "return-type": "json",
-    //  "exec": "$HOME/.config/waybar/custom_modules/cpugovernor.sh",
-    //  "min-length": 2,
-    //  "max-length": 2,
-    //  "format-icons": {
-    //    "perf": "",
-    //    "sched": ""
-    //  }
-    //},
-    //"custom/media": {
-    //  "format": "{icon} {}",
-    //  "return-type": "json",
-    //  "max-length": 40,
-    //  "format-icons": {
-    //    "spotify": "",
-    //    "default": "🎜"
-    //  },
-    //  "escape": true,
-    //  "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-    //  // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-    //},
+    ]
   },
   {
     "output": "HDMI-A-1",
     "layer": "top",
     "position": "top",
+    "include": ["~/.config/waybar/default-modules.json"],
 
-    // Module order
-    "modules-left": [
-      "battery",
-      "clock",
-      "sway/window"
-    ],
+    "modules-left": ["battery", "clock", "sway/window"],
     "modules-center": ["sway/workspaces"],
-    "modules-right": ["tray"],
-
-    // Module configurations
-    "battery": {
-      "bat": "BAT0",
-      "interval": 60,
-      //"design-capacity": true,
-      "states": {
-        "warning": 20,
-        "critical": 12
-      },
-      "format": "{capacity}% {icon}",
-      "format-icons": ["", "", "", "", ""],
-      "max-length": 25
-    },
-    "clock": {
-      "format": " {:%H:%M  %e %b}",
-      "tooltip-format": "<tt>{calendar}</tt>",
-      "on-click": "gnome-calendar",
-      "calendar": {
-        "format": {
-          "today": "<b>{}</b>"
-        }
-      }
-    },
-    "sway/window": {
-      "icon": true,
-      "icon-size": 16
-    },
-
-    "sway/workspaces": {
-      "enable-bar-scroll": true,
-      "disable-scroll-wraparound": true,
-      "all-outputs": false,
-      "format": "{icon}{name}",
-      "format-icons": {
-        "1: main": "",
-        "2: app": "",
-        "3: term": "",
-        "4: browser": "<span color=\"#FF8C15\"></span>",
-        "5: network": "",
-        "6: media": "",
-        "urgent": "",
-        "default": ""
-      }
-    },
-
-    "tray": {
-      "spacing": 5
-    }
+    "modules-right": ["tray"]
   }
 ]
 
