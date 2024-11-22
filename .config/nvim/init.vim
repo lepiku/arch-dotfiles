@@ -282,7 +282,10 @@ if has('nvim')
     nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
     " -- Extensions -- "
+    nmap <leader>f :CocCommand editor.action.formatDocument<CR>
+
     nnoremap <space>e <Cmd>CocCommand explorer<CR>
+    nnoremap <leader>er <Cmd>call CocAction('runCommand', 'explorer.doAction', 'closest', ['reveal:0'], [['relative', 0, 'file']])<CR>
 endif
 
 " these "Ctrl mappings" work well when Caps Lock is mapped to Ctrl
