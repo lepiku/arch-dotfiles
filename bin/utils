@@ -3,6 +3,7 @@
 source ~/.config/dotfiles.conf
 : '
 $utils_notif_id
+$utils_brightness_bus_id
 $utils_brightness_delta
 $utils_network_ethernet_interface
 $utils_network_ethernet_max
@@ -25,13 +26,15 @@ _notify() {
         brightness)
             case $2 in
                 increase)
-                    ddcutil --bus 6 setvcp 10 + $utils_brightness_delta
-                    value=`ddcutil --bus 6 getvcp 10 | sed 's/.*current value = *//;s/,.*//'`
+                    ddcutil --bus $utils_brightness_bus_id setvcp 10 + $utils_brightness_delta
+                    value=`ddcutil --bus $utils_brightness_bus_id getvcp 10 |
+                        sed 's/.*current value = *//;s/,.*//'`
                     _notify "Brightness: $value%"
                     ;;
                 decrease)
-                    ddcutil --bus 6 setvcp 10 - $utils_brightness_delta
-                    value=`ddcutil --bus 6 getvcp 10 | sed ';s/.*current value = *//;s/,.*//'`
+                    ddcutil --bus $utils_brightness_bus_id setvcp 10 - $utils_brightness_delta
+                    value=`ddcutil --bus $utils_brightness_bus_id getvcp 10 |
+                        sed ';s/.*current value = *//;s/,.*//'`
                     _notify "Brightness: $value%"
                     ;;
                 *)
