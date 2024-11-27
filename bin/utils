@@ -12,81 +12,141 @@ $utils_network_wifi_max
 '
 
 app_name="utils"
-args=" ${@:2} "
 
 _notify() {
     message="$1"
     urgency="${2:-low}" # low | normal | critical
-    icon="${3:-gtk-info}" # located in `/usr/share/icons`
+    duration="${3:-1500}" # in milisecond
+    icon="${4:-gtk-info}" # located in `/usr/share/icons`
 
-    notify-send -a $app_name -r $utils_notif_id -t 1500 "$message" -u "$urgency" -i "$icon"
-    }
+    notify-send -a $app_name -r $utils_notif_id -t $duration "$message" -u "$urgency" -i "$icon"
+}
 
-    case $1 in
-        brightness)
-            case $2 in
-                increase)
-                    ddcutil --bus $utils_brightness_bus_id setvcp 10 + $utils_brightness_delta
-                    value=`ddcutil --bus $utils_brightness_bus_id getvcp 10 |
-                        sed 's/.*current value = *//;s/,.*//'`
-                    _notify "Brightness: $value%"
+hotspot_running=`pidof wihotspot-gui`
+create_ap_running=`pidof --with-workers create_ap`
+
+case $1 in
+    prepare-exit)
+        pkill cron-loop
+        sleep 1
+        ;;
+    lock)
+        echo "Lock"
+        swaylock &
+        ;;
+
+    logoff)
+        echo "Logoff"
+        utils prepare-exit
+        swaymsg exit
+        ;;
+
+    shutdown)
+        echo "Shutdown"
+        utils prepare-exit
+        systemctl poweroff
+        ;;
+
+    reboot)
+        echo "Reboot"
+        utils prepare-exit
+        systemctl reboot
+        ;;
+
+    hibernate)
+        if [ -z "$hotspot_running" ] && [ -z "$create_ap_running" ]; then
+            echo "Hibernate"
+            utils prepare-exit
+            systemctl hibernate
+        else
+            echo "No hibernate"
+            _notify "Hotspot running, not hibernating!" critical 3000
+        fi
+        ;;
+
+
+    suspend-then-hibernate)
+        if [ -z "$hotspot_running" ] && [ -z "$create_ap_running" ]; then
+            utils lock
+            utils prepare-exit
+            sleep 1
+            echo "Suspend then Hibernate"
+            systemctl suspend-then-hibernate
+        else
+            echo "No suspend"
+            _notify "Hotspot running, not sleeping!" critical 3000
+        fi
+        ;;
+
+    brightness)
+        case $2 in
+            increase)
+                ddcutil --bus $utils_brightness_bus_id setvcp 10 + $utils_brightness_delta
+                value=`ddcutil --bus $utils_brightness_bus_id getvcp 10 |
+                    sed 's/.*current value = *//;s/,.*//'`
+                _notify "Brightness: $value%"
+                ;;
+            decrease)
+                ddcutil --bus $utils_brightness_bus_id setvcp 10 - $utils_brightness_delta
+                value=`ddcutil --bus $utils_brightness_bus_id getvcp 10 |
+                    sed ';s/.*current value = *//;s/,.*//'`
+                _notify "Brightness: $value%"
+                ;;
+            *)
+                _notify "Unknown brightness command: $2"
+        esac
+        ;;
+
+    network)
+        case $2 in
+            ethernet)
+                speedometer \
+                    -r $utils_network_ethernet_interface \
+                    -t $utils_network_ethernet_interface \
+                    -l -m $utils_network_ethernet_max
                     ;;
-                decrease)
-                    ddcutil --bus $utils_brightness_bus_id setvcp 10 - $utils_brightness_delta
-                    value=`ddcutil --bus $utils_brightness_bus_id getvcp 10 |
-                        sed ';s/.*current value = *//;s/,.*//'`
-                    _notify "Brightness: $value%"
+            wifi)
+                speedometer \
+                    -r $utils_network_wifi_interface \
+                    -t $utils_network_wifi_interface \
+                    -l -m $utils_network_wifi_max
                     ;;
-                *)
-                    _notify "Unknown brightness command: $2"
-            esac
-            ;;
+        esac
+        ;;
 
-        network)
-            case $2 in
-                ethernet)
-                    speedometer \
-                        -r $utils_network_ethernet_interface \
-                        -t $utils_network_ethernet_interface \
-                        -l -m $utils_network_ethernet_max
-                        ;;
-                wifi)
-                    speedometer \
-                        -r $utils_network_wifi_interface \
-                        -t $utils_network_wifi_interface \
-                        -l -m $utils_network_wifi_max
-                        ;;
-            esac
-            ;;
+    swayidle-toggle)
+        enabled=`pidof swayidle`
 
-        swayidle-toggle)
-            enabled=`pidof swayidle`
+        if [ -z "$enabled" ]; then
+            echo "Enabling auto suspend"
+            _notify "Enabling auto suspend" normal
+            nohup swayidle &> /dev/null & disown
+        else
+            echo "Disabling auto suspend"
+            _notify "Disabling auto suspend" critical
+            pkill swayidle
+        fi
+        ;;
 
-            if [ ! -n "$enabled" ]; then
-                echo "Enabling auto suspend"
-                _notify "Enabling auto suspend" normal
-                nohup swayidle &> /dev/null & disown
-            else
-                echo "Disabling auto suspend"
-                _notify "Disabling auto suspend" critical
-                pkill swayidle
-            fi
-            ;;
+    xidlehook-toggle)
+        enabled=`pidof xidlehook`
 
-        xidlehook-toggle)
-            enabled=`pidof xidlehook`
+        if [ -z "$enabled" ]; then
+            echo "Enabling auto suspend"
+            _notify "Enabling auto suspend" normal
+            nohup wrap-sigterm run-xidlehook &> /dev/null & disown
+        else
+            echo "Disabling auto suspend"
+            _notify "Disabling auto suspend" critical
+            pkill xidlehook
+        fi
+        ;;
 
-            if [ ! -n "$enabled" ]; then
-                echo "Enabling auto suspend"
-                _notify "Enabling auto suspend" normal
-                nohup wrap-sigterm run-xidlehook &> /dev/null & disown
-            else
-                echo "Disabling auto suspend"
-                _notify "Disabling auto suspend" critical
-                pkill xidlehook
-            fi
-            ;;
+    color-picker)
+        grim -g "$(slurp -p)" -t ppm - \
+            | magick - -format '%[pixel:p{0,0}]' txt:-
+        ;;
 
-        *)
-            _notify "Unknown command: $1"
-    esac
+    *)
+        _notify "Unknown command: $1"
+esac

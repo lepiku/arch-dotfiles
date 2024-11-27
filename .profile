@@ -8,15 +8,15 @@ if [ -d "$HOME/.local/bin" ] ; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
 
-# flutter path
-if [ -d "$HOME/Android/flutter/bin" ] ; then
-    export PATH="$PATH:$HOME/Android/flutter/bin"
-fi
-
 # android path
 if [ -d "$HOME/Android/Sdk" ] ; then
-    export PATH="$PATH:$HOME/Android/Sdk/platform-tools"
-    export PATH="$PATH:$HOME/Android/Sdk/emulator"
+    export PATH="$HOME/Android/Sdk/platform-tools:$PATH"
+    export PATH="$HOME/Android/Sdk/emulator:$PATH"
+fi
+
+# flutter path
+if [ -d "$HOME/Android/flutter/bin" ] ; then
+    export PATH="$HOME/Android/flutter/bin:$PATH"
 fi
 
 # for pyenv

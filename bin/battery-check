@@ -21,7 +21,7 @@ level=`cat /sys/class/power_supply/BAT0/charge_now`
 full_level=`cat /sys/class/power_supply/BAT0/charge_full_design`
 current_level=`expr "$level" \* 100 / "$full_level"`
 
-echo "Current battery: $current_level%"
+#echo "Current battery: $current_level%"
 
 if [ "$battery_notification_id" != -1 ]; then
     battery_is_notified=true
@@ -30,33 +30,33 @@ else
 fi
 
 if [ ! -n "$plugged_in" ] && [ "$current_level" -le "$battery_low" ]; then
-    echo "Low battery."
+    #echo "Low battery."
     if [ $battery_is_notified = false ]; then
-        echo -e "\tNotifying."
+        #echo -e "\tNotifying."
         notif_id=`
             notify-send -u critical -a $app_name -i xfce4-battery-critical \
                 -t $battery_notify_time -p "LOW BATTERY ($current_level%)" \
                 "Connect charger\!"`
         set-state "battery_notification_id" $notif_id
-        echo "$(date): $current_level% Low Battery" >> /tmp/$app_name.log
+        #echo "$(date): $current_level% Low Battery" >> /tmp/$app_name.log
     fi
 
 elif [ "$battery_notify_high" = true ] \
         && [ -n "$plugged_in" ] \
         && [ "$current_level" -ge "$battery_high" ]; then
-    echo "High battery."
+    #echo "High battery."
     if [ $battery_is_notified = false ]; then
-        echo -e "\tNotifying."
+        #echo -e "\tNotifying."
         notif_id=`
             notify-send -u normal -a $app_name -i battery-full-charged \
                 -t $battery_notify_time -p "High Battery ($current_level%)" \
                 "Disconnect charger\!"`
         set-state "battery_notification_id" $notif_id
-        echo "$(date): $current_level% Full Battery" >> /tmp/$app_name.log
+        #echo "$(date): $current_level% Full Battery" >> /tmp/$app_name.log
     fi
 
 else
-    echo "Nothing to do."
+    #echo "Nothing to do."
     if [ "$battery_is_notified" = true ]; then
         notify-send -a $app_name -t 1 " " -r $battery_notification_id
         set-state "battery_notification_id" -1
@@ -68,10 +68,10 @@ if [ "$battery_prev_plugged_in" = false ] && [ -n "$plugged_in" ]; then
     notify-send -u normal -a $app_name -i battery_plugged -p -t 2000 \
         "Power Plugged In"
     set-state "battery_prev_plugged_in" true
-    echo "$(date): $current_level% Plugged In" >> /tmp/$app_name.log
+    #echo "$(date): $current_level% Plugged In" >> /tmp/$app_name.log
 elif [ "$battery_prev_plugged_in" = true ] && [ ! -n "$plugged_in" ]; then
     notify-send -u low -a $app_name -i battery_plugged -p -t 2000 \
         "Power Unplugged"
     set-state "battery_prev_plugged_in" false
-    echo "$(date): $current_level% Unplugged" >> /tmp/$app_name.log
+    #echo "$(date): $current_level% Unplugged" >> /tmp/$app_name.log
 fi

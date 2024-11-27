@@ -1,0 +1,40 @@
+[
+  {
+    "output": "eDP-1",
+    "layer": "top",
+    "position": "top",
+    "include": ["~/.config/waybar/default-modules.json"],
+
+    "modules-left": [
+      "battery",
+      "clock",
+      //"sway/language",
+      "custom/scratchpad-indicator",
+      "idle_inhibitor",
+      "sway/mode",
+      "sway/window"
+    ],
+    "modules-center": ["sway/workspaces"],
+    "modules-right": [
+      "cpu",
+      "temperature",
+      "memory",
+      "pulseaudio",
+      "bluetooth",
+      "network",
+      "tray"
+    ]
+  },
+  {
+    "output": "HDMI-A-1",
+    "layer": "top",
+    "position": "top",
+    "include": ["~/.config/waybar/default-modules.json"],
+
+    "modules-left": ["battery", "clock", "sway/window"],
+    "modules-center": ["sway/workspaces"],
+    "modules-right": ["tray"]
+  }
+]
+
+// vim: filetype=jsonc

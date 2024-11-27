@@ -4,15 +4,14 @@ set $mod Mod4
 set $alt Mod1
 set $term foot
 set $terme foot -e
-set $termi foot -eic
-set $exe exec
+set $termi foot -e zsh -ic
 
-set $shutdown systemctl poweroff
-set $suspend systemctl suspend-then-hibernate
-set $reboot systemctl reboot
-set $logoff swaymsg exit
-set $lock swaylock
-set $hibernate systemctl hibernate
+set $shutdown utils shutdown
+set $suspend utils suspend-then-hibernate
+set $reboot utils reboot
+set $logoff utils logoff
+set $lock utils lock
+set $hibernate utils hibernate
 
 # Input Configuration
 input "type:touchpad" {
@@ -34,18 +33,23 @@ input "1267:12433:ELAN0504:00_04F3:3091_Touchpad" {
     pointer_accel 0.2
 }
 # for external mouse
-input "type:pointer" accel_profile flat
-input "1133:45083:M585/M590_Mouse" pointer_accel -0.6
-input "1133:45108:Logitech_MX_Master_3S" pointer_accel 0
+input "type:pointer" {
+    accel_profile flat
+    pointer_accel -0.4
+}
+#input "1133:45083:M585/M590_Mouse" pointer_accel -0.6
+#input "1133:45108:Logitech_MX_Master_3S" pointer_accel 0
+#input "1133:50504:Logitech_USB_Receiver_Mouse" pointer_accel -0.4
 
 # Output Configuration
 set $edp1 eDP-1
 set $hdmi HDMI-A-1
-output * bg ~/.config/sway/wallpaper.png fill
+output * bg ~/.config/sway/wallpaper fill
 output $edp1 position 0 0
-output $hdmi position 0 -1080
-output "Hewlett Packard LE1711 3CQ95126B5" position 1920 0
+output $hdmi position 0 -1080 mode 1920x1080
+output "Hewlett Packard LE1711 3CQ95126B5" position 1920 0 mode 1280x1024
 output "ASUSTek COMPUTER INC ASUS VG249 0x00033567" mode 1920x1080@120Hz
+output "Dell Inc. DELL E1916HV MMK395CIFWRI" position 1920 0 mode 1920x1080
 
 # set size for focused border
 for_window [class=".*"] border pixel 2
@@ -60,6 +64,10 @@ for_window [class="zoom" title="^Settings$"] floating enable
 for_window [class="^join\?action=join"] floating enable
 #for_window [title="^Android Emulator"] border pixel 0
 for_window [class="code-oss"] opacity set 0.95
+for_window [app_id="org.pulseaudio.pavucontrol"] floating enable
+for_window [app_id="wihotspot"] floating enable, resize set height 500
+for_window [app_id="nm-connection-editor"] floating enable
+for_window [app_id="java" title="Dbeaver"] floating enable
 
 # set gaps
 smart_borders on
@@ -73,34 +81,35 @@ font pango:Source Code Pro Medium 10
 floating_modifier $mod
 
 # Use pactl to adjust volume in PulseAudio.
-bindsym XF86AudioRaiseVolume $exe audio-adjust raise
-bindsym XF86AudioLowerVolume $exe audio-adjust lower
-bindsym XF86AudioMute $exe audio-adjust mute
-bindsym XF86AudioMicMute $exe audio-adjust mic-mute
-bindsym XF86AudioPlay $exe playerctl play-pause
-bindsym XF86AudioPrev $exe playerctl previous
-bindsym XF86AudioNext $exe playerctl next
+bindsym XF86AudioRaiseVolume exec audio-adjust raise
+bindsym XF86AudioLowerVolume exec audio-adjust lower
+bindsym XF86AudioMute exec audio-adjust mute
+bindsym XF86AudioMicMute exec audio-adjust mic-mute
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioNext exec playerctl next
 
 # adjust backlight
-bindsym XF86MonBrightnessUp $exe brightnessctl set +2%
-bindsym XF86MonBrightnessDown $exe brightnessctl set 2%-
+bindsym XF86MonBrightnessUp exec brightnessctl set +2%
+bindsym XF86MonBrightnessDown exec brightnessctl set 2%-
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return $exe $terme tmux
-bindsym $mod+Shift+Return $exe $term
+bindsym $mod+Return exec $terme tmux
+bindsym $mod+Shift+Return exec $term
+bindsym $mod+Grave exec $HOME/scripts/sway-scratchpad 'scratch-term' 'foot -e tmux'
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-#bindsym $mod+d $exe dmenu_run -fn "Source Code Pro-11"
-#bindsym $mod+Shift+d $exe i3-dmenu-desktop --dmenu='dmenu -i -fn "Source Code Pro-11"'
-#bindsym $mod+d $exe rofi -show drun
-bindsym $mod+d $exe fuzzel
-#bindsym $mod+Shift+d $exe rofi -show run -theme android_notification
+#bindsym $mod+d exec dmenu_run -fn "Source Code Pro-11"
+#bindsym $mod+Shift+d exec i3-dmenu-desktop --dmenu='dmenu -i -fn "Source Code Pro-11"'
+#bindsym $mod+d exec rofi -show drun
+bindsym $mod+d exec fuzzel
+#bindsym $mod+Shift+d exec rofi -show run -theme android_notification
 
 # ---------- Managing Windows ---------- #
 focus_wrapping no
@@ -150,11 +159,11 @@ bindsym $mod+$alt+Shift+0 gaps inner current set 8; gaps outer current set -8
 
 # Define names for default workspaces for which we configure key bindings later on.
 set $ws1 "1: main"
-set $ws2 "2: work"
-set $ws3 "3: shell"
+set $ws2 "2: app"
+set $ws3 "3: term"
 set $ws4 "4: browser"
-set $ws5 "5: media"
-set $ws6 "6"
+set $ws5 "5: network"
+set $ws6 "6: media"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
@@ -204,11 +213,11 @@ bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 
 # change container layout (stacked and toggle split)
 bindsym $mod+s layout toggle split
-bindsym $mod+Shift+s layout stacking
+bindsym $mod+Shift+s layout tabbed
 
 # enter fullscreen mode for the focused container and tabbed layout
 bindsym $mod+f fullscreen toggle
-bindsym $mod+Shift+f layout tabbed
+bindsym $mod+Shift+f layout stacking
 
 # split toggle
 bindsym $mod+x split toggle
@@ -223,6 +232,8 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 bindsym $mod+Shift+a focus child
 
+bindsym $mod+y sticky toggle
+
 # reload the configuration file
 bindsym $mod+r reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -231,12 +242,12 @@ bindsym $mod+r reload
 # power modes
 set $mode_power "[E]xit | [L]ock | sus[P]end | [R]eboot | [S]hutdown | [H]ibernate"
 mode $mode_power {
-    bindsym e $exe $logoff
-    bindsym l $exe $lock, mode "default"
-    bindsym p $exe $suspend, mode "default"
-    bindsym r $exe $reboot
-    bindsym s $exe $shutdown
-    bindsym h $exe $hibernate, mode "default"
+    bindsym e exec $logoff
+    bindsym l exec $lock, mode "default"
+    bindsym p exec $suspend, mode "default"
+    bindsym r exec $reboot
+    bindsym s exec $shutdown
+    bindsym h exec $hibernate, mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -253,30 +264,36 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000     #0c0c0c
 client.background       #ffffff
 
 # Start i3bar to display a workspace bar (plus the system information i3status)
+
 bar {
-    status_command i3status
-    #status_command while echo "`date +'%Y-%m-%d %I:%M:%S %p'` `acpi`"; do sleep 1; done
-    position top
-
-    colors {
-        background #18181a
-        separator #18181a
-
-        focused_workspace  #1640b8 #1640b8 #ffffff
-        active_workspace   #333333 #5f676a #ffffff
-        inactive_workspace #333333 #222222 #888888
-        urgent_workspace   #ff0000 #f00000 #ffffff
-        binding_mode       #2f343a #900000 #ffffff
-    }
+    swaybar_command waybar
 }
+
+# i3status bar
+#bar {
+#    status_command i3status
+#    #status_command while echo "`date +'%Y-%m-%d %I:%M:%S %p'` `acpi`"; do sleep 1; done
+#    position top
+
+#    colors {
+#        background #18181a
+#        separator #18181a
+
+#        focused_workspace  #1640b8 #1640b8 #ffffff
+#        active_workspace   #333333 #5f676a #ffffff
+#        inactive_workspace #333333 #222222 #888888
+#        urgent_workspace   #ff0000 #f00000 #ffffff
+#        binding_mode       #2f343a #900000 #ffffff
+#    }
+#}
 # ---------- Launch Applications ---------- #
 #bindsym $mod+apostrophe exec i3-sensible-terminal
 
 bindsym $mod+b          exec firefox
 bindsym $mod+Shift+b    exec firefox --private-window
 
-#bindsym $mod+c          exec calibre
-bindsym $mod+Shift+c    $exe $termi swayconfig
+bindsym $mod+c          exec code
+bindsym $mod+Shift+c    exec dbeaver
 
 #bindsym $mod+e          exec sudo bluetooth toggle
 #bindsym $mod+Shift+e    exec steam-runtime
@@ -284,19 +301,20 @@ bindsym $mod+Shift+c    $exe $termi swayconfig
 bindsym $mod+g          exec chromium
 bindsym $mod+Shift+g    exec chromium --incognito
 
-bindsym $mod+i          $exe $terme speedometer -r wlp2s0 -t wlp2s0 -l -m 6000000
+bindsym $mod+i          exec $terme utils network ethernet
+bindsym $mod+Shift+i    exec $terme utils network wifi
 
-bindsym $mod+m          $exe $terme ranger
+bindsym $mod+m          exec $terme ranger
 bindsym $mod+Shift+m    exec nautilus
 
 bindsym $mod+o          output $hdmi toggle
 
 bindsym $mod+Shift+p    exec utils swayidle-toggle
 
-bindsym $mod+t          $exe $terme htop
+bindsym $mod+t          exec $terme htop
 
 bindsym $mod+v          exec pavucontrol
-bindsym $mod+Shift+v    exec code
+bindsym $mod+Shift+v    exec $termi swayconfig
 
 bindsym $mod+z          exec /usr/share/sway-contrib/grimshot copy area
 bindsym $mod+Shift+z    exec /usr/share/sway-contrib/grimshot save area
@@ -311,4 +329,6 @@ bindsym $mod+w exec bash scripts/web-shortcuts.sh \
 # ---------- Autostart Programs ---------- #
 exec swayidle
 exec dunst
-#exec nm-applet
+exec nm-applet
+exec blueman-applet
+exec sway-audio-idle-inhibit
