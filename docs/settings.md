@@ -286,3 +286,14 @@
   Install [`mkinitcpio-bluetooth`](https://github.com/irreleph4nt/mkinitcpio-bluetooth/)
 
   Follow the setup guide in there
+
+- Bluetooth not powered on / no default controller
+
+  Issue sometimes found on okto-archpc after startup.
+
+  Solution: <https://wiki.archlinux.org/title/Bluetooth#bluetoothctl:_No_default_controller_available>
+
+  ```sh
+  sudo modprobe -r btusb
+  sudo modprobe btusb
+  ```
