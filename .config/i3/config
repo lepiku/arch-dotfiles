@@ -38,6 +38,7 @@ for_window [class="^join\?action=join"] floating enable
 #for_window [title="^Android Emulator"] border pixel 0
 for_window [class="Ulauncher.*"] floating enable border pixel 0
 for_window [class="pavucontrol"] floating enable
+for_window [class="steam" title="^(?!Steam$)"] floating enable
 
 # set gaps
 gaps inner 8
@@ -48,6 +49,8 @@ font pango:Source Code Pro Medium 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
+
+bindsym XF86PowerOff $exe lock & sleep 2 && systemctl suspend
 
 # Use pactl to adjust volume in PulseAudio.
 bindsym XF86AudioRaiseVolume $exe audio-adjust raise
@@ -67,6 +70,7 @@ bindsym XF86MonBrightnessDown $exe utils brightness decrease
 floating_modifier $mod
 
 # start a terminal
+bindsym $mod+u $exe st -e bash
 bindsym $mod+Return $exe $terme tmux
 bindsym $mod+Shift+Return $exe $term
 
@@ -213,6 +217,46 @@ mode $mode_power {
 }
 bindsym $mod+Shift+backslash mode $mode_power
 
+# temp alt mod
+set $mode_alt "Swap Mod to Alt"
+mode $mode_alt {
+    bindsym $alt+1 workspace $ws1
+    bindsym $alt+2 workspace $ws2
+    bindsym $alt+3 workspace $ws3
+    bindsym $alt+4 workspace $ws4
+    bindsym $alt+5 workspace $ws5
+    bindsym $alt+6 workspace $ws6
+    bindsym $alt+7 workspace $ws7
+    bindsym $alt+8 workspace $ws8
+    bindsym $alt+9 workspace $ws9
+    bindsym $alt+0 workspace $ws10
+
+    bindsym $alt+Shift+1 move container to workspace $ws1; workspace $ws1
+    bindsym $alt+Shift+2 move container to workspace $ws2; workspace $ws2
+    bindsym $alt+Shift+3 move container to workspace $ws3; workspace $ws3
+    bindsym $alt+Shift+4 move container to workspace $ws4; workspace $ws4
+    bindsym $alt+Shift+5 move container to workspace $ws5; workspace $ws5
+    bindsym $alt+Shift+6 move container to workspace $ws6; workspace $ws6
+    bindsym $alt+Shift+7 move container to workspace $ws7; workspace $ws7
+    bindsym $alt+Shift+8 move container to workspace $ws8; workspace $ws8
+    bindsym $alt+Shift+9 move container to workspace $ws9; workspace $ws9
+    bindsym $alt+Shift+0 move container to workspace $ws10; workspace $ws10
+
+    bindsym $alt+Return $exe $terme tmux
+    bindsym $alt+d $exe ulauncher-toggle
+    bindsym $alt+Shift+q kill
+    bindsym $alt+o floating toggle
+    bindsym $alt+x split toggle
+
+    bindsym $alt+r reload
+    #bindsym $alt+Shift+r restart
+
+    bindsym $mod+y mode "default"
+    bindsym $alt+y mode "default"
+}
+bindsym $mod+y mode $mode_alt
+bindsym $alt+y mode $mode_alt
+
 # window colors
 # class                 border  backgr. text    indicator   child_border
 client.focused          #1a46c4 #1640b8 #ffffff #a5b0ce     #0041fa
@@ -283,7 +327,7 @@ exec --no-startup-id i3-msg workspace $ws1
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- lock
+#exec --no-startup-id xss-lock --transfer-sleep-lock -- lock
 
 # unused
 #exec --no-startup-id urxvtd -q
