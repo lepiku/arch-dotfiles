@@ -64,6 +64,18 @@ case $1 in
         fi
         ;;
 
+    suspend)
+        if [ -z "$hotspot_running" ] && [ -z "$create_ap_running" ]; then
+            lock &
+            utils prepare-exit
+            sleep 1
+            echo "Suspend"
+            systemctl suspend
+        else
+            echo "No suspend"
+            _notify "Hotspot running, not sleeping!" critical 3000
+        fi
+        ;;
 
     suspend-then-hibernate)
         if [ -z "$hotspot_running" ] && [ -z "$create_ap_running" ]; then
