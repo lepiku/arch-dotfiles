@@ -46,10 +46,17 @@ set $edp1 eDP-1
 set $hdmi HDMI-A-1
 output * bg ~/.config/sway/wallpaper fill
 output $edp1 position 0 0
-output $hdmi position 0 -1080 mode 1920x1080
-output "Hewlett Packard LE1711 3CQ95126B5" position 1920 0 mode 1280x1024
+
+# gaming monitor
 output "ASUSTek COMPUTER INC ASUS VG249 0x00033567" mode 1920x1080@120Hz
+# ckb
+output "Hewlett Packard LE1711 3CQ95126B5" position 1920 0 mode 1280x1024
 output "Dell Inc. DELL E1916HV MMK395CIFWRI" position 1920 0 mode 1920x1080
+output "Lenovo Group Limited E1922s  Wide V900424D" position -1366 0
+
+# xwayland
+#xwayland disable
+for_window [shell="xwayland"] title_format "[XWayland] %title"
 
 # set size for focused border
 for_window [class=".*"] border pixel 2

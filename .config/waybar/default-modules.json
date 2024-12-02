@@ -20,7 +20,13 @@
   },
   "sway/window": {
     "icon": true,
-    "icon-size": 16
+    "icon-size": 16,
+    "format": "{shell}-{title}",
+    "rewrite": {
+      "xdg_shell-(.*)": "$1",
+      "xwayland-(.*)": "[XWayland] $1",
+      "-": ""
+    }
   },
   "bluetooth": {
     "on-click": "blueman-manager",
@@ -114,7 +120,7 @@
   },
   "battery": {
     "bat": "BAT0",
-    "interval": 60,
+    "interval": 5,
     //"design-capacity": true,
     "states": {
       "warning": 20,
