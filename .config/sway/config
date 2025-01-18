@@ -75,6 +75,7 @@ for_window [app_id="org.pulseaudio.pavucontrol"] floating enable
 for_window [app_id="wihotspot"] floating enable, resize set height 500
 for_window [app_id="nm-connection-editor"] floating enable
 for_window [app_id="java" title="Dbeaver"] floating enable
+for_window [instance="pinentry-gtk"] floating enable
 
 # set gaps
 smart_borders on
@@ -300,10 +301,11 @@ bindsym $mod+b          exec firefox
 bindsym $mod+Shift+b    exec firefox --private-window
 
 bindsym $mod+c          exec code
-bindsym $mod+Shift+c    exec dbeaver
 
-#bindsym $mod+e          exec sudo bluetooth toggle
+bindsym $mod+Shift+d    exec dbeaver
 #bindsym $mod+Shift+e    exec steam-runtime
+
+bindsym $mod+Shift+r    exec remmina
 
 bindsym $mod+g          exec chromium
 bindsym $mod+Shift+g    exec chromium --incognito
@@ -312,7 +314,7 @@ bindsym $mod+i          exec $terme utils network ethernet
 bindsym $mod+Shift+i    exec $terme utils network wifi
 
 bindsym $mod+m          exec $terme ranger
-bindsym $mod+Shift+m    exec nautilus
+bindsym $mod+Shift+m    exec thunar
 
 bindsym $mod+o          output $hdmi toggle
 
