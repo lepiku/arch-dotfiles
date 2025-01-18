@@ -114,9 +114,11 @@ if [ -f ~/.condainit ]; then
     . ~/.condainit
 fi
 
-if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-    . ~/.profile
-fi
+# source profile
+#if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+#    echo 'source profile'
+. ~/.profile
+#fi
 
 # fzf plugin settings
 export FZF_DEFAULT_COMMAND='fd --type f -I --hidden --follow --max-depth 5'
