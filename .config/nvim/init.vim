@@ -246,8 +246,8 @@ if has('nvim')
 
     " Use CTRL-S for selections ranges.
     " Requires 'textDocument/selectionRange' support of language server.
-    nmap <silent> <C-s> <Plug>(coc-range-select)
-    xmap <silent> <C-s> <Plug>(coc-range-select)
+    "nmap <silent> <C-s> <Plug>(coc-range-select)
+    "xmap <silent> <C-s> <Plug>(coc-range-select)
 
     " Add `:Format` command to format current buffer.
     command! -nargs=0 Format :call CocActionAsync('format')
@@ -380,6 +380,7 @@ noremap <silent> k gk
 
 " save with ctrl-s
 nnoremap ZX :w<CR>
+nnoremap <silent> <C-s> :w<CR>
 
 " change indent in visual mode
 vnoremap > >gv
