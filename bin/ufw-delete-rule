@@ -1,0 +1,6 @@
+#!/bin/sh
+
+for NUM in $(sudo ufw status numbered | grep "$1" | awk -F"[][]" '{print $2}' | tr --delete [:blank:] | sort -rn); do
+    sudo ufw delete $NUM
+done
+
