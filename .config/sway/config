@@ -35,7 +35,7 @@ input "1267:12433:ELAN0504:00_04F3:3091_Touchpad" {
 # for external mouse
 input "type:pointer" {
     accel_profile flat
-    pointer_accel -0.4
+    pointer_accel 0.4
 }
 #input "1133:45083:M585/M590_Mouse" pointer_accel -0.6
 #input "1133:45108:Logitech_MX_Master_3S" pointer_accel 0
@@ -66,16 +66,18 @@ for_window [class="jetbrains-studio" window_type="dialog" title="^win\d+$"] bord
 for_window [class="jetbrains-studio" title="^win\d+$"] focus
 for_window [class="firefox" window_role="Popup"] border pixel 0
 for_window [class="PacketTracer7"] floating enable
-for_window [class="zoom" title="^zoom$"] floating enable border pixel 0
+for_window [class="zoom" title="^zoom$"] floating enable, border pixel 0
 for_window [class="zoom" title="^Settings$"] floating enable
 for_window [class="^join\?action=join"] floating enable
 #for_window [title="^Android Emulator"] border pixel 0
-for_window [class="code-oss"] opacity set 0.95
+for_window [app_id="code-oss"] opacity set 0.975
+for_window [app_id="codium"] opacity set 0.975
 for_window [app_id="org.pulseaudio.pavucontrol"] floating enable
 for_window [app_id="wihotspot"] floating enable, resize set height 500
 for_window [app_id="nm-connection-editor"] floating enable
 for_window [app_id="java" title="Dbeaver"] floating enable
 for_window [instance="pinentry-gtk"] floating enable
+for_window [app_id="firefox" title="Picture-in-Picture"] floating enable, sticky enable
 
 # set gaps
 smart_borders on
@@ -240,7 +242,7 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 bindsym $mod+Shift+a focus child
 
-bindsym $mod+y sticky toggle
+bindsym $mod+w sticky toggle
 
 # reload the configuration file
 bindsym $mod+r reload
@@ -303,6 +305,7 @@ bindsym $mod+Shift+b    exec firefox --private-window
 bindsym $mod+c          exec code
 
 bindsym $mod+Shift+d    exec dbeaver
+
 #bindsym $mod+Shift+e    exec steam-runtime
 
 bindsym $mod+Shift+r    exec remmina
@@ -332,8 +335,8 @@ bindsym Print           exec /usr/share/sway-contrib/grimshot -n copy screen
 bindsym Shift+Print     exec /usr/share/sway-contrib/grimshot -n save screen
 
 # ---------- Browser Shortcuts ---------- #
-bindsym $mod+w exec bash scripts/web-shortcuts.sh \
-    `bash scripts/web-shortcuts.sh | rofi -dmenu -i -p "Web Shortcuts"`
+#bindsym $mod+w exec bash scripts/web-shortcuts.sh \
+#    `bash scripts/web-shortcuts.sh | rofi -dmenu -i -p "Web Shortcuts"`
 
 # ---------- Autostart Programs ---------- #
 exec swayidle
