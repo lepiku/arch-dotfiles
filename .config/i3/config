@@ -219,44 +219,44 @@ mode $mode_power {
 bindsym $mod+Shift+backslash mode $mode_power
 
 # temp alt mod
-set $mode_alt "Swap Mod to Alt"
-mode $mode_alt {
-    bindsym $alt+1 workspace $ws1
-    bindsym $alt+2 workspace $ws2
-    bindsym $alt+3 workspace $ws3
-    bindsym $alt+4 workspace $ws4
-    bindsym $alt+5 workspace $ws5
-    bindsym $alt+6 workspace $ws6
-    bindsym $alt+7 workspace $ws7
-    bindsym $alt+8 workspace $ws8
-    bindsym $alt+9 workspace $ws9
-    bindsym $alt+0 workspace $ws10
+#set $mode_alt "Swap Mod to Alt"
+#mode $mode_alt {
+#    bindsym $alt+1 workspace $ws1
+#    bindsym $alt+2 workspace $ws2
+#    bindsym $alt+3 workspace $ws3
+#    bindsym $alt+4 workspace $ws4
+#    bindsym $alt+5 workspace $ws5
+#    bindsym $alt+6 workspace $ws6
+#    bindsym $alt+7 workspace $ws7
+#    bindsym $alt+8 workspace $ws8
+#    bindsym $alt+9 workspace $ws9
+#    bindsym $alt+0 workspace $ws10
 
-    bindsym $alt+Shift+1 move container to workspace $ws1; workspace $ws1
-    bindsym $alt+Shift+2 move container to workspace $ws2; workspace $ws2
-    bindsym $alt+Shift+3 move container to workspace $ws3; workspace $ws3
-    bindsym $alt+Shift+4 move container to workspace $ws4; workspace $ws4
-    bindsym $alt+Shift+5 move container to workspace $ws5; workspace $ws5
-    bindsym $alt+Shift+6 move container to workspace $ws6; workspace $ws6
-    bindsym $alt+Shift+7 move container to workspace $ws7; workspace $ws7
-    bindsym $alt+Shift+8 move container to workspace $ws8; workspace $ws8
-    bindsym $alt+Shift+9 move container to workspace $ws9; workspace $ws9
-    bindsym $alt+Shift+0 move container to workspace $ws10; workspace $ws10
+#    bindsym $alt+Shift+1 move container to workspace $ws1; workspace $ws1
+#    bindsym $alt+Shift+2 move container to workspace $ws2; workspace $ws2
+#    bindsym $alt+Shift+3 move container to workspace $ws3; workspace $ws3
+#    bindsym $alt+Shift+4 move container to workspace $ws4; workspace $ws4
+#    bindsym $alt+Shift+5 move container to workspace $ws5; workspace $ws5
+#    bindsym $alt+Shift+6 move container to workspace $ws6; workspace $ws6
+#    bindsym $alt+Shift+7 move container to workspace $ws7; workspace $ws7
+#    bindsym $alt+Shift+8 move container to workspace $ws8; workspace $ws8
+#    bindsym $alt+Shift+9 move container to workspace $ws9; workspace $ws9
+#    bindsym $alt+Shift+0 move container to workspace $ws10; workspace $ws10
 
-    bindsym $alt+Return $exe $terme tmux
-    bindsym $alt+d $exe ulauncher-toggle
-    bindsym $alt+Shift+q kill
-    bindsym $alt+o floating toggle
-    bindsym $alt+x split toggle
+#    bindsym $alt+Return $exe $terme tmux
+#    bindsym $alt+d $exe ulauncher-toggle
+#    bindsym $alt+Shift+q kill
+#    bindsym $alt+o floating toggle
+#    bindsym $alt+x split toggle
 
-    bindsym $alt+r reload
-    #bindsym $alt+Shift+r restart
+#    bindsym $alt+r reload
+#    #bindsym $alt+Shift+r restart
 
-    bindsym $mod+y mode "default"
-    bindsym $alt+y mode "default"
-}
-bindsym $mod+y mode $mode_alt
-bindsym $alt+y mode $mode_alt
+#    bindsym $mod+y mode "default"
+#    bindsym $alt+y mode "default"
+#}
+#bindsym $mod+y mode $mode_alt
+#bindsym $alt+y mode $mode_alt
 
 # window colors
 # class                 border  backgr. text    indicator   child_border
@@ -290,7 +290,7 @@ bindsym $mod+apostrophe exec i3-sensible-terminal
 bindsym $mod+b          exec firefox
 bindsym $mod+Shift+b    exec firefox --private-window
 
-bindsym $mod+c          exec calibre
+bindsym $mod+c          exec code
 bindsym $mod+Shift+c    $exe $termi i3config
 
 bindsym $mod+e          exec sudo bluetooth toggle
