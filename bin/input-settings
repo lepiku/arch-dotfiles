@@ -9,6 +9,8 @@
     # keyboard key press repeat rate
     xset r rate 400 32
 
+    # xinput set-prop 'pointer:Logitech USB Receiver Mouse' 'libinput Accel Speed' 0.2
+
     # disable mouse wake up
     #if cat /proc/acpi/wakeup | grep "XHC1" | grep -q "enabled"
     #then
