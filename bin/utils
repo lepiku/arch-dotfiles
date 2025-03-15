@@ -32,9 +32,12 @@ case $1 in
         ;;
     lock)
         echo "Lock"
-        swaylock &
+        if [ -n `pidof i3` ]; then
+            i3lock -c 18181a -n
+        elif [ -n `pidof sway` ]; then
+            swaylock
+        fi
         ;;
-
     logoff)
         echo "Logoff"
         utils prepare-exit
@@ -66,7 +69,7 @@ case $1 in
 
     suspend)
         if [ -z "$hotspot_running" ] && [ -z "$create_ap_running" ]; then
-            lock &
+            utils lock &
             utils prepare-exit
             sleep 1
             echo "Suspend"
@@ -79,7 +82,7 @@ case $1 in
 
     suspend-then-hibernate)
         if [ -z "$hotspot_running" ] && [ -z "$create_ap_running" ]; then
-            utils lock
+            utils lock &
             utils prepare-exit
             sleep 1
             echo "Suspend then Hibernate"
