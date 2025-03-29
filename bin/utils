@@ -32,9 +32,9 @@ case $1 in
         ;;
     lock)
         echo "Lock"
-        if [ -n `pidof i3` ]; then
+        if [ `pidof i3` ]; then
             i3lock -c 18181a -n
-        elif [ -n `pidof sway` ]; then
+        elif [ `pidof sway` ]; then
             swaylock
         fi
         ;;
