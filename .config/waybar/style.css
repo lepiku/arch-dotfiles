@@ -1,21 +1,25 @@
 @keyframes blink-warning {
-  70% {
-    color: @light;
+  0% {
+    background-color: @warning;
   }
-
-  to {
-    color: @light;
+  50% {
+    color: #d8dee9;
+    background-color: @warning;
+  }
+  100% {
     background-color: @warning;
   }
 }
 
 @keyframes blink-critical {
-  70% {
-    color: @light;
+  from {
+    background-color: @critical;
   }
-
+  50% {
+    color: #d8dee9;
+    background-color: @critical;
+  }
   to {
-    color: @light;
     background-color: @critical;
   }
 }
@@ -143,7 +147,7 @@
 /* Each warning that should blink */
 #battery.warning.discharging {
   animation-name: blink-warning;
-  animation-duration: 3s;
+  animation-duration: 1s;
 }
 
 /* And now modules themselves in their respective order */

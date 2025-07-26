@@ -78,6 +78,7 @@ for_window [app_id="nm-connection-editor"] floating enable
 for_window [app_id="java" title="Dbeaver"] floating enable
 for_window [instance="pinentry-gtk"] floating enable
 for_window [app_id="firefox" title="Picture-in-Picture"] floating enable, sticky enable
+for_window [app_id="thunar" title="^Rename"] floating enable
 
 # set gaps
 smart_borders on
@@ -262,6 +263,10 @@ mode $mode_power {
     bindsym Escape mode "default"
 }
 bindsym $mod+Shift+backslash mode $mode_power
+
+# replace mouse button
+bindsym --whole-window BTN_EXTRA seat seat0 cursor press BTN_LEFT; \
+    seat seat0 cursor release BTN_LEFT
 
 # window colors
 # class                 border  backgr. text    indicator   child_border
