@@ -297,3 +297,15 @@
   sudo modprobe -r btusb
   sudo modprobe btusb
   ```
+
+- Wireguard
+
+  Copy the config to `/etc/wireguard/{file}.conf` and start the service
+
+  ```sh
+  sudo systemctl enable --now wg-quick@peer2.service
+  ```
+
+  Fix startup issue:
+
+  <https://bbs.archlinux.org/viewtopic.php?pid=2249137#p2249137>
