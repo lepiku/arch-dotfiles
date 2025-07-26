@@ -145,3 +145,9 @@ if [[ $1 == eval ]]; then
     "$@"
 set --
 fi
+
+# https://wiki.archlinux.org/title/GnuPG#Set_SSH_AUTH_SOCK
+unset SSH_AGENT_PID
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gnupg/S.gpg-agent.ssh"
+export GPG_TTY=$(tty)
+gpg-connect-agent updatestartuptty /bye > /dev/null
