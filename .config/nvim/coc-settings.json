@@ -17,5 +17,11 @@
   },
   "markdownlint.config": {
     "line-length": false
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "[python]": {
+    "inlayHint.enable": false
   }
 }

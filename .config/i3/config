@@ -303,7 +303,7 @@ bindsym $mod+i          $exe $term utils network ethernet
 bindsym $mod+Shift+i    $exe $term utils network wifi
 
 bindsym $mod+m          $exe $terme ranger
-bindsym $mod+Shift+m    exec pcmanfm
+bindsym $mod+Shift+m    exec thunar
 
 bindsym $mod+o          exec monitors
 bindsym $mod+Shift+o    exec monitors --no-hdmi
@@ -340,7 +340,7 @@ exec --no-startup-id i3-msg workspace $ws1
 #exec --no-startup-id bash "$HOME/bin/auto-enable-mic.sh"
 
 # wallpaper
-exec --no-startup-id sleep 1 && monitors
+#exec --no-startup-id sleep 1 && monitors
 # hold key repeat rate
 exec --no-startup-id input-settings
 #exec --no-startup-id dropbox
@@ -348,10 +348,12 @@ exec --no-startup-id blueman-applet
 exec --no-startup-id nm-applet
 exec --no-startup-id wrap-sigterm redshift-gtk
 # autosuspend
-exec --no-startup-id wrap-sigterm run-xidlehook
+#exec --no-startup-id wrap-sigterm run-xidlehook
 exec --no-startup-id systemctl --user start dispad.service
 #exec --no-startup-id picom -b
 exec --no-startup-id sleep 2 && xcompmgr -c
 exec --no-startup-id dunst
 exec --no-startup-id lxsession
 exec --no-startup-id sleep 2 && systemctl --user start ulauncher.service
+#exec --no-startup-id xrandr --output HDMI-A-0 --mode 1920x1080 --rate 60
+exec --no-startup-id xrandr --output HDMI-A-0 --mode 2560x1440 --rate 60

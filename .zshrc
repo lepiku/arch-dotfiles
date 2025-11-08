@@ -145,3 +145,12 @@ if [[ $1 == eval ]]; then
     "$@"
 set --
 fi
+
+#export SSH_AGENT_PID=""
+#export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/dimas/.lmstudio/bin"
+# End of LM Studio CLI section
+
+export GPG_TTY=$(tty)

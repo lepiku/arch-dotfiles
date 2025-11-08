@@ -69,6 +69,8 @@ bin/assets
 ## wayland
 !.config/foot
 !.config/foot/**
+!.config/hypr
+!.config/hypr/**
 !.config/sway
 !.config/sway/**
 .config/sway/wallpaper

@@ -45,3 +45,11 @@ export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
 # dolphin
 # https://wiki.archlinux.org/title/Dolphin#Icons_not_showing
 export QT_QPA_PLATFORMTHEME="qt5ct"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/dimas/.lmstudio/bin"
+# End of LM Studio CLI section
+
+if uwsm check may-start && uwsm select; then
+  exec uwsm start default
+fi

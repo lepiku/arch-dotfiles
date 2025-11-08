@@ -29,3 +29,7 @@ export FZF_DEFAULT_OPTS='--height 40%'
 
 # not disturb ctrl-s and ctrl-q
 stty -ixon
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/dimas/.lmstudio/bin"
+# End of LM Studio CLI section
