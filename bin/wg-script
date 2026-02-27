@@ -1,0 +1,12 @@
+#!/bin/sh
+
+case "$1" in
+    peer1-any)
+        sudo systemctl stop wg-quick@peer1.service
+        sudo systemctl start wg-quick@peer1-any.service
+        ;;
+    peer1)
+        sudo systemctl stop wg-quick@peer1-any.service
+        sudo systemctl start wg-quick@peer1.service
+        ;;
+esac
