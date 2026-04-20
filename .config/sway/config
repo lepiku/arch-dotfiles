@@ -30,7 +30,8 @@ input "type:keyboard" {
 }
 input "1267:12433:ELAN0504:00_04F3:3091_Touchpad" {
     accel_profile adaptive
-    pointer_accel 0.2
+    pointer_accel 0.3
+    drag_lock disabled
 }
 # for external mouse
 input "type:pointer" {
@@ -70,8 +71,8 @@ for_window [class="zoom" title="^zoom$"] floating enable, border pixel 0
 for_window [class="zoom" title="^Settings$"] floating enable
 for_window [class="^join\?action=join"] floating enable
 #for_window [title="^Android Emulator"] border pixel 0
-for_window [app_id="code-oss"] opacity set 0.975
-for_window [app_id="codium"] opacity set 0.975
+for_window [app_id="code-oss"] opacity set 0.96
+for_window [app_id="codium"] opacity set 0.96
 for_window [app_id="org.pulseaudio.pavucontrol"] floating enable
 for_window [app_id="wihotspot"] floating enable, resize set height 500
 for_window [app_id="nm-connection-editor"] floating enable
@@ -79,6 +80,7 @@ for_window [app_id="java" title="Dbeaver"] floating enable
 for_window [instance="pinentry-gtk"] floating enable
 for_window [app_id="firefox" title="Picture-in-Picture"] floating enable, sticky enable
 for_window [app_id="thunar" title="^Rename"] floating enable
+#for_window [app_id="thunderbird" title="^Write:"] floating enable
 
 # set gaps
 smart_borders on
@@ -322,22 +324,24 @@ bindsym $mod+i          exec $terme utils network ethernet
 bindsym $mod+Shift+i    exec $terme utils network wifi
 
 bindsym $mod+m          exec $terme ranger
-bindsym $mod+Shift+m    exec thunar
+bindsym $mod+Shift+m    exec nautilus
+#bindsym $mod+Shift+m    exec thunar
 
 bindsym $mod+o          output $hdmi toggle
 
 bindsym $mod+Shift+p    exec utils swayidle-toggle
 
 bindsym $mod+t          exec $terme htop
+bindsym $mod+Shift+t    exec thunderbird
 
 bindsym $mod+v          exec pavucontrol
 bindsym $mod+Shift+v    exec $termi swayconfig
 
-bindsym $mod+z          exec /usr/share/sway-contrib/grimshot copy area
-bindsym $mod+Shift+z    exec /usr/share/sway-contrib/grimshot save area
+bindsym $mod+z          exec grimshot copy area
+bindsym $mod+Shift+z    exec grimshot save area
 
-bindsym Print           exec /usr/share/sway-contrib/grimshot -n copy screen
-bindsym Shift+Print     exec /usr/share/sway-contrib/grimshot -n save screen
+bindsym Print           exec grimshot -n copy screen
+bindsym Shift+Print     exec grimshot -n save screen
 
 # ---------- Browser Shortcuts ---------- #
 #bindsym $mod+w exec bash scripts/web-shortcuts.sh \
