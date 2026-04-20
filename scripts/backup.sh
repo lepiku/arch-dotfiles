@@ -24,17 +24,17 @@ case $1 in
         ;;
 
     sync-okuto)
-        ssh -t archpc.okuto.id /server/scripts/backup-okuto.sh
+        ssh -t nova.okuto.id /server/scripts/sync-okuto.fish
         ;;
 
     backup)
         echo 'Backing up...'
-        sudo btrbk run --progress -v -c /etc/btrbk/archpc-server.conf
+        time ssh -t nova.okuto.id sudo snbk transfer-and-delete
         ;;
-    backup-local)
-        echo 'Backing up (local)...'
-        sudo btrbk run --progress -v -c /etc/btrbk/local-archpc-server.conf
-        ;;
+    #backup-local)
+    #    echo 'Backing up (local)...'
+    #    sudo btrbk run --progress -v -c /etc/btrbk/local-archpc-server.conf
+    #    ;;
 
     run)
         $0 vpn-on
@@ -42,15 +42,14 @@ case $1 in
         $0 sync-okuto
         $0 backup
         $0 unmount
-        $0 vpn-off
+        #$0 vpn-off
         ;;
     run-local)
-        $0 vpn-on
         $0 mount
         $0 sync-okuto
         $0 backup-local
         $0 unmount
-        $0 vpn-off
+        #$0 vpn-off
         ;;
     *)
         echo Unknown command $1
