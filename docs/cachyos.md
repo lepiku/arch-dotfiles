@@ -1,0 +1,4 @@
+- partitions
+  - 2048 MiB, format: FAT32, label: Boot, mount: /boot, flags: boot
+  - all, format: Btrfs, label: CachyOS, mount: /, flags: root
+- KDE Desktop (plasma, wayland)
