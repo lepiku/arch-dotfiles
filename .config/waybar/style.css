@@ -79,7 +79,8 @@
 #waybar {
   background: @bg;
   color: @light;
-  font-family: "Source Code Pro", "Font Awesome 6 Free", "Font Awesome 6 Brands";
+  font-family:
+    "Source Code Pro", "Font Awesome 7 Free", "Font Awesome 7 Brands";
   border-radius: 0;
   font-size: 12px;
   font-weight: bold;
